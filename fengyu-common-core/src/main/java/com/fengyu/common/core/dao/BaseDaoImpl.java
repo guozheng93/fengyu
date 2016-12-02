@@ -1,10 +1,8 @@
 package com.fengyu.common.core.dao;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
@@ -22,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 
+ *
  * @描述: 数据访问层基础支撑类.
  * @作者: WuShuicheng .
  * @创建时间: 2013-7-22,下午4:52:52 .
@@ -48,12 +46,6 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	 */
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-
-	@Autowired
-	protected SqlSessionFactory sqlSessionFactory;
-
-	@Autowired
-	private DruidDataSource druidDataSource;
 
 	public SqlSessionTemplate getSessionTemplate() {
 		return sessionTemplate;
@@ -207,49 +199,49 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return sb.toString();
 	}
 
-	/**
-	 * 根据序列名称,获取序列值
-	 */
-	public String getSeqNextValue(String seqName) {
-		boolean isClosedConn = false;
-		// 获取当前线程的连接
-		Connection connection = this.sessionTemplate.getConnection();
-		// 获取Mybatis的SQLRunner类
-		SqlRunner sqlRunner = null;
-		try {
-			// 要执行的SQL
-			String sql = "";
-			// 数据库驱动类
-			String driverClass = druidDataSource.getDriver().getClass().getName();
-			// 不同的数据库,拼接SQL语句
-			if (driverClass.equals("com.ibm.db2.jcc.DB2Driver")) {
-				sql = "  VALUES " + seqName.toUpperCase() + ".NEXTVAL";
-			}
-			if (driverClass.equals("oracle.jdbc.OracleDriver")) {
-				sql = "SELECT " + seqName.toUpperCase() + ".NEXTVAL FROM DUAL";
-			}
-			if (driverClass.equals("com.mysql.jdbc.Driver")) {
-				sql = "SELECT  FUN_SEQ('" + seqName.toUpperCase() + "')";
-			}
-			// 如果状态为关闭,则需要从新打开一个连接
-			if (connection.isClosed()) {
-				connection = sqlSessionFactory.openSession().getConnection();
-				isClosedConn = true;
-			}
-			sqlRunner = new SqlRunner(connection);
-			Object[] args = {};
-			// 执行SQL语句
-			Map<String, Object> params = sqlRunner.selectOne(sql, args);
-			for (Object o : params.values()) {
-				return o.toString();
-			}
-			return null;
-		} catch (Exception e) {
-			throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR.newInstance("获取序列出现错误!序列名称:{%s}", seqName);
-		} finally {
-			if (isClosedConn) {
-				sqlRunner.closeConnection();
-			}
-		}
-	}
+//	/**
+//	 * 根据序列名称,获取序列值
+//	 */
+//	public String getSeqNextValue(String seqName) {
+//		boolean isClosedConn = false;
+//		// 获取当前线程的连接
+//		Connection connection = this.sessionTemplate.getConnection();
+//		// 获取Mybatis的SQLRunner类
+//		SqlRunner sqlRunner = null;
+//		try {
+//			// 要执行的SQL
+//			String sql = "";
+//			// 数据库驱动类
+//			String driverClass = druidDataSource.getDriver().getClass().getName();
+//			// 不同的数据库,拼接SQL语句
+//			if (driverClass.equals("com.ibm.db2.jcc.DB2Driver")) {
+//				sql = "  VALUES " + seqName.toUpperCase() + ".NEXTVAL";
+//			}
+//			if (driverClass.equals("oracle.jdbc.OracleDriver")) {
+//				sql = "SELECT " + seqName.toUpperCase() + ".NEXTVAL FROM DUAL";
+//			}
+//			if (driverClass.equals("com.mysql.jdbc.Driver")) {
+//				sql = "SELECT  FUN_SEQ('" + seqName.toUpperCase() + "')";
+//			}
+//			// 如果状态为关闭,则需要从新打开一个连接
+//			if (connection.isClosed()) {
+//				connection = sqlSessionFactory.openSession().getConnection();
+//				isClosedConn = true;
+//			}
+//			sqlRunner = new SqlRunner(connection);
+//			Object[] args = {};
+//			// 执行SQL语句
+//			Map<String, Object> params = sqlRunner.selectOne(sql, args);
+//			for (Object o : params.values()) {
+//				return o.toString();
+//			}
+//			return null;
+//		} catch (Exception e) {
+//			throw BizException.DB_GET_SEQ_NEXT_VALUE_ERROR.newInstance("获取序列出现错误!序列名称:{%s}", seqName);
+//		} finally {
+//			if (isClosedConn) {
+//				sqlRunner.closeConnection();
+//			}
+//		}
+//	}
 }

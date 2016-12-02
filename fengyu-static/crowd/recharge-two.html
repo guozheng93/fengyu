@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>充值</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="recharge-box">
+			<h5><b>充值</b></h5>
+			<div class="recharge-info">
+				<p class="rech-payp1">银联支付：<span><img src="images/yinlian.png" class="rech-paytu"><img src="images/hb_duihao.png" class="duihao"></span></p>
+				<p class="rech-payp2">其他支付方式：<span><img src="images/weixinzhifu.png" class="rech-paytu"><img src="images/hb_duihao.png" class="duihao"></span></span></p>
+				<a href="javascript:;" class="rech-sub rech-pay">确认支付</a>
+				
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script>
+			$(function(){
+				$(".rech-paytu").click(function(){
+					$(".rech-paytu").parents("span").css("border",0);
+					$(".duihao").css("display","none");
+					$(this).parents("span").css("border","2px solid #ffdd00");
+					$(this).parents("span").find(".duihao").show();
+				})
+			})
+		</script>
+	</body>
+</html>

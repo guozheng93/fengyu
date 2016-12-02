@@ -95,13 +95,13 @@ public abstract class BaseBizImpl<T extends BaseEntity> implements BaseBiz<T> {
 		return this.getDao().getBy(paramMap, sqlId);
 	}
 
-	/**
-	 * 根据序列名称获取下一个值
-	 * 
-	 * @return
-	 */
-	public String getSeqNextValue(String seqName) {
-		return this.getDao().getSeqNextValue(seqName);
-	}
+//	/**
+//	 * 根据序列名称获取下一个值
+//	 *
+//	 * @return
+//	 */
+//	public String getSeqNextValue(String seqName) {
+//		return this.getDao().getSeqNextValue(seqName);
+//	}
 
 }

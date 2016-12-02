@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html style="position: relative;">
+	<head>
+		<meta charset="UTF-8">
+		<title>项目进度</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="pro-sched">
+			<p class="me-title"><b>项目进度</b></p>
+			
+			<div class="pro-sched-list" >
+				
+				<img src="images/add_sch.png" class="sched-img1 add_dynamic no-sche">
+				
+				<div style="display: none;">
+				<div class="sched-li">
+					<img src="images/add_sch.png" class="sched-img1 add_dynamic">
+				</div>
+				<div class="sched-li" >
+					<img src="images/huang1.png" class="sched-img1">
+					<span class="sched-data">2016－08-08</span>
+					<p class="sched-p1">Acappella夏令营</p>
+					<p class="sched-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+					<p class="sched-p3">
+						<span style="background-image:url(images/ln_tu.png)"></span>
+						<span style="background-image:url(images/ln_tu.png)"></span>
+						<span style="background-image:url(images/ln_tu.png)"></span>
+						<span style="background-image:url(images/ln_tu.png)"></span>
+					</p>
+				</div>
+				<div class="sched-li">
+					<img src="images/huang1.png" class="sched-img1">
+					<span class="sched-data">2016－08-08</span>
+					<p class="sched-p1">Acappella夏令营</p>
+					<p class="sched-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+					
+				</div>
+				<div class="sched-li">
+					<img src="images/huang1.png" class="sched-img1">
+					<span class="sched-data">2016－08-08</span>
+					<p class="sched-p1">Acappella夏令营</p>
+					<p class="sched-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+					
+				</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script>
+			$(function(){
+				$(".add_dynamic").click(function(){
+					parent.$(".bound,.add-new").show();
+				})
+				$(".close-btn").click(function(){
+					parent.$(".bound,.add-new").hide();
+					
+				})
+				 /*关闭新闻动态的添加*/
+			  parent.$(".close-btn").click(function(){
+			   	parent.$(".bound,.add-new").hide();
+			   })
+			})
+		</script>
+		<!---todo------->
+		<!--<script>
+				window.onbeforeunload = function(){
+				    parent.$(".bound").hide();
+					parent.$(".add-new").hide();				   
+				}
+		</script>-->
+	</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>交易详情</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/skin/layer.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="trad-box">
+			<h5><b>交易详情</b></h5>
+			<div class="trad-state">
+				<!---众筹中的未支付---------->
+				<ul class="list-unstyled trad-ul trad-ul-nopay" style="display: none;">
+					<p style="background:#FFDD00;width:50%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="tras-gray">2</span>
+						<p>待支付</p>
+					</li>
+					<li class="trad-s3">
+						<span class="tras-gray">?</span>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+				<!---众筹中的已支付---------->
+				<ul class="list-unstyled trad-ul trad-ul-oldpay" style="display: none;">
+					<p style="background:#FFDD00;width:33.3333333333%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="trad-yellow">2</span>
+						<p>支付成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s3">
+						<span class="tras-gray">3</span>
+						<p>众筹中</p>
+					</li>
+					<li class="trad-s4">
+						<span class="tras-gray">?</span>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+				<!---众筹成功---------->
+				<ul class="list-unstyled trad-ul trad-ul-zhongok" style="display: none;">
+					<p style="background:#FFDD00;width:50%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="trad-yellow">2</span>
+						<p>支付成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s3">
+						<span class="trad-yellow">3</span>
+						<p>众筹成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s4">
+						<span class="tras-gray">4</span>
+						<p>等待发货</p>
+					</li>
+					<li class="trad-s5">
+						<span class="tras-gray">?</span>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+				<!---众筹失败---------->
+				<ul class="list-unstyled trad-ul trad-ul-zhongok" style="display: none;">
+					<p style="background:#FFDD00;width:50%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="trad-yellow">2</span>
+						<p>支付成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s3">
+						<span class="trad-yellow">3</span>
+						<p>众筹失败</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s4">
+						<span class="tras-gray">4</span>
+						<p>退款中</p>
+					</li>
+					<li class="trad-s5">
+						<span class="tras-gray">?</span>
+					</li>
+					<div class="clearfix"></div>
+				</ul>
+				<!---项目失败---------->
+				<ul class="list-unstyled trad-ul trad-ul-zhongok" style="display: none;">
+					<p style="background:#FFDD00;width:75%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="trad-yellow">2</span>
+						<p>支付成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s3">
+						<span class="trad-yellow">3</span>
+						<p>众筹成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s4">
+						<span class="tras-gray">4</span>
+						<p>回报失败</p>
+					</li>
+					<li class="trad-s5">
+						<span class="tras-gray">?</span>
+						<p><a href="javascript:;" class="content-initiator">联系发起方</a></p>
+					</li>
+					
+					<div class="clearfix"></div>
+				</ul>
+				<!---项目成功---------->
+				<ul class="list-unstyled trad-ul trad-ul-zhongok" style="display: block;">
+					<p style="background:#FFDD00;width:100%;height: 4px;position: absolute;left: 0;top:-4px;"></p>
+					<li class="trad-s1">
+						<span class="trad-yellow">1</span>
+						<p>下单成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s2">
+						<span class="trad-yellow">2</span>
+						<p>支付成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s3">
+						<span class="trad-yellow">3</span>
+						<p>众筹成功</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s4">
+						<span class="trad-yellow">4</span>
+						<p>确认发货</p>
+						<p>2016-06-25</p>
+					</li>
+					<li class="trad-s5">
+						<span class="trad-yellow">5</span>
+						<p>确认收货</p>
+						<p>2016-06-25</p>
+					</li>
+				</ul>
+			</div>
+			<div class="trad-con">
+				<p class="trad-p1"><span>订单号：16051200000000</span><span>支付金额：<b style="color:#ff0000">¥3.00</b></span><span>支付方式：在线支付</span></p>
+			    <p class="trad-p2"><span>收货人：陈某某</span><span>手机号码：130-000-0000</span><span>地址：某某省某某市某某区某某地</span></p>
+			    <!--添加的备注信息，如果有备注就显示，如果没有就不显示-->
+			    <p class="trad-p3">备注：暂无备注/备注备注备注备注 </p>
+			    <div class="trad-d">
+			    	<p class="trad-d-p1">订单状态：下单成功</p>
+			    	<p class="trad-d-p2">物流公司：暂无<span>物流单号：暂无</span></p>
+			    	<p class="trad-d-p3">物流信息：<a href="logistics-information.html" target="ifa">查看物流信息</a></p>
+			    	<!------虚拟回报-------->
+			    	<p class="return-xuni" style="display: none;">回报状态：已回报</p>
+			        <p class="trad-d-p4">您现在可以：<a href="javascript:;" class="is-goods"> 确认收货</a><a href="product-evaluation.html" class="go-evaluate" style="display: none;" target="ifa">评价</a></p>
+			    </div>
+			</div>
+			<div class="trad-prodetail">
+				<h5><b>项目详情</b></h5>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>发起人</th>
+							<th>回报</th>
+							<th>支付金额</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr >
+							<td class="trad-tr1">
+								<span style="background-image:url(images/2.png)" class="trad-p-tu"></span>
+								<p class="trad-p-txt">Acappella夏令营Acappella夏令营Acappella夏令营</p>
+							</td>
+							<td class="trad-tr2">发起人</td>
+							<td class="trad-tr3">回报内容回报内容回报内容回报内容</td>
+							<td class="trad-tr4">
+								<p>¥3.00</p>
+                                <p>（含运费￥0.00）</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="trad-proplan">
+				<h5><b>项目进度</b></h5>
+				<div class="trad-p-lists">
+					<div class="trad-p-list">
+						<span class="trad-point"></span>
+						<p class="trad-time">2016－08-08</p>
+						<div class="trad-p-r">
+							<p class="trad-r-p1">Acappella夏令营</p>
+							<p class="trad-r-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+							<p class="trad-r-p3" style="background-image:url(images/2.png)"></p>
+						</div>
+					</div>
+					<div class="trad-p-list">
+						<span class="trad-point"></span>
+						<p class="trad-time">2016－08-08</p>
+						<div class="trad-p-r">
+							<p class="trad-r-p1">Acappella夏令营</p>
+							<p class="trad-r-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+						</div>
+					</div>
+					<div class="trad-p-list">
+						<span class="trad-point"></span>
+						<p class="trad-time">2016－08-08</p>
+						<div class="trad-p-r">
+							<p class="trad-r-p1">Acappella夏令营</p>
+							<p class="trad-r-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+						</div>
+					</div>
+					<div class="trad-p-list">
+						<span class="trad-point"></span>
+						<p class="trad-time">2016－08-08</p>
+						<div class="trad-p-r">
+							<p class="trad-r-p1">Acappella夏令营</p>
+							<p class="trad-r-p2">Acappella夏令营众筹开始，希望大家多多支持。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script src="js/layer.js"></script>
+		<script>
+			$(function(){
+				$(".content-initiator").click(function(){
+					parent.layer.open({
+						title:'',
+						content:'您支持的项目回报失败，请联系发起方协商处理方案。回报失败时间为后台设置项目为项目失败时间',
+						closeBtn:0,
+					})
+				})
+				/*确认收货*/
+				$(".is-goods").click(function(){
+					parent.layer.open({
+						title:'确认收货',
+						content:'<p style="text-align:center">是否确认收货？</p>',
+						yes:function(index, layero){
+							$(".is-goods").hide();
+							$(".go-evaluate").show();
+							parent.$(".layui-layer-shade,.layer-anim").hide();
+						}
+					})
+				})
+				/*项目进度图片放大*/
+				$(".trad-r-p3").click(function(){
+					parent.layer.open({
+						title:'',
+						area:['500px','400px'],
+						content:'<div style="background-image:url(images/2.png)" class="big-tu"></div>',
+						btn:'',
+					})
+				})
+			})
+		</script>
+		<!---todo------->
+		<script>
+				window.onbeforeunload = function(){
+				    parent.$(".layui-layer-shade").hide();
+					parent.$(".layer-anim").hide();				   
+				}
+		</script>
+	</body>
+</html>

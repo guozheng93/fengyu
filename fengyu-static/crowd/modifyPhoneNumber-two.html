@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+			<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="modify-phone-number">
+			<h5><b>修改手机号</b></h5>
+			<div class="modify-step">
+				<div class="active-step step1">
+					<p class="modify-p1"><span>1</span></p>
+					<p class="modify-p2">验证身份</p>
+				</div>
+				<div style="border-top:6px solid #FFDD00;width:330px;position: absolute;top:-6px;"></div>
+				<div class="active-step step2">
+					<p class="modify-p1"><span>2</span></p>
+					<p class="modify-p2">修改手机</p>
+				</div>
+				<div class="step3">
+					<p class="modify-p1"><span>3</span></p>
+					<p class="modify-p2">完成</p>
+				</div>
+			</div>
+		</div>
+		<div class="modify-con">
+			<p class="modify-con-p1">手机号：<input type="number" maxlength="11" class="mod-ohone" placeholder="请输入要绑定的手机号"></p>
+			<p class="modify-con-p2">验证码：<input type="text" placeholder="短信验证码"><input type="button" class="send-ver2" value="获取验证码" onclick="settime(this)"></span></p>
+		    <p class="modify-con-p3"><a  href="modifyPhoneNumber-three.html" target="ifa">下一步</a></p>
+		</div>
+	</body>
+</html>

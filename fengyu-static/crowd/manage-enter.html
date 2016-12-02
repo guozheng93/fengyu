@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>管理入口</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+		<link rel="stylesheet" href="css/skin/laypage.css" />
+	</head>
+	<body>
+		<div class="me-box">
+			<p class="me-title"><b>管理入口>档位支持总览</b></p>
+			<div class="me-con">
+				<div class="me-list">
+					<p class="me-data">2016-06－06</p>
+					<table class="table table-bordered">
+						<tr>
+							<td class="me-td1">
+								<div class="me-base-info">
+									<a href="project-detail.html" target="_blank"  style="background-image:url(images/2.png)" class="me-tu"></a>
+									<div class="me-txt">
+										<p class="me-name"><a href="project-detail.html" target="_blank">Acappella夏令营Acappella夏令营Acappella夏令营Acappella</a></p>
+										<p class="me-tate">众筹成功</p>
+									</div>
+								</div>
+							</td>
+							<td class="me-td2">支持档位：¥1</td>
+							<td class="me-td3">限定人数<br>100</td>
+							<td class="me-td4">支持人数<br>8750</td>
+							<td class="me-td5">回报内容<br>我要回报我要回报我要回报我要回报我要回报我要回报我要回报我要回报</td>
+							<td class="me-td6"><a href="manage-enter-detail.html" target="ifa">查看详情</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="me-list">
+					<p class="me-data">2016-06－06</p>
+					<table class="table table-bordered">
+						<tr>
+							<td class="me-td1">
+								<div class="me-base-info">
+									<a href="project-detail.html" target="_blank"  style="background-image:url(images/2.png)" class="me-tu"></a>
+									<div class="me-txt">
+										<p class="me-name"><a href="project-detail.html" target="_blank">Acappella夏令营Acappella夏令营Acappella夏令营Acappella</a></p>
+										<p class="me-tate">众筹成功</p>
+									</div>
+								</div>
+							</td>
+							<td class="me-td2">支持档位：¥1</td>
+							<td class="me-td3">限定人数<br>100</td>
+							<td class="me-td4">支持人数<br>8750</td>
+							<td class="me-td5">回报内容<br>我要回报我要回报我要回报我要回报我要回报我要回报我要回报我要回报</td>
+							<td class="me-td6"><a href="manage-enter-detail.html" target="ifa">查看详情</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="me-list">
+					<p class="me-data">2016-06－06</p>
+					<table class="table table-bordered">
+						<tr>
+							<td class="me-td1">
+								<div class="me-base-info">
+									<a href="project-detail.html" target="_blank"  style="background-image:url(images/2.png)" class="me-tu"></a>
+									<div class="me-txt">
+										<p class="me-name"><a href="project-detail.html" target="_blank">Acappella夏令营Acappella夏令营Acappella夏令营Acappella</a></p>
+										<p class="me-tate">众筹成功</p>
+									</div>
+								</div>
+							</td>
+							<td class="me-td2">支持档位：¥1</td>
+							<td class="me-td3">限定人数<br>100</td>
+							<td class="me-td4">支持人数<br>8750</td>
+							<td class="me-td5">回报内容<br>我要回报我要回报我要回报我要回报我要回报我要回报我要回报我要回报</td>
+							<td class="me-td6"><a href="manage-enter-detail.html" target="ifa">查看详情</a></td>
+						</tr>
+					</table>
+				</div>
+				<!----分页--->
+				<div id="pr-page"></div>
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script src="js/laypage.js"></script>
+		<script>
+			$(function(){
+				var nums = 5; //每页出现的数量
+				var pages =100; //得到总页数
+				//调用分页
+				laypage({
+				    cont: 'pr-page',
+				    pages: pages,
+				    jump: function(obj){
+				       // document.getElementById('biuuu_city_list').innerHTML = thisDate(obj.curr);
+				    }
+				})
+			})
+		</script>
+	</body>
+</html>

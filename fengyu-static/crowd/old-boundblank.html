@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/skin/layer.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="old-bound-box">
+			<h5><b>已绑定的银行卡</b></h5>
+			<div class="blank-card old-blank-card">
+		    	<div class="blank-list">
+		    		<p class="bl-p1"><img src="images/blank_logo.png"><span class="bl-car-kind">信用卡</span><span class="bl-weihao">尾号003</span></p>
+		    	    <p class="bl-p2">持卡人姓名：*辰辰</p>
+		    	    <p class="bl-p3">手机号：156****6521</p>
+		    	    <span class="cancel-bind">取消绑定</span>
+		    	</div>
+		    	<div class="blank-list">
+		    		<p class="bl-p1"><img src="images/blank_logo.png"><span class="bl-car-kind">信用卡</span><span class="bl-weihao">尾号003</span></p>
+		    	    <p class="bl-p2">持卡人姓名：*亚亚</p>
+		    	    <p class="bl-p3">手机号：156****6521</p>
+		    	    <span class="cancel-bind">取消绑定</span>
+		    	</div>
+		    	<div class="blank-list">
+		    		<p class="bl-p1"><img src="images/blank_logo.png"><span class="bl-car-kind">信用卡</span><span class="bl-weihao">尾号003</span></p>
+		    	    <p class="bl-p2">持卡人姓名：*晶晶</p>
+		    	    <p class="bl-p3">手机号：156****6521</p>
+		    	    <span class="cancel-bind">取消绑定</span>
+		    	</div>
+		    	<div class="blank-list">
+		    		<p class="bl-p1"><img src="images/blank_logo.png"><span class="bl-car-kind">储蓄卡</span><span class="bl-weihao">尾号003</span></p>
+		    	    <p class="bl-p2">持卡人姓名：*甜甜</p>
+		    	    <p class="bl-p3">手机号：156****6521</p>
+		    	    <span class="cancel-bind">取消绑定</span>
+		    	</div>
+		    </div>
+		    <a href="blank-bind-one.html" target="ifa" class="add-newcard">+添加新的银行卡</a>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
+		<script src="js/layer.js"></script>
+		<script>
+			$(function(){
+				$.each($(".blank-list"), function(i,e) {
+					$(e).find(".cancel-bind").click(function(){
+						parent.layer.open({
+						title:['温馨提示','background:#ffdd00;color:#ffffff'],
+						content:'确认取消绑定此银行卡么？',
+						btn:['取消绑定','不取消'],
+						yes:function(){
+						    $(e).remove();
+							parent.$(".layui-layer-shade,.layer-anim").hide();
+						}
+					})
+					})
+				});
+				
+			})
+		</script>
+		<!---todo------->
+		<script>
+				window.onbeforeunload = function(){
+				    parent.$(".layui-layer-shade").hide();
+					parent.$(".layer-anim").hide();				   
+				}
+		</script>
+	</body>
+</html>

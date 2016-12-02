@@ -1,0 +1,59 @@
+$(function(){
+			$("input[type!='password'][type!='button'],textarea").bind({
+				"focus":function(){
+					var placeholderVal = $(this).attr("placeholder");
+					var realVal = $(this).val();
+					if($.trim(realVal)==placeholderVal){
+						$(this).val("");
+					}
+				},
+				"blur":function(){
+					var placeholderVal = $(this).attr("placeholder");
+					var realVal = $(this).val();
+					if($.trim(realVal)==""){
+						$(this).val(placeholderVal);
+					}
+				}
+			});
+			
+			$("input[type!='password'][type!='button'],textarea").each(function(i,n){
+				$(this).val($(this).attr("placeholder"));
+			});
+			/*************************/
+			$(".user-name").attr("value","手机/绑定邮箱");
+			$(".paswd2").show();
+			$(".paswd").hide();
+			$(".paswd2").attr("value",'密码');
+			$(".paswd2").focus(function(){
+				$(this).hide();
+				$(".paswd").show().focus();
+			})
+			/*网页验证码*/
+			$(".web-code").attr('value','请输入验证码');
+			/***************************/
+			$(".paswd3p,.paswd4p").hide();
+			$(".paswd3,.paswd4").show();
+			$(".paswd3").attr("value",'请填写登录密码');
+			$(".paswd4").attr("value","请重复登录密码");
+			$(".paswd3").focus(function(){
+				$(this).hide();
+				$(".paswd3p").show().focus();
+			})
+			$(".paswd4").focus(function(){
+				$(this).hide();
+				$(".paswd4p").show().focus();
+			})
+			/*三方注册*/
+			$(".set-paswd,.confirm-paswd").hide();
+			$(".set-paswd2,.confirm-paswd2").show();
+			$(".set-paswd2").attr("value","密码位数不低于六位且包含英文数字组合");
+			$(".confirm-paswd2").attr("value","请再次输入密码");
+			$(".set-paswd2").focus(function(){
+				$(this).hide();
+				$(".set-paswd").show().focus();
+			})
+			$(".confirm-paswd2").focus(function(){
+				$(this).hide();
+				$(".confirm-paswd").show().focus();
+			})
+		});

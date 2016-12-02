@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/skin/laypage.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="md-box">
+			<div class="message-title">
+				<a href="my-message.html" target="ifa" class="private-letter active-letter">私信<img src="images/daosanjiao.png"><span></span>
+					<dl>
+						<dd class="old-harvest">已收到的私信（4）</dd>
+						<dd class="send-harvest">已发送的私信（4）</dd>
+					</dl>
+				</a>
+				<a href="my-message2.html" class="inside-letter">站内信<span class="badge">9</span></a>
+			</div>
+			<!--<h4 class="md-title"><b>标题标题标题标题标题标题标题标题标题</b></h4>-->
+			<p class="md-txt">私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信
+				私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信
+				私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私
+				信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私
+				信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私
+				信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信
+				私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私
+				信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信
+				私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私
+				信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私信私信私信私信私私信私信私
+				信私信私信私信私私信私信私信私信私信私信私私信私信私信私信
+			</p>
+			<div class="sixin-list">
+				<span style="background-image: url(images/2.png);" class="sixin-head"></span><span>喵苗淼</span>
+				<span class="sixin-time">2016-06-06   15：30</span>
+				<p class="sixin-con">私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容私信内容</p>
+			    <a href="javascript:;" class="sixin-btn">回复</a>
+			</div>
+			<div class="md-replay">
+				<textarea id="saytext"></textarea>
+				<p class="md-re-p"><span class="emotion"><img src="images/smail.png"></span>还可以输入140字<a href="javascript:;" class="replay-btn">回复</a></p>
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script src="js/jquery-browser.js"></script>
+		<script src="js/jquery.qqFace.js"></script>
+		<script src="js/laypage.js"></script>
+		<script>
+			$(function(){
+				  var type = getQueryString("type");
+				  if(type==null || type==""){
+				  	//没有参数 
+				  	$(".md-replay").hide();
+				  }else{
+				  	//有参数  说明是跳转过来的
+				  	$(".md-replay").show();
+				  	$(".replay-btn").click(function(){
+				  		$(".sixin-list").show();
+				  		$(".md-replay").hide();
+				  	})
+				  }
+				$(".private-letter img").click(function(){
+					$(this).parents(".private-letter").find("dl").slideToggle(400);
+					return false;
+				})
+				$(".sixin-btn").click(function(){
+					$(".md-replay").show();
+					$("#saytext").val("");
+				})
+			});
+			function getQueryString(name) {
+		        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		        var r = window.location.search.substr(1).match(reg);
+		        if (r != null) return unescape(r[2]); return null;
+		    }
+		</script>
+		<script>
+			$(function(){
+				$('.emotion').qqFace({
+					id : 'facebox', 
+					assign:'saytext', 
+					path:'arclist/'	//表情存放的路径
+				});
+				
+			});
+		</script>
+	</body>
+</html>

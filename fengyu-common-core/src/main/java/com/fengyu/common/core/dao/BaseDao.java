@@ -104,12 +104,12 @@ public interface BaseDao<T> {
 
 	Object getBy(Map<String, Object> paramMap, String sqlId);
 
-	/**
-	 * 根据序列名称获取下一个值
-	 * 
-	 * @return
-	 */
-	String getSeqNextValue(String seqName);
+//	/**
+//	 * 根据序列名称获取下一个值
+//	 *
+//	 * @return
+//	 */
+//	String getSeqNextValue(String seqName);
 
 	SqlSessionTemplate getSessionTemplate();
 

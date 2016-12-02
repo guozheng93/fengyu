@@ -24,9 +24,11 @@
         <module>fengyu-facade-account</module>
         <module>fengyu-facade-other</module>
         <module>fengyu-facade-crowd</module>
+        <module>fengyu-facade-order</module>
         <module>fengyu-facade-user</module>
         <module>fengyu-service-user</module>
         <module>fengyu-service-account</module>
+        <module>fengyu-service-order</module>
         <module>fengyu-service-crowd</module>
         <module>fengyu-service-other</module>
         <module>fengyu-view-shop</module>
@@ -303,6 +305,11 @@
                 <groupId>org.apache.tomcat</groupId>
                 <artifactId>jsp-api</artifactId>
                 <version>6.0.37</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.6.2</version>
             </dependency>
         </dependencies>
 

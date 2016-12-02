@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>实名认证</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="real-box">
+			<h5><b>实名认证</b></h5>
+			<div class="real-info">
+				<p class="real-p1">
+					<span>用户名：<b>某某用户</b></span>
+					<span>真实姓名：<input type="text"></span><span>手机号码：<b>15269159206</b></span>
+				</p>
+				<p class="real-p2">
+					<span><b>身份证号码：</b><input type="number" class="idcard"></span>
+					<span>验证码：<input type="text" placeholder="短信验证码" class="mesg-card"><input type="button" class="send-ver" value="获取验证码" onclick="settime(this)"></span>
+				</p>
+				<div class="id-photo">
+					<div class="id-p-list">
+						<span style="background-image:url(images/default_tu.png)"></span>
+						<a href="javascript:;" class="a-upload"><input type="file">上传身份证正面照</a>
+					</div>
+					<div class="id-p-list">
+						<span style="background-image:url(images/default_tu.png)"></span>
+						<a href="javascript:;" class="a-upload"><input type="file">上传身份证背面照</a>
+					</div>
+					<div class="id-p-list">
+						<span style="background-image:url(images/default_tu.png)"></span>
+						<a href="javascript:;" class="a-upload"><input type="file">上传手持身份证半身照</a>
+					</div>
+				</div>
+				<a href="real-renzhen-ok.html" class="real-submit" name="ifa">提交</a>
+			</div>
+		</div>
+		<script>
+			var countdown=60; 
+	        function settime(obj) { 
+	            if (countdown == 0) { 
+	                obj.removeAttribute("disabled");    
+	                obj.value="获取验证码"; 
+	                
+	                countdown = 60; 
+	               return flase;
+	             } else { 
+			        obj.setAttribute("disabled", 'disabled'); 
+			        obj.value="重新发送(" + countdown + ")"; 
+			        
+			        countdown--; 
+	     			} 
+			   setTimeout(function() { 
+			    settime(obj) }
+			    ,1000) 
+			}
+		</script>
+	</body>
+</html>

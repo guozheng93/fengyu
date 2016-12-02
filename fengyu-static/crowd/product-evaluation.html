@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>商品评价</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="pro-eval">
+			<h5><b>商品评价</b></h5>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="pro-th1">商品信息</th>
+						<th>订单编号</th>
+						<th>价格</th>
+						<th>购买时间</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="trad-tr1">
+							<span style="background-image:url(images/2.png)" class="trad-p-tu"></span>
+							<p class="trad-p-txt">Acappella夏令营</p>
+						</td>
+						<td class="trad-tr2" style="color:#f27801">0000000000000</td>
+						<td class="trad-tr3">¥0.01</td>
+						<td class="trad-tr4">2016-06-03</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="eval-con">
+				<p class="eval-li">
+					<span class="eval-s">商品满意度：</span>
+					<span class="eval-start"><img src="images/gray_strat.png"></span>
+					<span class="eval-start"><img src="images/gray_strat.png"></span>
+					<span class="eval-start"><img src="images/gray_strat.png"></span>
+					<span class="eval-start"><img src="images/gray_strat.png"></span>
+					<span class="eval-start"><img src="images/gray_strat.png"></span>
+				</p>
+				<!--------商品印象------>
+				<div class="image-list"></div>
+			    <p class="eval-li eval-p">
+			    	<span class="eval-s">商品印象：</span>
+			    	<input type="text" placeholder="您对本商品的印象" class="good-eval-txt"><a href="javascript:;" class="add-eval">+添加</a>
+			    </p>
+			    <p class="eval-li">
+			    	<span class="eval-s">评价：</span>
+			    	<textarea class="eval-txt"></textarea>
+			    	<span class="word-limit">您还可以输入<b style="color:#FF0000">500</b>字</span>
+			    </p>
+			    <div class="eval-li">
+			    	<span class="eval-s eval-print">晒图：</span>
+			    	<div class="print">
+			    		<p>
+				    		<a href="javascript:;" class="file">选择文件<input type="file" name="" id=""></a>
+				    		<span><b>0/4</b>  最多能添加<b style="color:#FFDD00;margin:0 4px">4</b>张图片</span>
+			    		</p>
+			    		<p class="print-list">
+			    			<span style="background-image:url(images/tui11.png)"></span>
+			    		</p>
+			    	</div>
+			    </div>
+			    <p class="eval-li">
+			    	<span class="eval-s eval-sub"></span>
+			    	<a href="javascript:;" class="eval-submit">提交评价</a>
+			    	<input type="checkbox" id="niming"><label for="niming">匿名评论</label>
+			    </p>
+			</div>
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script>
+			$(function(){
+				$(".eval-start").click(function(){
+				     var dangqian=$(this);
+					$.each($(".eval-start"), function(i,e) {
+						if(i<=dangqian.index()-1){
+							$(e).find("img").attr("src","images/yellpw_start.png");
+						}else{
+							$(e).find("img").attr("src","images/gray_strat.png");
+						}
+					});
+				})
+				/*商品印象添加*/
+				
+				$(".add-eval").click(function(){
+					var image_val="";
+					image_val=$(".good-eval-txt").val();
+					if(image_val!=''){
+						$(".image-list").append("<span class='image-span'>"+image_val+"<img src='images/image_tu.png'>"+"</span>");
+					}
+					$(".image-list span").click(function(){
+					    $(this).css({
+					    	"background":"#ffffff",
+					    	"color":"#999999",
+					    	"border":"1px solid #999999"
+					    });
+					    $(this).find("img").hide();
+				    })
+				})
+				
+			})
+		</script>
+	</body>
+</html>

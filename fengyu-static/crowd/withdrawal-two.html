@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="withdrawal-box">
+			<h5><b>确认提现信息</b></h5>
+		    <div class="withdrawal-info">
+		    	<p><span class="info-s">银行卡信息：</span>陈某某<br><img src="images/blank_logo.png" class="blank_tu"><span class="blank_hao"><b>**** **** **** 1111</b></span></p>
+		    	<p><span class="info-s">提现金额：</span><b style="color:red">0.01元</b></p>
+		    	<p><span class="info-s">到账时间：</span><span style="color:#7a7a7a">以银行实际到账时间为准</span></p>
+		    </div>
+		    <a href="withdrawal-three.html" target="ifa" class="rech-sub">确认提现</a>
+		    
+		</div>
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script>
+			$(function(){
+				$.each($(".blank-list"), function(i,e) {
+					$(".blank-list").first().css("margin-left",0);
+					if(i%2==0){
+						$(e).css("margin-left","88px");
+					}
+				});
+				$(".blank-list").click(function(){			
+					$(this).addClass("active-blank").siblings(".blank-list").removeClass("active-blank");
+				})
+				
+				/*到账时间*/
+				$(".daozhang-time input").click(function(){
+					if($(this).attr("checked")){
+						$(this).attr("checked",false);
+					}else{
+						$(this).attr("checked",true);
+					}
+				})
+			})
+		</script>
+	</body>
+</html>

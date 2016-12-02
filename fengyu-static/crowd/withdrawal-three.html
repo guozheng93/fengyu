@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>提现</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" href="css/person.css" />
+	</head>
+	<body>
+		<div class="withdrawal-box">
+			<p class="withdrawal-title"><img src="images/lou.png">提现申请已提交，等待银行处理</p>
+			<div class="progress-apply">
+				<p style="color:#FFDD00"><span>提出申请</span><span>（2016-05-23  11:22:23）</span></p>
+				<p><span>银行处理</span><span>（2016-05-23  11:22:23）</span></p>
+				<p><span>提现成功</span><span>（2016-05-24  24:00:00 前）</span></p>
+				<div class="gray-tiao">
+					<span class="jindu-num" style="width:0%;"></span>
+					<div class="gray-icon"><img src="images/yellow-cricle.png"></div>
+					<div class="gray-icon"><img src="images/gray-cricle.png"></div>
+					<div class="gray-icon"><img src="images/gray-cricle.png"></div>
+					<div class="clearfix"></div>
+				</div>
+				<p class="withdrawal-a"><a href="withdrawal-one.html" class="continue-carry" target="ifa">继续提现</a><a href="account-detail.html" target="ifa" class="find-cord">返回账户中心</a></p>
+			</div>
+		</div>
+		
+		<script src="js/jquery1.11.3.min.js"></script>
+		<script>
+			$(function(){
+				$(".gray-tiao .gray-icon").first().css("text-align","left");
+				$(".gray-tiao .gray-icon").last().css("text-align","right");
+			})
+		</script>
+	</body>
+</html>
