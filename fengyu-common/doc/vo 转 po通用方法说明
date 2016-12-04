@@ -1,0 +1,198 @@
+使用
+
+public class UserServiceImpl extends BaseServiceImpl implements UserService {
+
+    private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+    /**
+     * 增加，方法一
+     */
+    @Override
+    public void save(UserVo entityVo) {
+        User user = new User();
+        user = super.getVoTemplate().defaultExcute(user, entityVo);
+        this.userDao.save(user);
+    }
+
+    /**
+     * 增加，方法二
+     */
+//    @Override
+//    public void save(final UserVo entityVo) {
+//
+//        //这里是处理entityVo与entity转换的地方
+//        User user = super.getVoTemplate().execute(new VoCallback<User>(){
+//
+//            @Override
+//            public User doInVo() {
+//                User u = new User();
+//                //这句根据主键生成策略决定要、不要、改
+//                u.setUuid(UUID.randomUUID().toString().replace("-", ""));
+//                u.setUsername(entityVo.getUsername());
+//                u.setPassword(entityVo.getPassword());
+//                return u;
+//            }
+//
+//        });
+//
+//        //处理业务
+//        this.userDao.save(user);
+//    }
+
+    /**
+     * 增加，方法三
+     */
+//    @Override
+//    public void save(UserVo entityVo) {
+//        //这里是处理entityVo与entity转换的地方
+//        User user = super.getVoTemplate().execute(new UserVoCallback(entityVo));
+//        //这里是处理业务的地方
+//        this.userDao.save(user);
+//    }
+
+    /**
+     * 增加，方法四
+     */
+//    @Override
+//    public void save(UserVo entityVo) {
+//        //这里是处理entityVo与entity转换的地方
+//        User user = super.getVoTemplate().execute(new UserVoCallback2(entityVo));
+//        //这里是处理业务的地方
+//        this.userDao.save(user);
+//    }
+
+    @Override
+    public void update(UserVo entityVo) {
+        User user = new User();
+        user = super.getVoTemplate().defaultExcute(user, entityVo);
+        this.userDao.update(user);
+    }
+
+    public UserDao getUserDao() {
+        return userDao;
+    }
+
+    @Override
+    public void deleteByPK(String pk) {
+        this.userDao.deleteByPK(pk, UserVo.PK_NAME);
+    }
+
+    @Override
+    public void delete(UserVo entityVo) {
+        User user = new User();
+        user = super.getVoTemplate().defaultExcute(user, entityVo);
+        this.userDao.delete(user);
+
+    }
+
+    @Override
+    public UserVo get(String pk) {
+        User user = this.userDao.get(pk);
+        UserVo userVo = new UserVo();
+        userVo = super.getVoTemplate().defaultExcute(userVo,user);
+        return userVo;
+    }
+
+    @Override
+    public List<UserVo> findAll() {
+        List<User> list = this.userDao.findAll();
+        List<UserVo> listVo = new ArrayList<UserVo>();
+        if(list==null) return null;
+        for(User user : list){
+            UserVo userVo = new UserVo();
+            userVo = super.getVoTemplate().defaultExcute(userVo, user);
+            listVo.add(userVo);
+        }
+        return listVo;
+    }
+
+}
+
+上面的例子以save方法为例，给出了voTemplate处理entityVo与entity转化的4种用法。
+方法1
+使用voTemplate的defaultExcute方法，简单的从 v -> t 复制属性
+
+方法2
+使用voTemplate的excute方法，自定义处理方法。
+方法2、3、4都是自定义处理方法，只不过在提供VoCallback<T>的实现类方式上有所差别。
+这里是用内部类实现的
+
+方法3
+提供一个UserVoCallback.java，实现VoCallback接口。
+以这个类的对象作为voTemplate.execute的参数来实现的。
+UerVoCallback.java
+package org.lxl.mr.vo.callback;
+
+import org.lxl.mr.common.base.vo.VoCallback;
+import org.lxl.mr.pojo.User;
+import org.lxl.mr.vo.UserVo;
+
+public class UserVoCallback implements VoCallback<User> {
+    private UserVo userVo;
+
+    public UserVoCallback(UserVo userVo){
+        this.userVo = userVo;
+    }
+
+    @Override
+    public User doInVo() {
+        if(userVo==null) return null;
+        User user = new User();
+        user.setUsername(userVo.getUsername());
+        user.setPassword(userVo.getPassword());
+        return user;
+    }
+
+}
+
+方法4
+1) 提供一个VoCallback接口的抽象实现类VoCallbackSupport.java：
+VoCallbackSupport.java
+package org.lxl.mr.common.base.vo;
+
+public abstract class VoCallbackSupport<T,V> implements VoCallback<T> {
+    protected V v;
+    public VoCallbackSupport(V v){
+        this.v = v;
+    }
+    @Override
+    public abstract T doInVo();
+
+}
+2)提供一个UserVoCallback2.java，继承VoCallbackSupport抽象类。
+以这个类的对象作为voTemplate.execute的参数来实现的。
+UserVoCallback2.java
+package org.lxl.mr.vo.callback;
+
+import org.lxl.mr.common.base.vo.VoCallbackSupport;
+import org.lxl.mr.pojo.User;
+import org.lxl.mr.vo.UserVo;
+
+public class UserVoCallback2 extends VoCallbackSupport<User, UserVo>{
+
+    public UserVoCallback2(UserVo v) {
+        super(v);
+    }
+
+    @Override
+    public User doInVo() {
+        User user = new User();
+        user.setUsername(v.getUsername());
+        user.setPassword(v.getPassword());
+        return user;
+    }
+
+}
+
+这种方式处理entityVo与entity之间转换与传统的方式一样，还是要程序员自己去处理。
+它真正的好处是：
+1、规范化处理entityVo与entity之间的转换
+2、处理entityVo与entity之间转换的代码与业务代码分离，使代码更清晰
+3、在entityVo与entity相似度极高，可以直接复制相同属性的情况下，使用VoTemplate
+提供的defalutExcute方法一句话即可实现entityVo与entity的转换，如：
+User user = super.getVoTemplate().defaultExcute(new User,entityVo);
+非常的方便！
