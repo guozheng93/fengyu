@@ -1,6 +1,7 @@
-package com.fengyu.common.base.service;
+package com.fengyu.common.core.base.service;
 
 import java.util.List;
+
 /**
  * service 基本模式接口，实现基本增删该查操作
  *

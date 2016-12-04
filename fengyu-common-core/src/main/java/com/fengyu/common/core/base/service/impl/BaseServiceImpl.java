@@ -1,6 +1,6 @@
-package com.fengyu.common.base.service.impl;
+package com.fengyu.common.core.base.service.impl;
 
-import com.fengyu.common.base.vo.VoTemplate;
+import com.fengyu.common.core.base.vo.VoTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

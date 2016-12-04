@@ -1,7 +1,7 @@
-package com.fengyu.common.base.vo;
+package com.fengyu.common.core.base.vo;
 
-import org.springframework.stereotype.Component;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 
 /**
  * 本类的作用是解决service层传递的EntityVo对象与dao层

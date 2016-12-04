@@ -1,4 +1,4 @@
-package com.fengyu.common.base.vo;
+package com.fengyu.common.core.base.vo;
 
 /**
  * vo 注入po 回调函数接口
