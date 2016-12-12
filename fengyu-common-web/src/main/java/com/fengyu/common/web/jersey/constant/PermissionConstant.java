@@ -1,4 +1,4 @@
-package com.fengyu.common.web.constant;
+package com.fengyu.common.web.jersey.constant;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;

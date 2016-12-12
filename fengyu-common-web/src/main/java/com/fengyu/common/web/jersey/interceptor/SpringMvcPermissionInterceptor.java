@@ -1,7 +1,7 @@
-package com.fengyu.common.web.interceptor;
+package com.fengyu.common.web.jersey.interceptor;
 
-import com.fengyu.common.web.annotation.Permission;
-import com.fengyu.common.web.constant.PermissionConstant;
+import com.fengyu.common.web.jersey.annotation.Permission;
+import com.fengyu.common.web.jersey.constant.PermissionConstant;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;

@@ -1,4 +1,4 @@
-package com.fengyu.common.web.taglib;
+package com.fengyu.common.web.jersey.taglib;
 
 import com.fengyu.common.page.PageBean;
 

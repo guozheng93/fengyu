@@ -1,4 +1,4 @@
-//package com.fengyu.common.web.file;
+package com.fengyu.common.web.jersey.file;//package com.fengyu.common.web.springmvc.file;
 //
 //import org.apache.commons.lang.StringUtils;
 //import org.apache.log4j.Logger;

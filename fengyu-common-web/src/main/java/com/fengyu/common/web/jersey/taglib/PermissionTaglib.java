@@ -1,6 +1,6 @@
-package com.fengyu.common.web.taglib;
+package com.fengyu.common.web.jersey.taglib;
 
-import com.fengyu.common.web.constant.PermissionConstant;
+import com.fengyu.common.web.jersey.constant.PermissionConstant;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;

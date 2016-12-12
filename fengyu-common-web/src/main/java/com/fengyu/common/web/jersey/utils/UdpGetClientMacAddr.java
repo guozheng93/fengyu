@@ -1,4 +1,4 @@
-package com.fengyu.common.web.utils;
+package com.fengyu.common.web.jersey.utils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -110,7 +110,7 @@ public class UdpGetClientMacAddr {
 	
 	public static void main(String[] args) {
 		try {
-			UdpGetClientMacAddr  upd = new UdpGetClientMacAddr("192.168.88.112");
+			UdpGetClientMacAddr upd = new UdpGetClientMacAddr("192.168.88.112");
 			System.out.println(upd.GetRemoteMacAddr());
 		} catch(SocketTimeoutException e){
 			System.out.println("3");

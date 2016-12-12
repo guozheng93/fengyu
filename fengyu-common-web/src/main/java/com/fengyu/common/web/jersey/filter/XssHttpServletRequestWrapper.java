@@ -1,4 +1,4 @@
-package com.fengyu.common.web.filter;
+package com.fengyu.common.web.jersey.filter;
 
 import org.apache.commons.lang.StringUtils;
 import org.jsoup.Jsoup;

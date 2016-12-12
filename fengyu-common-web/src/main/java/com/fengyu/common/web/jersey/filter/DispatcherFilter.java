@@ -1,8 +1,8 @@
-package com.fengyu.common.web.filter;
+package com.fengyu.common.web.jersey.filter;
 
-import com.fengyu.common.web.context.ThreadLocalContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import com.fengyu.common.web.jersey.context.ThreadLocalContext;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

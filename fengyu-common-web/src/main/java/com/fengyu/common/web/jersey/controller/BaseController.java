@@ -1,23 +1,36 @@
-package com.fengyu.common.web.controller;
+package com.fengyu.common.web.jersey.controller;
 
+import com.alibaba.dubbo.common.json.JSON;
+import com.fengyu.common.core.base.service.BaseService;
+import com.fengyu.common.entity.VOEntity;
+import com.fengyu.common.exception.Constant.UserDefinedExceptionType;
+import com.fengyu.common.exception.MapperSupport.CommonExceptionHandler;
+import com.fengyu.common.exception.MapperSupport.CommonExceptionType;
+import com.fengyu.common.exception.MapperSupport.WebActionException;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
-import com.fengyu.common.utils.json.JSONObject;
 import com.fengyu.common.utils.string.StrUtil;
-import com.fengyu.common.web.utils.UdpGetClientMacAddr;
+import com.fengyu.common.web.jersey.utils.UdpGetClientMacAddr;
+import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import net.sf.json.util.PropertyFilter;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.web.context.WebApplicationContext;
 
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
 import java.net.URLDecoder;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  */
@@ -25,7 +38,7 @@ public class BaseController {
 
     private static final Log LOG = LogFactory.getLog(BaseController.class);
 
-    public PageBean pageBean;
+    private ResponseWrapper response;
 
     public Integer pageNum;
 
@@ -37,23 +50,78 @@ public class BaseController {
      * 编码类型 UTF-8.
      */
     private static final String UTF_8 = "utf-8";
+    
 
-
-    /**
-     * pageBean.
-     *
-     * @return the pageBean
-     */
-    public PageBean getPageBean() {
-        return pageBean;
+    public ResponseWrapper getResponse() {
+        return response;
     }
 
+    public void setResponse(ResponseWrapper response) {
+        this.response = response;
+    }
+    
     /**
-     * @param pageBean
-     *            the pageBean to set
-     */
-    public void setPageBean(PageBean pageBean) {
-        this.pageBean = pageBean;
+     * @author junz
+     * @date 2016/12/4 19:59
+     * @description 调用service 直接封装到ResponseWrapper中
+     * @param
+     * @return
+    **/
+    public ResponseWrapper doServiceAndResponse(BaseService service, String methodName, Object... args) throws InvocationTargetException {
+        ResponseWrapper response=new ResponseWrapper();
+        PageBean page=new PageBean();
+        Method method = null;
+        Class[] paramType=args==null?null:new Class[args.length];
+        if(args!=null)
+        {
+            for (int i=0;i<args.length;i++)
+            {
+
+                if(args[i] instanceof Map)
+                {
+                    paramType[i]=Map.class;
+                }else
+                {
+                    paramType[i]=args[i].getClass();
+                }
+            }
+        }
+
+        try {
+            method = service.getClass().getMethod(methodName,paramType);
+
+            Object obj=method .invoke( service ,args);
+            if(!(obj instanceof Integer))
+            {
+                if(obj instanceof List)
+                    page.setRecordList((List)obj);
+               /* else if(obj instanceof PageBean)
+                {
+                    page= (PageBean) obj;
+                }*/
+                else
+                {
+                    List list=new ArrayList();
+                    list.add(obj);
+                    page.setRecordList(list);
+                }
+                page.setNumPerPage(page.getRecordList().size());
+                response.setResponseBody(page);
+            }else
+            {
+                Map hashMap=new HashMap();
+                hashMap.put("id",obj);
+                List list=new ArrayList();
+                list.add(hashMap);
+                page.setRecordList(list);
+                response.setResponseBody(page);
+            }
+        } catch (NoSuchMethodException e) {
+            throw  new CommonExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+        }  catch (IllegalAccessException e) {
+            throw  new CommonExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+        }
+        return response;
     }
 
     /**
@@ -475,5 +543,35 @@ public class BaseController {
         return "";
     }
 
-
+    public String nullParamOfJsonFilter(Object obj)
+    {
+        String jsonStr= "";
+        /*try {
+            //设置过滤json格式
+            JsonConfig jsonConfig = new JsonConfig();
+            PropertyFilter filter = new PropertyFilter() {
+                public boolean apply(Object object, String fieldName, Object fieldValue) {
+                    if(fieldValue instanceof List){
+                        List<Object> list = (List<Object>) fieldValue;
+                        if (list.size()==0) {
+                            return true;
+                        }
+                    }
+                    return null == fieldValue || "".equals(fieldValue);
+                }
+            };
+            jsonConfig.setJsonPropertyFilter(filter);
+            JSONArray jsonArray = JSONArray.fromObject(obj,jsonConfig);
+            JSONObject jsonObject = new JSONObject();
+            jsonStr = JSON.json(jsonArray);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
+        try {
+            jsonStr=JSON.json(obj);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonStr;
+    }
 }

@@ -1,4 +1,4 @@
-package com.fengyu.common.web.context;
+package com.fengyu.common.web.jersey.context;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package com.fengyu.common.web.controller;
+package com.fengyu.common.web.jersey.controller;
 
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;

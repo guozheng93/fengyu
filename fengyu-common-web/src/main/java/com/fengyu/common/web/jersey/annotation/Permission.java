@@ -1,4 +1,4 @@
-package com.fengyu.common.web.annotation;
+package com.fengyu.common.web.jersey.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

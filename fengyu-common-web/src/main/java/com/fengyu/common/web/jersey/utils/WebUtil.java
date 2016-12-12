@@ -1,4 +1,4 @@
-package com.fengyu.common.web.utils;
+package com.fengyu.common.web.jersey.utils;
 
 import org.apache.commons.lang.StringUtils;
 
