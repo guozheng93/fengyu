@@ -1,20 +1,40 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% String path = request.getContextPath();String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;%>
+<% String platPath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"+"platform";%>
+<%--<% String jsonPath = "http://47.88.190.192:8088/silu_api/rest/"; %>--%>
+<% String jsonPath = "http://47.88.190.192:8088/silu_api/rest"; %>
+<% String picPath = "http://47.88.190.192:8787"; %>
 <body>
     <div class="navigate">
-        <a href="/view/home/index.jsp" <c:if test="${param.index == 1}">class='nav-active'</c:if>>众筹首页<p class="nav-active2" <c:if test='${param.index == 1}'>style="display: block;"</c:if>><span></span></p></a>
-        <a href="/view/project/index.jsp" <c:if test="${param.index == 2}">class='nav-active'</c:if> >众筹列表<p class="nav-active2" <c:if test="${param.index == 2}">style="display: block;"</c:if>><span></span></p></a>
-        <a href="javascript:;" class="faqi_zhongchou" target="push " <c:if test="${param.index ==3}">class='nav-active'</c:if>>发起众筹<p class="nav-active2" <c:if test="${param.index == 3}">style="display: block;"</c:if>><span></span></p></a>
-        <a href="/view/news/index.jsp" <c:if test="${param.index ==4}">class='nav-active'</c:if>>最新资讯<p class="nav-active2" <c:if test="${param.index == 4}">style="display: block;"</c:if>><span></span></p> </a>
-        <a href="/view/about/index.jsp" <c:if test="${param.index ==5}">class='nav-active'</c:if>>关于我们<p class="nav-active2" <c:if test="${param.index == 5}">style="display: block;"</c:if>><span></span></p></a>
+        <a href="<%=basePath%>/view/home/index.jsp"> 众筹首页<p><span></span></p></a>
+        <a href="<%=basePath%>/view/project/index.jsp"> 众筹列表<p><span></span></p></a>
+        <a href="javascript:;"> 发起众筹<p><span></span></p></a>
+        <a href="<%=basePath%>/view/news/index.jsp"> 最新资讯<p><span></span></p></a>
+        <a href="<%=basePath%>/view/about/index.jsp"> 关于我们<p><span></span></p></a>
     </div>
 </body>
 <script>
+    //用于切换nav栏选中效果
+    function navCheckStyleAction(curNavNode) {
+        var otherNavNode=$(curNavNode).siblings();
+        $(otherNavNode).children("p").removeClass("nav-active2");
+        $(otherNavNode).children("p").fadeOut();
+        $(curNavNode).addClass("nav-active").siblings().removeClass("nav-active");;
+        $(curNavNode).children("p").addClass("nav-active2");
+        $(curNavNode).children("p").fadeIn();
+    }
+    //获取当前地址栏，通过地址栏判断点击对象
+    var browserAddress=window.location.pathname;
+    var curNavNode=$(".navigate").children("a[href$='"+browserAddress+"']");
+    navCheckStyleAction(curNavNode);
     /*导航*/
     //$(".navigate a p").hide().first().show();
     $(".navigate a").click(function(){
-        $(this).addClass("nav-active").siblings().removeClass("nav-active");
-        $(".navigate a p").hide();
-        $(this).children("p").show();
+        //判断是否重复点击
+        if($(curNavNode).html()==$(this).html())
+            return false;
+        else
+            navCheckStyleAction($(this));
+
     })
 </script>

@@ -2,8 +2,7 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<jsp:include page="base-css.jsp"/>
-<jsp:include page="base-js.jsp"/>
+
 <body>
 <div class="head">
     <div class="head-mid">
