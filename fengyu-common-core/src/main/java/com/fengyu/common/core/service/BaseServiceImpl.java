@@ -20,7 +20,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity> implements BaseServi
 
 	protected abstract BaseDao<T> getDao();
 
-	public T getById(long id) {
+	public T getById(Integer id) {
 		return this.getDao().getById(id);
 	}
 

@@ -19,23 +19,23 @@ public abstract class BaseBizImpl<T extends BaseEntity> implements BaseBiz<T> {
 
 	protected abstract BaseDao<T> getDao();
 
-	public long create(T entity) {
+	public Integer create(T entity) {
 		return getDao().insert(entity);
 	}
 
-	public long create(List<T> list) {
+	public Integer create(List<T> list) {
 		return getDao().insert(list);
 	}
 
-	public long update(T entity) {
+	public Integer update(T entity) {
 		return getDao().update(entity);
 	}
 
-	public long update(List<T> list) {
+	public Integer update(List<T> list) {
 		return getDao().update(list);
 	}
 
-	public T getById(long id) {
+	public T getById(Integer id) {
 		return this.getDao().getById(id);
 	}
 
@@ -46,8 +46,8 @@ public abstract class BaseBizImpl<T extends BaseEntity> implements BaseBiz<T> {
 	 *            .
 	 * @return
 	 */
-	public long deleteById(long id) {
-		return this.getDao().deleteById(id);
+	public Integer deleteById(Integer id) {
+		return this.getDao().delete(id);
 	}
 
 	/**

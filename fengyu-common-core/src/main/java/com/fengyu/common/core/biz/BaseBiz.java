@@ -22,7 +22,7 @@ public interface BaseBiz<T extends BaseEntity> {
 	 *            .
 	 * @return id .
 	 */
-	long create(T entity);
+	Integer create(T entity);
 
 	/**
 	 * 批量保存对象.
@@ -31,7 +31,7 @@ public interface BaseBiz<T extends BaseEntity> {
 	 *            .
 	 * @return id .
 	 */
-	long create(List<T> list);
+	Integer create(List<T> list);
 
 	/**
 	 * 更新实体对应的记录.
@@ -40,7 +40,7 @@ public interface BaseBiz<T extends BaseEntity> {
 	 *            .
 	 * @return
 	 */
-	long update(T entity);
+	Integer update(T entity);
 
 	/**
 	 * 批量更新对象.
@@ -49,7 +49,7 @@ public interface BaseBiz<T extends BaseEntity> {
 	 *            .
 	 * @return id .
 	 */
-	long update(List<T> list);
+	Integer update(List<T> list);
 
 	/**
 	 * 根据ID删除记录.

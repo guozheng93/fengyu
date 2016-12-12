@@ -5,6 +5,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +25,9 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return id .
 	 */
-	long insert(T entity);
+	int insert(T entity);
+
+	Map select(Map map);
 
 	/**
 	 * 批量保存对象.
@@ -33,7 +36,7 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return id .
 	 */
-	long insert(List<T> list);
+	int insert(List<T> list);
 
 	/**
 	 * 更新实体对应的记录.
@@ -42,7 +45,7 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return
 	 */
-	long update(T entity);
+	int update(T entity);
 
 	/**
 	 * 批量更新对象.
@@ -51,7 +54,7 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return int .
 	 */
-	long update(List<T> list);
+	int update(List<T> list);
 
 	/**
 	 * 根据ID查找记录.
@@ -60,7 +63,7 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return entity .
 	 */
-	T getById(long id);
+	T getById(int id);
 
 	/**
 	 * 根据ID删除记录.
@@ -69,7 +72,7 @@ public interface BaseDao<T> {
 	 *            .
 	 * @return
 	 */
-	long deleteById(long id);
+	int delete(int id);
 
 	/**
 	 * 分页查询 .
@@ -114,4 +117,5 @@ public interface BaseDao<T> {
 	SqlSessionTemplate getSessionTemplate();
 
 	SqlSession getSqlSession();
+
 }

@@ -1,5 +1,6 @@
 package com.fengyu.common.core.dao;
 
+import com.fengyu.common.entity.VOEntity;
 import org.apache.ibatis.jdbc.SqlRunner;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -40,6 +41,11 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 	public static final String SQL_LIST_BY = "listBy";
 	public static final String SQL_COUNT_BY_PAGE_PARAM = "countByPageParam"; // 根据当前分页参数进行统计
 
+	@Override
+	public Map select(Map map) {
+		return null;
+	}
+
 	/**
 	 * 注入SqlSessionTemplate实例(要求Spring中进行SqlSessionTemplate的配置).<br/>
 	 * 可以调用sessionTemplate完成数据库操作.
@@ -59,7 +65,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return super.getSqlSession();
 	}
 
-	public long insert(T t) {
+	public int insert(T t) {
 
 		if (t == null)
 			throw new RuntimeException("T is null");
@@ -75,7 +81,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return result;
 	}
 
-	public long insert(List<T> list) {
+	public int insert(List<T> list) {
 
 		if (list == null || list.size() <= 0)
 			return 0;
@@ -88,7 +94,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return result;
 	}
 
-	public long update(T t) {
+	public int update(T t) {
 		if (t == null)
 			throw new RuntimeException("T is null");
 
@@ -100,7 +106,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return result;
 	}
 
-	public long update(List<T> list) {
+	public int update(List<T> list) {
 
 		if (list == null || list.size() <= 0)
 			return 0;
@@ -118,12 +124,12 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 		return result;
 	}
 
-	public T getById(long id) {
+	public T getById(int id) {
 		return sessionTemplate.selectOne(getStatement(SQL_GET_BY_ID), id);
 	}
 
-	public long deleteById(long id) {
-		return (long) sessionTemplate.delete(getStatement(SQL_DELETE_BY_ID), id);
+	public int delete(int id) {
+		return (int) sessionTemplate.delete(getStatement(SQL_DELETE_BY_ID), id);
 	}
 
 	public PageBean listPage(PageParam pageParam, Map<String, Object> paramMap, String sqlId) {
@@ -132,7 +138,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 			paramMap = new HashMap<String, Object>();
 
 		// 获取分页数据集 , 注切勿换成 sessionTemplate 对象
-		List<Object> list = getSqlSession().selectList(getStatement(sqlId), paramMap,
+		List<VOEntity> list = getSqlSession().selectList(getStatement(sqlId), paramMap,
 				new RowBounds((pageParam.getPageNum() - 1) * pageParam.getNumPerPage(), pageParam.getNumPerPage()));
 
 		// 统计总记录数
@@ -148,7 +154,7 @@ public abstract class BaseDaoImpl<T extends BaseEntity> extends SqlSessionDaoSup
 			paramMap = new HashMap<String, Object>();
 
 		// 获取分页数据集 , 注切勿换成 sessionTemplate 对象
-		List<Object> list = getSqlSession().selectList(getStatement(SQL_LIST_PAGE), paramMap,
+		List<VOEntity> list = getSqlSession().selectList(getStatement(SQL_LIST_PAGE), paramMap,
 				new RowBounds((pageParam.getPageNum() - 1) * pageParam.getNumPerPage(), pageParam.getNumPerPage()));
 
 		// 统计总记录数
