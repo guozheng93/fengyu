@@ -1,11 +1,19 @@
 package com.fengyu.common.utils;
 
+import com.fengyu.common.utils.string.StringUtil;
 import net.sf.cglib.beans.BeanCopier;
 import org.apache.log4j.Logger;
 
+import java.beans.BeanInfo;
 import java.beans.Beans;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -15,7 +23,25 @@ import java.util.*;
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class BeanUtils {
+	public static String DATE_FORMAT = "yyyy-MM-dd";
+	public static String[] TYPE_SIMPLE = {"java.lang.Integer","int","java.util.Date"};
+	public static String TYPE_INTEGER = "java.lang.Integer,int";
+	public static String TYPE_DATE = "java.util.Date";
 
+
+	public static Map transDataMap2BeanMap4FiledName(Map map)
+	{
+		Map<String,Object> newMap=new HashMap();
+		// 方法三：用keySet()
+		Iterator it = map.keySet().iterator();
+		while (it.hasNext()){
+			String key;
+			key=(String)it.next();
+			String newKey= StringUtil.replaceUnderlineAndfirstToUpper(key);
+			newMap.put(newKey,map.get(key));
+		}
+		return newMap;
+	}
 	/**
 	 * 存储BeanCoper对象
 	 */
@@ -50,6 +76,43 @@ public class BeanUtils {
 			}
 		}
 
+	}
+	/** 实现将源类(Map类型)属性拷贝到目标类中
+	 * @param Map map
+	 * @param Object obj
+	 */
+	public static void copyProperties4Map2Bean(Map map, Object obj) throws Exception {
+		// 获取目标类的属性信息
+		BeanInfo targetbean = Introspector.getBeanInfo(obj.getClass());
+		PropertyDescriptor[] propertyDescriptors = targetbean.getPropertyDescriptors();
+		// 对每个目标类的属性查找set方法，并进行处理
+		for (int k = 0; k < propertyDescriptors.length; k++) {
+			PropertyDescriptor pro = propertyDescriptors[k];
+			Method wm = pro.getWriteMethod();
+			String propName=pro.getName().toLowerCase();
+			if (wm != null) {
+				Iterator ite = map.keySet().iterator();
+				while (ite.hasNext()) {
+					String key = (String) ite.next();
+					// 判断匹配
+					if (key.toLowerCase().equals(propName)) {
+						if (!Modifier.isPublic(wm.getDeclaringClass().getModifiers())) {
+							wm.setAccessible(true);
+						}
+						Object value = map.get(key);
+						String pt = splitSpace(pro.getPropertyType().getName());
+						//判断类型是否匹配，不匹配则作强制转换
+						if (!(pt.equals(value.getClass().getName()))) {
+							value = parseByType(pro.getPropertyType(),value.toString());
+						}
+						// 调用目标类对应属性的set方法对该属性进行填充
+
+						wm.invoke((Object) obj, new Object[] {value});
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -398,5 +461,119 @@ public class BeanUtils {
 		}
 		return list;
 
+	}
+	/**
+	 * 得到空格之后的字符
+	 *
+	 * @param String type
+	 * @param String str
+	 * @return Date
+	 * @throws ParseException
+	 */
+	public static String splitSpace(String str) throws ParseException {
+		if(str.contains(" ")){
+			return str.split(" ")[1];
+		} else {
+			return str;
+		}
+	}
+
+	/**
+	 * 判断是否是简单数据类型
+	 *
+	 * @param String type
+	 */
+	public static boolean isSimpleType(String type) {
+		for (int i = 0; i < TYPE_SIMPLE.length; i++) {
+			if (type.equals(TYPE_SIMPLE[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+	/**
+	 * 把String类型转换为Integer
+	 *
+	 * @param String str
+	 * @return Integer
+	 */
+	public static Integer parseInteger(String str){
+		if(str == null || str.equals("")){
+			return 0;
+		} else {
+			return Integer.parseInt(str);
+		}
+	}
+
+	/**
+	 * 把String类型转换为Date
+	 *
+	 * @param String str
+	 * @return Date
+	 * @throws ParseException
+	 */
+	public static Date parseDate(String str) throws ParseException{
+		if(str == null || str.equals("")){
+			return null;
+		} else {
+			SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+			Date date = sdf.parse(str);
+			return date;
+		}
+	}
+
+	/**
+	 * 转换对象（用户定义的对象）。设置对象的Id。
+	 *
+	 * @param Class clazz
+	 * @param  String str
+	 * @return Object
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 * @throws NoSuchMethodException
+	 * @throws SecurityException
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws ParseException
+	 */
+	public static Object parseObject(Class clazz, String str) throws InstantiationException, IllegalAccessException, SecurityException, NoSuchMethodException, IllegalArgumentException, InvocationTargetException {
+		Object obj;
+		if(str == null || str.equals("")){
+			obj = null;
+		} else {
+			obj = clazz.newInstance();
+			Method m = clazz.getMethod("setId",str.getClass());
+			m.invoke(obj,str);
+		}
+		return obj;
+	}
+
+	/**
+	 * 根据类型进行转换
+	 *
+	 * @param Class clazz
+	 * @param String str
+	 * @return Object
+	 * @throws ParseException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
+	 */
+	public static Object parseByType(Class clazz, String str) throws ParseException, InstantiationException, IllegalAccessException, SecurityException, IllegalArgumentException, NoSuchMethodException, InvocationTargetException{
+		Object r = "";
+		String clazzName = splitSpace(clazz.getName());
+		if (isSimpleType(clazzName)){
+			if (TYPE_INTEGER.contains(clazzName)) {
+				r = parseInteger(str);
+			} else if (TYPE_DATE.contains(clazzName)) {
+				r = parseDate(str);
+			}
+		} else {
+			r = parseObject(clazz, str);
+		}
+		return r;
 	}
 }

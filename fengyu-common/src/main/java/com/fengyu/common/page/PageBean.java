@@ -1,5 +1,7 @@
 package com.fengyu.common.page;
 
+import com.fengyu.common.entity.VOEntity;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,7 @@ public class PageBean implements Serializable{
 
 	// 查询数据库
 	private int totalCount; // 总记录数
-	private List<Object> recordList; // 本页的数据列表
+	private List<VOEntity> recordList; // 本页的数据列表
 
 	// 计算
 	private int pageCount; // 总页数
@@ -38,11 +40,11 @@ public class PageBean implements Serializable{
 	 * 只接受前4个必要的属性，会自动的计算出其他3个属生的值
 	 * 
 	 * @param currentPage
-	 * @param pageSize
+	 * @param numPerPage
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<Object> recordList) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List<VOEntity> recordList) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -79,11 +81,11 @@ public class PageBean implements Serializable{
 	 * 只接受前5个必要的属性，会自动的计算出其他3个属生的值
 	 * 
 	 * @param currentPage
-	 * @param pageSize
+	 * @param numPerPage
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<Object> recordList, Map<String, Object> countResultMap) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List<VOEntity> recordList, Map<String, Object> countResultMap) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -117,11 +119,11 @@ public class PageBean implements Serializable{
 		}
 	}
 
-	public List<Object> getRecordList() {
+	public List<VOEntity> getRecordList() {
 		return recordList;
 	}
 
-	public void setRecordList(List<Object> recordList) {
+	public void setRecordList(List<VOEntity> recordList) {
 		this.recordList = recordList;
 	}
 
