@@ -27,6 +27,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="fengyu-common-config" />
+    <orderEntry type="module" module-name="fengyu-facade-crowd" />
     <orderEntry type="module" module-name="fengyu-common" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.1.41" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
