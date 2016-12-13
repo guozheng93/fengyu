@@ -20,7 +20,6 @@
       <module fileurl="file://$PROJECT_DIR$/fengyu-view-shop/fengyu-view-shop.iml" filepath="$PROJECT_DIR$/fengyu-view-shop/fengyu-view-shop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fengyu-web-jersey-shop/fengyu-web-jersey-shop.iml" filepath="$PROJECT_DIR$/fengyu-web-jersey-shop/fengyu-web-jersey-shop.iml" />
       <module fileurl="file://$PROJECT_DIR$/fengyu-web-shop/fengyu-web-shop.iml" filepath="$PROJECT_DIR$/fengyu-web-shop/fengyu-web-shop.iml" />
-      <module fileurl="file://$PROJECT_DIR$/static/static.iml" filepath="$PROJECT_DIR$/static/static.iml" />
     </modules>
   </component>
 </project>
