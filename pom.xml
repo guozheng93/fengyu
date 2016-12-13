@@ -31,6 +31,7 @@
         <module>fengyu-service-order</module>
         <module>fengyu-service-crowd</module>
         <module>fengyu-service-other</module>
+        <module>fengyu-web-jersey-shop</module>
         <module>fengyu-view-shop</module>
         <module>fengyu-web-shop</module>
     </modules>
