@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingItemPropsDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="REPAY_ID" property="repayId" jdbcType="INTEGER" />
+    <result column="PROP_NAME" property="propName" jdbcType="INTEGER" />
+    <result column="ITEM_ID" property="itemId" jdbcType="INTEGER" />
+    <result column="P_PROP_ID" property="pPropId" jdbcType="INTEGER" />
+    <result column="PRJT_ID" property="prjtId" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID
+    ,B.REPAY_ID
+    ,A.PROP_NAME
+    ,A.ITEM_ID
+    ,A.P_PROP_ID
+    ,B.PRJT_ID
+  </sql>
+
+  <select id="select">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM crowdfunding_item_props A
+      LEFT JOIN crowdfunding_item_props_map B
+        ON A.ID=B.PROP_ID
+    WHERE 1=1
+    <if test="id != null" >
+      AND A.id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+  <select id="getList4CrowdfundingItemProps11" resultType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM crowdfunding_item_props A
+      LEFT JOIN crowdfunding_item_props_map B
+        ON A.ID=B.PROP_ID
+    WHERE 1=1
+    <if test="id != null" >
+      AND A.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND B.PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+    <if test="repayId != null" >
+      AND B.REPAY_ID = #{repayId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    insert into crowdfunding_item_props
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="propName != null" >
+        PROP_NAME,
+      </if>
+      <if test="itemId != null" >
+        ITEM_ID,
+      </if>
+      <if test="pPropId != null" >
+        P_PROP_ID,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="propName != null" >
+        #{propName,jdbcType=INTEGER},
+      </if>h
+      <if test="itemId != null" >
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="pPropId != null" >
+        #{pPropId,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+
+  <insert id="insert4Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    insert into crowdfunding_item_props_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="repayId != null" >
+        REPAY_ID,
+      </if>
+
+      <if test="id != null" >
+        PROP_ID,
+      </if>
+      <if test="prjtId != null" >
+        PRJT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="repayId != null" >
+        #{repayId,jdbcType=INTEGER},
+      </if>
+
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prjtId != null" >
+        #{prjtId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    update crowdfunding_item_props
+    <set >
+
+      <if test="propName != null" >
+        PROP_NAME=#{propName,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        ITEM_ID=#{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="pPropId != null" >
+        P_PROP_ID=#{pPropId,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="physicsDelete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    delete from crowdfunding_item_props
+    where 1=1
+    <if test="repayId != null" >
+      and REPAY_ID = #{repayId,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      and PRJT_ID=#{prjtId,jdbcType=INTEGER}
+    </if>
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+  </delete>
+  <delete id="physicsDelete4Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    delete from crowdfunding_item_props_map
+    where 1=1
+    <if test="repayId != null" >
+      and REPAY_ID = #{repayId,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      and PRJT_ID=#{prjtId,jdbcType=INTEGER}
+    </if>
+
+
+  </delete>
+
+  <update id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO" >
+    update crowdfunding_item_props set status='delete'
+    where 1=1
+    where 1=1
+    <if test="repayId != null" >
+      and REPAY_ID = #{repayId,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      and PRJT_ID=#{prjtId,jdbcType=INTEGER}
+    </if>
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+  </update>
+
+</mapper>

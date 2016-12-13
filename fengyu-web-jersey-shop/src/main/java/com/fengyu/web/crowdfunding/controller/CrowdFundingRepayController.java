@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 
@@ -255,7 +256,7 @@ public class CrowdFundingRepayController extends BaseController {
     @Path("newCrowdfundingItemPropsBatch")
     public String newCrowdfundingItemPropsBatch(String args)
     {
-        CrowdfundingItemPropsVO crowdfundingItemPropsVO= JSON.parseObject(args, CrowdfundingItemPropsVO.class);
+        List<CrowdfundingItemPropsVO> crowdfundingItemPropsVO= JSON.parseObject(args, List.class);
         ResponseWrapper responseWrapper= null;
         String jsonStr="";
         try {
@@ -276,7 +277,7 @@ public class CrowdFundingRepayController extends BaseController {
      * @return
      **/
     @POST
-    @Path("editCrowdFundingRepay(CrowdFundingRepayVO")
+    @Path("editCrowdFundingRepay")
     public String editCrowdFundingRepay(String args)
     {
         CrowdFundingRepayVO crowdFundingRepayVO= JSON.parseObject(args, CrowdFundingRepayVO.class);

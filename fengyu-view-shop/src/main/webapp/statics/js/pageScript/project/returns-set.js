@@ -4,12 +4,13 @@ $(function(){
 });
 function getItemPropFromNode(repayId,prjtId) {
     var itemPropNodes=$(".hb-attr-box");
-    var itemPropsJson={repayId:repayId,prjtId:prjtId};
-    for(var i=0;i++;i<itemPropNodes.length)
+    var itemPropsArray=new Array();
+    for(var i=0;i<itemPropNodes.length;i++)
     {
+        var itemPropsJson={repayId:repayId,prjtId:prjtId};
         itemPropsJson["propName"]=$(itemPropNodes[i]).find(".propName").text();
         var itemPropValuesArray=new Array();
-        var itemPropValuesNodes={propValueName:$(itemPropNodes[i]).find(".propValueName")};
+        var itemPropValuesNodes=$(itemPropNodes[i]).find(".propValueName");
         for(var j=0;j<itemPropValuesNodes.length;j++)
         {
             var itemPropValuesJson={propValueName:$(itemPropValuesNodes[j]).text()};
@@ -17,8 +18,9 @@ function getItemPropFromNode(repayId,prjtId) {
         }
 
         itemPropsJson["propValues"]=itemPropValuesArray;
+        itemPropsArray.push(itemPropsJson);
     }
-    return itemPropsJson;
+    return itemPropsArray;
 }
 function dynamicAppendItemPropNode(itemProps) {
     for(var i=0;i<itemProps.length;i++)
@@ -56,6 +58,68 @@ function getCrdfdRepayList()
 
 }
 
+function getList4CrowdfundingItemProps(repayId)
+{
+    if(sessionStorage.getItem("prjtId"))
+    {
+        $.ajax({
+            url:  serverUrl + "crowdFundingRepay/getList4CrowdfundingItemProps",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "post",
+            data: JSON.stringify({repayId:repayId}),
+            //async: false,
+            success: function (data){
+                console.log(data);
+                if(data.responseBody&&data.responseBody.recordList[0])
+                {
+                    data=data.responseBody.recordList;
+                    for(var i=0;i<data.length;i++)
+                    {
+                        var propValues=getList4CrowdfundingItemPropValueByItmPropId(data[i].propId);
+                        var currentItemPropNode=addItemPropNode(data[i]["propName"]);
+                        for(var j=0;j<propValues.length;j++)
+                        {
+                            addItemPropValuesNode(propValues[j]["propValueName"],currentItemPropNode);
+                        }
+
+                    }
+                }
+            },
+            error: function (returndata) {
+//            	layer.msg("网络异常，请重试");
+            }
+        });
+    }
+
+}
+function getList4CrowdfundingItemPropValueByItmPropId(propId)
+{
+    var propValues;
+    if(sessionStorage.getItem("prjtId"))
+    {
+        $.ajax({
+            url:  serverUrl + "crowdFundingRepay/getList4CrowdfundingItemPropValueByItmPropId",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "post",
+            data: JSON.stringify({propId:propId}),
+            async: false,
+            success: function (data){
+                console.log(data);
+                if(data.responseBody&&data.responseBody.recordList[0])
+                {
+                    propValues=data.responseBody.recordList;
+                }
+            },
+            error: function (returndata) {
+//            	layer.msg("网络异常，请重试");
+            }
+        });
+    }
+    return propValues;
+}
+
 function getCrdfdRepayInfoByRepayId(repayId)
 {
     if(sessionStorage.getItem("prjtId"))
@@ -72,7 +136,7 @@ function getCrdfdRepayInfoByRepayId(repayId)
                 if(data.responseBody&&data.responseBody.recordList)
                 {
                     Tools.autoInjectValue(data.responseBody.recordList[0]);
-                    dynamicAppendItemPropNode(data.responseBody.recordList[0]["propValues"]);
+                    //dynamicAppendItemPropNode(data.responseBody.recordList[0]["propValues"]);
                 }
             },
             error: function (returndata) {
@@ -107,8 +171,11 @@ function initEvent(){
     Tools.webImageUploader("repayImagePicker","repayImageThumbnail");
 
     $("#crdfdRepayListContainer").on("click",".hb-edit",function () {
-        getCrdfdRepayInfoByRepayId($(this).parent().attr("repayId"));
-        sessionStorage.setItem("repayId",$(this).parent().attr("repayId"));
+        var repayId=$(this).parent().attr("repayId");
+        sessionStorage.setItem("repayId",repayId);
+        getCrdfdRepayInfoByRepayId(repayId);
+        getList4CrowdfundingItemProps(repayId);
+
     });
     $("#crdfdRepayListContainer").on("click",".hb-del",function () {
         var repayId=$(this).parent().attr("repayId");

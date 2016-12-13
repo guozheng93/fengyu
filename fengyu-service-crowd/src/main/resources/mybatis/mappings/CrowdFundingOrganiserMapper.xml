@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingOrganiserDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingOrganiserPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="ORGNR_RESUME" property="orgnrResume" jdbcType="VARCHAR" />
+    <result column="ORGNR_BLOG" property="orgnrBlog" jdbcType="VARCHAR" />
+    <result column="ORGNR_BLESS_WORD" property="orgnrBlessWord" jdbcType="VARCHAR" />
+    <result column="ORGNR_TELEPHONE" property="orgnrTelephone" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingOrganiserPO" >
+    insert into crowdfunding_organiser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="orgnrResume != null" >
+        ORGNR_RESUME,
+      </if>
+      <if test="orgnrBlog != null" >
+        ORGNR_BLOG,
+      </if>
+      <if test="orgnrBlessWord != null" >
+        ORGNR_BLESS_WORD,
+      </if>
+      <if test="orgnrTelephone != null" >
+        ORGNR_TELEPHONE,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orgnrResume != null" >
+        #{orgnrResume,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrBlog != null" >
+        #{orgnrBlog,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrBlessWord != null" >
+        #{orgnrBlessWord,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrTelephone != null" >
+        #{orgnrTelephone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingOrganiserPO" >
+    update crowdfunding_organiser
+    <set >
+
+      <if test="userId != null" >
+        USER_ID=#{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orgnrResume != null" >
+        ORGNR_RESUME=#{orgnrResume,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrBlog != null" >
+        ORGNR_BLOG=#{orgnrBlog,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrBlessWord != null" >
+        ORGNR_BLESS_WORD=#{orgnrBlessWord,jdbcType=VARCHAR},
+      </if>
+      <if test="orgnrTelephone != null" >
+        ORGNR_TELEPHONE= #{orgnrTelephone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      and USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+
+
+  </update>
+  <delete id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingOrganiserPO" >
+    delete from crowdfunding_organiser
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      and USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+
+  </delete>
+
+</mapper>

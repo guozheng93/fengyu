@@ -2,20 +2,14 @@ package com.fengyu.common.web.jersey.controller;
 
 import com.alibaba.dubbo.common.json.JSON;
 import com.fengyu.common.core.base.service.BaseService;
-import com.fengyu.common.entity.VOEntity;
-import com.fengyu.common.exception.Constant.UserDefinedExceptionType;
 import com.fengyu.common.exception.MapperSupport.CommonExceptionHandler;
 import com.fengyu.common.exception.MapperSupport.CommonExceptionType;
-import com.fengyu.common.exception.MapperSupport.WebActionException;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
 import com.fengyu.common.utils.string.StrUtil;
 import com.fengyu.common.web.jersey.utils.UdpGetClientMacAddr;
 import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
-import net.sf.json.util.PropertyFilter;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +74,9 @@ public class BaseController {
                 if(args[i] instanceof Map)
                 {
                     paramType[i]=Map.class;
+                }else if(args[i] instanceof List)
+                {
+                    paramType[i]=List.class;
                 }else
                 {
                     paramType[i]=args[i].getClass();

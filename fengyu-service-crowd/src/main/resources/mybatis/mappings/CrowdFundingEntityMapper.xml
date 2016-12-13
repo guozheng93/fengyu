@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingEntityDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ENTITY_COVER_IMAGE" property="entityCoverImage" jdbcType="VARCHAR" />
+    <result column="ENTITY_CATALOG_IMAGE" property="entityCatalogImage" jdbcType="VARCHAR" />
+    <result column="ENTITY_LOCATION_PROVINCE" property="entityLocationProvince" jdbcType="VARCHAR" />
+    <result column="ENTITY_LOCATION_CITY" property="entityLocationPity" jdbcType="VARCHAR" />
+    <result column="ENTITY_LOCATION_COUNTY" property="entityLocationCounty" jdbcType="VARCHAR" />
+    <result column="ENTITY_LOCATION_FULL" property="entityLocationFull" jdbcType="VARCHAR" />
+    <result column="ACCT_ID" property="acctId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID, A.ITEM_NAME,A.PITEM_ID,A.IS_PITEM,A.SORT_SEQ
+  </sql>
+
+  <insert id="insert"  parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    insert into crowdfunding_entity
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="entityCoverImage != null" >
+        ENTITY_COVER_IMAGE,
+      </if>
+      <if test="entityCatalogImage != null" >
+        ENTITY_CATALOG_IMAGE,
+      </if>
+      <if test="entityLocationProvince != null" >
+        ENTITY_LOCATION_PROVINCE,
+      </if>
+      <if test="entityLocationPity != null" >
+        ENTITY_LOCATION_CITY,
+      </if>
+      <if test="entityLocationCounty != null" >
+        ENTITY_LOCATION_COUNTY,
+      </if>
+      <if test="entityLocationFull != null" >
+        ENTITY_LOCATION_FULL,
+      </if>
+      <if test="acctId != null" >
+        ACCT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="entityCoverImage != null" >
+        #{entityCoverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="entityCatalogImage != null" >
+        #{entityCatalogImage,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationProvince != null" >
+        #{entityLocationProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationPity != null" >
+        #{entityLocationPity,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationCounty != null" >
+        #{entityLocationCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationFull != null" >
+        #{entityLocationFull,jdbcType=VARCHAR},
+      </if>
+      <if test="acctId != null" >
+        #{acctId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    update crowdfunding_entity
+    <set>
+    <if test="entityCoverImage != null" >
+      ENTITY_COVER_IMAGE=#{entityCoverImage,jdbcType=VARCHAR},
+    </if>
+    <if test="entityCatalogImage != null" >
+      ENTITY_CATALOG_IMAGE=#{entityCatalogImage,jdbcType=VARCHAR},
+    </if>
+    <if test="entityLocationProvince != null" >
+      ENTITY_LOCATION_PROVINCE=#{entityLocationProvince,jdbcType=VARCHAR},
+    </if>
+    <if test="entityLocationPity != null" >
+      ENTITY_LOCATION_CITY=#{entityLocationPity,jdbcType=VARCHAR},
+    </if>
+    <if test="entityLocationCounty != null" >
+      ENTITY_LOCATION_COUNTY=#{entityLocationCounty,jdbcType=VARCHAR},
+    </if>
+    <if test="entityLocationFull != null" >
+      ENTITY_LOCATION_FULL=#{entityLocationFull,jdbcType=VARCHAR},
+    </if>
+      <if test="acctId != null" >
+        ACCT_ID=#{acctId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="pysicalDelete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    delete from crowdfunding_entity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+</mapper>

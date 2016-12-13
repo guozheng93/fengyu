@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingItemDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="itemName" property="ITEM_NAME" jdbcType="VARCHAR" />
+    <result column="pItemId" property="PITEM_ID" jdbcType="INTEGER" />
+    <result column="isPItemId" property="IS_PITEM" jdbcType="INTEGER" />
+    <result column="sortSeq" property="SORT_SEQ" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    A.ID as id, A.ITEM_NAME as itemName,A.PITEM_ID as pItemId,A.IS_PITEM as isPItemId,A.SORT_SEQ as sortSeq
+  </sql>
+
+  <select id="getList4CrdFdBottomItem" resultType="map" >
+    select
+      <include refid="Base_Column_List" />
+    from CROWDFUNDING_ITEM A
+    WHERE A.IS_PITEM=0
+  </select>
+
+</mapper>

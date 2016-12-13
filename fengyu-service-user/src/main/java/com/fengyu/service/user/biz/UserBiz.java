@@ -18,7 +18,7 @@ public class UserBiz {
     private UserDao userDao;
 
     public User findByLoginName(String loginName) {
-
-        return  userDao.findByLoginName(loginName);
+        User user=userDao.findByLoginName(loginName);
+        return user;
     }
 }

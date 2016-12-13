@@ -4,7 +4,7 @@ package com.fengyu.web.shop.action.user;
 import com.fengyu.common.enums.ErrorEnum;
 import com.fengyu.common.result.ResponseResult;
 import com.fengyu.common.utils.MD5;
-import com.fengyu.common.web.controller.BaseController;
+import com.fengyu.common.web.jersey.controller.BaseController;
 import com.fengyu.facade.user.entity.User;
 import com.fengyu.facade.user.service.UserFacade;
 import org.apache.commons.lang.StringUtils;
@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private Logger log = LoggerFactory.getLogger(UserController.class);
 

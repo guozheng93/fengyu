@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="PRJT_NAME" property="prjtName" jdbcType="INTEGER" />
+    <result column="PRJT_ITEM_ID" property="prjtItemId" jdbcType="INTEGER" />
+    <result column="PRJT_USER_ID" property="prjtUserId" jdbcType="INTEGER" />
+    <result column="PRJT_ORGANISER_ID" property="prjtOrganiserId" jdbcType="INTEGER" />
+    <result column="PRJT_SUMMARY" property="prjtSummary" jdbcType="VARCHAR" />
+    <result column="PRJT_RAISE_TYPE" property="prjtRaiseType" jdbcType="VARCHAR" />
+    <result column="PRJT_RAISE_AMOUNT" property="prjtRaiseAmount" jdbcType="DOUBLE" />
+    <result column="PRJT_RAISE_TOPLIMIT" property="prjtRaiseToplimit" jdbcType="DOUBLE" />
+    <result column="PRJT_FUND_CYCLE" property="prjtFundCycle" jdbcType="INTEGER" />
+    <result column="PRJT_COMMIT_TTIME" property="prjtCommitTime" jdbcType="TIMESTAMP" />
+    <result column="PRJT_STATUS" property="prjtStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingPO" >
+    insert into crowdfunding
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+
+      <if test="prjtName != null" >
+        PRJT_NAME,
+      </if>
+      <if test="prjtItemId != null" >
+        PRJT_ITEM_ID,
+      </if>
+      <if test="prjtUserId != null" >
+        PRJT_USER_ID,
+      </if>
+      <if test="prjtOrganiserId != null" >
+        PRJT_ORGANISER_ID,
+      </if>
+      <if test="prjtSummary != null" >
+        PRJT_SUMMARY,
+      </if>
+      <if test="prjtRaiseType != null" >
+        PRJT_RAISE_TYPE,
+      </if><if test="prjtRaiseAmount != null" >
+      PRJT_RAISE_AMOUNT,
+    </if>
+      <if test="prjtRaiseToplimit != null" >
+        PRJT_RAISE_TOPLIMIT,
+      </if>
+      <if test="prjtFundCycle != null" >
+        PRJT_FUND_CYCLE,
+      </if>
+      <if test="prjtCommitTime != null" >
+        PRJT_COMMIT_TTIME,
+      </if>
+      <if test="prjtStatus != null" >
+        PRJT_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prjtName != null" >
+        #{prjtName,jdbcType=INTEGER},
+      </if>
+      <if test="prjtItemId != null" >
+        #{prjtItemId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtUserId != null" >
+        #{prjtUserId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtOrganiserId != null" >
+        #{prjtOrganiserId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtSummary != null" >
+        #{prjtSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="prjtRaiseType != null" >
+        #{prjtRaiseType,jdbcType=VARCHAR},
+      </if>
+      <if test="prjtRaiseAmount != null" >
+        #{prjtRaiseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="prjtRaiseToplimit != null" >
+        #{prjtRaiseToplimit,jdbcType=DOUBLE},
+      </if>
+      <if test="prjtRaiseToplimit != null" >
+        #{prjtRaiseToplimit,jdbcType=INTEGER},
+      </if>
+      <if test="prjtCommitTime != null" >
+        #{prjtCommitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prjtStatus != null" >
+        #{prjtStatus,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingPO" >
+    update crowdfunding
+    <set >
+      <if test="prjtName != null" >
+        PRJT_NAME=#{prjtName,jdbcType=INTEGER},
+      </if>
+      <if test="prjtItemId != null" >
+        PRJT_ITEM_ID=#{prjtItemId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtUserId != null" >
+        PRJT_USER_ID=#{prjtUserId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtOrganiserId != null" >
+        PRJT_ORGANISER_ID=#{prjtOrganiserId,jdbcType=INTEGER},
+      </if>
+      <if test="prjtSummary != null" >
+        PRJT_SUMMARY=#{prjtSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="prjtRaiseType != null" >
+        PRJT_RAISE_TYPE=#{prjtRaiseType,jdbcType=VARCHAR},
+      </if>
+      <if test="prjtRaiseAmount != null" >
+        PRJT_RAISE_AMOUNT=#{prjtRaiseAmount,jdbcType=DOUBLE},
+      </if>
+      <if test="prjtRaiseToplimit != null" >
+        PRJT_RAISE_TOPLIMIT=#{prjtRaiseToplimit,jdbcType=DOUBLE},
+      </if>
+      <if test="prjtFundCycle != null" >
+        PRJT_FUND_CYCLE=#{prjtFundCycle,jdbcType=INTEGER},
+      </if>
+      <if test="prjtCommitTime != null" >
+        PRJT_COMMIT_TTIME=#{prjtCommitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prjtStatus != null" >
+        PRJT_STATUS=#{prjtStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="physicalDelete" parameterType="java.lang.Integer" >
+    delete from crowdfunding
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <update id="delete" parameterType="java.lang.Integer">
+    update crowdfunding set PRJT_STATUS='delete'
+    where id=#{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="submitCrowdFunding" parameterType="java.lang.Integer">
+    update crowdfunding set PRJT_STATUS='sumbit'
+    where id=#{id,jdbcType=INTEGER} and PRJT_STATUS="edit"
+  </update>
+
+</mapper>

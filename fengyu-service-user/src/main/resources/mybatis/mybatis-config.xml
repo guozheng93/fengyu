@@ -40,7 +40,7 @@
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="mybatis/mappings/userMapper.xml" />
+		<mapper resource="mybatis/mappings/UserMapper.xml" />
 	</mappers>
 
 </configuration>

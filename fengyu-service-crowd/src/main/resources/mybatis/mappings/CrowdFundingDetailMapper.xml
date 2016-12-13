@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingDetailDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingDetailPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingDetailPO" extends="BaseResultMap" >
+    <result column="PRJT_DETAIL" property="prjtDetail"  jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID, A.PRJT_DETAIL
+  </sql>
+
+  <insert id="insert" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingDetailPO" >
+    insert into crowdfunding_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="prjtDetail != null" >
+        PRJT_DETAIL,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="prjtDetail != null" >
+        #{PRJT_DETAIL,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingDetailPO" >
+    update crowdfunding_detail
+    <set >
+      <if test="prjtDetail != null" >
+        PRJT_DETAIL = #{prjtDetail,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from crowdfunding_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+</mapper>

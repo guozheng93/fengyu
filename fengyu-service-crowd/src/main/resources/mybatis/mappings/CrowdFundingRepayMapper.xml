@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingRepayDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="PRJT_ID" property="prjtId" jdbcType="INTEGER" />
+    <result column="REPAY_TYPE" property="repayType" jdbcType="VARCHAR" />
+    <result column="REPAY_PRICE" property="repayPrice" jdbcType="DOUBLE" />
+    <result column="REPAY_DETAIL" property="repayDetail" jdbcType="VARCHAR" />
+    <result column="REPAY_NEED_REMARK" property="repayNeedRemark" jdbcType="INTEGER" />
+    <result column="REPAY_REMARK" property="repayRemark" jdbcType="VARCHAR" />
+    <result column="REPAY_LIMIT_AMOUNT" property="repayLimitAmount" jdbcType="INTEGER" />
+    <result column="REPAY_EXPRESS_FEE" property="repayExpressFee" jdbcType="DOUBLE" />
+    <result column="REPAY_INVOICE_FLAG" property="repayInvoiceFlag" jdbcType="INTEGER" />
+    <result column="REPAY_INVOICE_REMARK" property="repayInvoiceRemark" jdbcType="VARCHAR" />
+    <result column="REPAY_TIME" property="repayTime" jdbcType="VARCHAR" />
+    <result column="REPAY_IMAGE_THUMBNAIL" property="repayImageThumbnail" jdbcType="VARCHAR" />
+    <result column="REPAY_IMAGE" property="repayImage" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.PRJT_ID
+    ,A.REPAY_TYPE
+    ,A.REPAY_PRICE
+    ,A.REPAY_DETAIL
+    ,A.REPAY_NEED_REMARK
+    ,A.REPAY_REMARK
+    ,A.REPAY_LIMIT_AMOUNT
+    ,A.REPAY_EXPRESS_FEE
+    ,A.REPAY_INVOICE_FLAG
+    ,A.REPAY_INVOICE_REMARK
+    ,A.REPAY_TIME
+    ,A.REPAY_IMAGE_THUMBNAIL
+    ,A.REPAY_IMAGE
+  </sql>
+
+  <select id="select" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM CROWDFUNDING_REPAY A
+    WHERE 1=1
+    <if test="id != null" >
+      AND id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <select id="getList4CrowdFundingRepay22" resultType="map">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM CROWDFUNDING_REPAY A
+    WHERE 1=1
+    <if test="id != null" >
+      AND id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
+    insert into crowdfunding_repay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        PRJT_ID,
+      </if>
+      <if test="repayType != null" >
+        REPAY_TYPE,
+      </if>
+      <if test="repayPrice != null" >
+        REPAY_PRICE,
+      </if>
+      <if test="repayDetail != null" >
+        REPAY_DETAIL,
+      </if>
+      <if test="repayNeedRemark != null" >
+        REPAY_NEED_REMARK,
+      </if>
+      <if test="repayRemark != null" >
+        REPAY_REMARK,
+      </if>
+      <if test="repayLimitAmount != null" >
+        REPAY_LIMIT_AMOUNT,
+      </if>
+      <if test="repayExpressFee != null" >
+        REPAY_EXPRESS_FEE,
+      </if>
+      <if test="repayInvoiceFlag != null" >
+        REPAY_INVOICE_FLAG,
+      </if>
+      <if test="repayInvoiceRemark != null" >
+        REPAY_INVOICE_REMARK,
+      </if>
+      <if test="repayTime != null" >
+        REPAY_TIME,
+      </if>
+      <if test="repayImageThumbnail != null" >
+        REPAY_IMAGE_THUMBNAIL,
+      </if>
+      <if test="repayImage != null" >
+        REPAY_IMAGE,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        #{prjtId,jdbcType=INTEGER},
+      </if>
+      <if test="repayType != null" >
+        #{repayType,jdbcType=VARCHAR},
+      </if>
+      <if test="repayPrice != null" >
+        #{repayPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="repayDetail != null" >
+        #{repayDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="repayNeedRemark != null" >
+        #{repayNeedRemark,jdbcType=INTEGER},
+      </if>
+      <if test="repayRemark != null" >
+        #{repayRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="repayLimitAmount != null" >
+        #{repayLimitAmount,jdbcType=INTEGER},
+      </if>
+      <if test="repayExpressFee != null" >
+        #{repayExpressFee,jdbcType=DOUBLE},
+      </if>
+      <if test="repayInvoiceFlag != null" >
+        #{repayInvoiceFlag,jdbcType=INTEGER},
+      </if>
+      <if test="repayInvoiceRemark != null" >
+        #{repayInvoiceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null" >
+        #{repayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="repayImageThumbnail != null" >
+        #{repayImageThumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="repayImage != null" >
+        #{repayImage,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
+    update crowdfunding_repay
+    <set >
+      <if test="prjtId != null" >
+        PRJT_ID=#{prjtId,jdbcType=INTEGER},
+      </if>
+      <if test="repayType != null" >
+        REPAY_TYPE=#{repayType,jdbcType=VARCHAR},
+      </if>
+      <if test="repayPrice != null" >
+        REPAY_PRICE=#{repayPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="repayDetail != null" >
+        REPAY_DETAIL=#{repayDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="repayNeedRemark != null" >
+        REPAY_NEED_REMARK=#{repayNeedRemark,jdbcType=INTEGER},
+      </if>
+      <if test="repayRemark != null" >
+        REPAY_REMARK=#{repayRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="repayLimitAmount != null" >
+        REPAY_LIMIT_AMOUNT=#{repayLimitAmount,jdbcType=INTEGER},
+      </if>
+      <if test="repayExpressFee != null" >
+        REPAY_EXPRESS_FEE=#{repayExpressFee,jdbcType=DOUBLE},
+      </if>
+      <if test="repayInvoiceFlag != null" >
+        REPAY_INVOICE_FLAG=#{repayInvoiceFlag,jdbcType=INTEGER},
+      </if>
+      <if test="repayInvoiceRemark != null" >
+        REPAY_INVOICE_REMARK=#{repayInvoiceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null" >
+        REPAY_TIME=#{repayTime,jdbcType=VARCHAR},
+      </if>
+
+      <if test="repayImageThumbnail != null" >
+        REPAY_IMAGE_THUMBNAIL=#{repayImageThumbnail,jdbcType=VARCHAR},
+      </if>
+      <if test="repayImage != null" >
+        REPAY_IMAGE=#{repayImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null">
+      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+
+  </update>
+  <delete id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
+    delete from crowdfunding_repay
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null">
+      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+  </delete>
+
+</mapper>

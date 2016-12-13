@@ -36,7 +36,9 @@
         <module name="fengyu-service-order" />
         <module name="fengyu-service-other" />
         <module name="fengyu-service-user" />
+        <module name="fengyu-service-user (1)" />
         <module name="fengyu-view-shop" />
+        <module name="fengyu-web-jersey-shop" />
         <module name="fengyu-web-shop" />
       </profile>
     </annotationProcessing>
@@ -56,7 +58,9 @@
       <module name="fengyu-service-order" target="1.7" />
       <module name="fengyu-service-other" target="1.7" />
       <module name="fengyu-service-user" target="1.7" />
+      <module name="fengyu-service-user (1)" target="1.5" />
       <module name="fengyu-view-shop" target="1.7" />
+      <module name="fengyu-web-jersey-shop" target="1.7" />
       <module name="fengyu-web-shop" target="1.7" />
     </bytecodeTargetLevel>
   </component>

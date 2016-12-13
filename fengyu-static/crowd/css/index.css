@@ -177,7 +177,7 @@
 .ir-l-tip3 {font-size: 0.8em;margin-left: 6px;color:#999999;}
 .le-tu-show {width:250px;height: 200px;background-size: cover;background-repeat: no-repeat;background-position: center;margin-top:14px;}
 .a-upload {position: relative;cursor: pointer;color: #888;background: #ffdd00;border-radius: 4px;behavior:url(js/PIE.htc);overflow: hidden;padding:8px 14px;*display: inline;*zoom: 1}
-.a-upload  input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);cursor: pointer}
+.a-upload  input {position: absolute;font-size: 100px;right: 0;top: 0;opacity: 0;filter: alpha(opacity=0);cursor: pointer;width: 100%}
 .le-list {margin-top:30px;}
 .ir-info-2 {border-top: 1px solid #F0F0F0;}
 .ir-list .self-introduce {width:560px;min-height: 102px;vertical-align: middle;}
