@@ -114,6 +114,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+      </list>
+    </option>
+  </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsBuildToolPackageJson" detection-done="true" />
   <component name="JsGulpfileManager">
@@ -613,11 +620,18 @@
       <option name="project" value="LOCAL" />
       <updated>1481592383856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="工程配置">
+      <created>1481592427822</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1481592427822</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119000" />
+    <option name="totallyTimeSpent" value="136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -659,7 +673,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="去掉编译后的文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="去掉编译后的文件" />
+    <MESSAGE value="工程配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="工程配置" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
