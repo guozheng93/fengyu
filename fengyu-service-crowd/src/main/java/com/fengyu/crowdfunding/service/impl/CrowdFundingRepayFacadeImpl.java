@@ -3,11 +3,17 @@ package com.fengyu.crowdfunding.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.fengyu.common.core.base.service.impl.BaseServiceImpl;
 import com.fengyu.common.utils.BeanUtils;
-import com.fengyu.crowdfunding.dao.*;
 
-import com.fengyu.facade.crowdfunding.entity.po.*;
-import com.fengyu.facade.crowdfunding.entity.vo.*;
+import com.fengyu.crowdfunding.dao.CrowdFundingItemPropsDao;
+import com.fengyu.crowdfunding.dao.CrowdFundingRepayDao;
+import com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO;
+import com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropValuePO;
+import com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropsPO;
+import com.fengyu.facade.crowdfunding.entity.vo.CrowdFundingRepayVO;
+import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropValueVO;
+import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropsVO;
 import com.fengyu.facade.crowdfunding.service.CrowdFundingRepayFacade;
+import com.fengyu.crowdfunding.dao.CrowdFundingItemPropValueDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -105,7 +111,8 @@ public class CrowdFundingRepayFacadeImpl extends BaseServiceImpl implements Crow
     **/
     public Integer newCrowdfundingItemPropsBatch(List<CrowdfundingItemPropsVO> crowdfundingItemPropsVOs) {
         Integer num=0;
-        for (int i=0;i<crowdfundingItemPropsVOs.size();i++)
+        int forSize=crowdfundingItemPropsVOs.size();
+        for (int i=0;i<forSize;i++)
         {
             CrowdfundingItemPropsVO  crowdfundingItemPropsVO=JSON.parseObject(JSON.toJSONString(crowdfundingItemPropsVOs.get(i))
                     , CrowdfundingItemPropsVO.class);
@@ -117,7 +124,8 @@ public class CrowdFundingRepayFacadeImpl extends BaseServiceImpl implements Crow
                 crowdFundingItemPropsDao.physicsDelete4Map(crowdfundingItemPropsPO);
 
             //插入itemprop
-            num=num+crowdFundingItemPropsDao.insert(crowdfundingItemPropsPO);
+            Integer temp=crowdFundingItemPropsDao.insert(crowdfundingItemPropsPO);
+            num=num+temp;
             //插入itemprop
             crowdFundingItemPropsDao.insert4Map(crowdfundingItemPropsPO);
 
@@ -135,6 +143,7 @@ public class CrowdFundingRepayFacadeImpl extends BaseServiceImpl implements Crow
                 //插入新的propvalue
                 num=num+crowdFundingItemPropValueDao.insert(crowdfundingItemPropValuePO);
             }
+            System.out.println(i);
         }
 
         return num;

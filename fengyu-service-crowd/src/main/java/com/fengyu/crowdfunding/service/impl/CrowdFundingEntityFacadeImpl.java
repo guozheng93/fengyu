@@ -1,9 +1,9 @@
 package com.fengyu.crowdfunding.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.fengyu.common.core.base.service.impl.BaseServiceImpl;
 import com.fengyu.crowdfunding.dao.*;
 import com.fengyu.crowdfunding.enums.CrowdFundingEnum;
-import com.fengyu.crowdfunding.enums.CrowdFundingEnum.CrowdFundingStatus;
 import com.fengyu.facade.crowdfunding.entity.po.*;
 import com.fengyu.facade.crowdfunding.entity.vo.*;
 import com.fengyu.facade.crowdfunding.service.CrowdFundingEntityFacade;
@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service(value = "crowdFundingEntityFacade")
@@ -81,7 +83,7 @@ public class CrowdFundingEntityFacadeImpl extends BaseServiceImpl implements Cro
 
         //crowdFunding塞入其他字段
         crowdFundingPO.setPrjtRaiseType(CrowdFundingEnum.CrowdFundingRaiseType.CROWDFUNDINGRAISETYPE_MONEY.getCode());
-        crowdFundingPO.setPrjtStatus(CrowdFundingStatus.CROWDFUNDINGSTATUS_EDIT.getCode());
+        crowdFundingPO.setPrjtStatus(CrowdFundingEnum.CrowdFundingStatus.CROWDFUNDINGSTATUS_EDIT.getCode());
         //插入crowdFunding表
         crowdFundingDao.insert(crowdFundingPO);
         //插入crowdFundingentity 表
@@ -121,7 +123,20 @@ public class CrowdFundingEntityFacadeImpl extends BaseServiceImpl implements Cro
 
     @Override
     public CrowdFundingAcctVO getCrowdFundingAcctInfo(CrowdFundingAcctVO crowdFundingAcctVO) {
-        return null;
+        Map map= JSON.parseObject(JSON.toJSONString(crowdFundingAcctVO), HashMap.class);
+        return JSON.parseObject(JSON.toJSONString(crowdFundingAcctDao.select(map)),CrowdFundingAcctVO.class);
+    }
+
+    @Override
+    public List<CrowdFundingAcctVO> getList4AcctByMap(Map crowdFundingAcctVO) {
+        List<CrowdFundingAcctVO> voList=null;
+        List list=crowdFundingAcctDao.getList4AcctByMap(crowdFundingAcctVO);
+        voList=super.getObjectTransformer().defaulBatchtExcute(
+                list
+                ,CrowdFundingAcctVO.class
+        ) ;
+
+        return voList;
     }
 
     @Override

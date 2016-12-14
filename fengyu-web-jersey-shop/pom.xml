@@ -39,6 +39,11 @@
             <artifactId>fengyu-facade-crowd</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.fengyu</groupId>
+            <artifactId>fengyu-facade-other</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.fengyu</groupId>
             <artifactId>fengyu-facade-user</artifactId>
@@ -68,7 +73,7 @@
                     <stopKey>foo</stopKey>
                     <connectors>
                         <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                            <port>7777</port>
+                            <port>8181</port>
                             <maxIdleTime>60000</maxIdleTime>
                         </connector>
                     </connectors>

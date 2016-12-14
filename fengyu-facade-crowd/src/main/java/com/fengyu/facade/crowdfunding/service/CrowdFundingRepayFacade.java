@@ -6,7 +6,6 @@ import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropValueVO;
 import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropsVO;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -234,5 +234,19 @@ var Tools={
         }
         return true;
 
+    },
+    getMessageTipsByName:function (jsonNodeName) {
+        var jsonNodes=jsonNodeName.split(".");
+        var messageTips;
+        $.ajaxSettings.async = false;
+        $.getJSON("/statics/js/common/message.json",messageTips,function(data){
+            var jsonNode=data;
+            for(var i=0;i<jsonNodes.length;i++)
+            {
+                jsonNode=jsonNode[jsonNodes[i]];
+            }
+            messageTips=jsonNode;
+        });
+        return messageTips;
     }
 }

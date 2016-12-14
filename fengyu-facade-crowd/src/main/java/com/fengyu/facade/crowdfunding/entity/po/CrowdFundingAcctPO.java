@@ -16,7 +16,7 @@ public class CrowdFundingAcctPO extends BaseEntity{
     private Integer bankId;
     private Integer acctNo;
     private Integer openBankCity;
-    private Integer acctOpenBank;
+    private String acctOpenBank;
     private Integer openBankProvince;
 
     public Integer getPrjtId() {
@@ -76,11 +76,11 @@ public class CrowdFundingAcctPO extends BaseEntity{
         this.openBankCity = openBankCity;
     }
 
-    public Integer getAcctOpenBank() {
+    public String getAcctOpenBank() {
         return acctOpenBank;
     }
 
-    public void setAcctOpenBank(Integer acctOpenBank) {
+    public void setAcctOpenBank(String acctOpenBank) {
         this.acctOpenBank = acctOpenBank;
     }
 

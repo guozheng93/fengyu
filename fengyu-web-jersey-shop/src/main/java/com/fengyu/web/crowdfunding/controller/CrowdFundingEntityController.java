@@ -146,29 +146,7 @@ public class CrowdFundingEntityController extends BaseController {
         return jsonStr;
     }
 
-    /**
-     * @author junz
-     * @date 2016/12/4 20:51
-     * @description 更新产品众筹项目收款信息表
-     * @param
-     * @return
-     **/
-    @POST
-    @Path("editCrowdFundingAcct")
-    public String editCrowdFundingAcct(String args)
-    {
-        CrowdFundingAcctVO crowdFundingAcctVO= JSON.parseObject(args, CrowdFundingAcctVO.class);
-        ResponseWrapper responseWrapper= null;
-        String jsonStr="";
-        try {
-            responseWrapper = doServiceAndResponse(crowdFundingEntityFacade,"newCrowdFundingAcct",crowdFundingAcctVO);
-            jsonStr=nullParamOfJsonFilter(responseWrapper);
-        } catch (InvocationTargetException e) {
-            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
 
-        }
-        return jsonStr;
-    }
 
     /**
      * @author junz
@@ -217,5 +195,83 @@ public class CrowdFundingEntityController extends BaseController {
         return jsonStr;
     }
 
+    /**
+     * @author junz
+     * @date 2016/12/4 20:51
+     * @description 更新产品众筹项目收款信息表
+     * @param
+     * @return
+     **/
+    @POST
+    @Path("editCrowdFundingAcct")
+    public String editCrowdFundingAcct(String args)
+    {
+        CrowdFundingAcctVO crowdFundingAcctVO= JSON.parseObject(args, CrowdFundingAcctVO.class);
+        ResponseWrapper responseWrapper= null;
+        String jsonStr="";
+        try {
+            responseWrapper = doServiceAndResponse(crowdFundingEntityFacade,"editCrowdFundingAcct",crowdFundingAcctVO);
+            jsonStr=nullParamOfJsonFilter(responseWrapper);
+        } catch (InvocationTargetException e) {
+            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+
+        }
+        return jsonStr;
+    }
+    /**
+     * @author junz
+     * @date 2016/12/4 20:51
+     * @description 更新产品众筹项目收款信息表
+     * @param
+     * @return
+     **/
+    @POST
+    @Path("newCrowdFundingAcct")
+    public String newCrowdFundingAcct(String args)
+    {
+        CrowdFundingAcctVO crowdFundingAcctVO= JSON.parseObject(args, CrowdFundingAcctVO.class);
+        ResponseWrapper responseWrapper= null;
+        String jsonStr="";
+        try {
+            responseWrapper = doServiceAndResponse(crowdFundingEntityFacade,"newCrowdFundingAcct",crowdFundingAcctVO);
+            jsonStr=nullParamOfJsonFilter(responseWrapper);
+        } catch (InvocationTargetException e) {
+            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+
+        }
+        return jsonStr;
+    }
+
+    @POST
+    @Path("getList4AcctByMap")
+    public String getList4AcctByMap(String args) {
+        Map acctParamMap= com.alibaba.fastjson.JSON.parseObject(args, Map.class);
+        ResponseWrapper responseWrapper= null;
+        String jsonStr="";
+        try {
+            responseWrapper = doServiceAndResponse(crowdFundingEntityFacade,"getList4AcctByMap",acctParamMap);
+            jsonStr=nullParamOfJsonFilter(responseWrapper);
+        } catch (InvocationTargetException e) {
+            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+
+        }
+        return jsonStr;
+    }
+
+    @POST
+    @Path("getCrowdFundingAcctInfo")
+    public String getCrowdFundingAcctInfo(String args) {
+        CrowdFundingAcctVO crowdFundingAcctVO= JSON.parseObject(args, CrowdFundingAcctVO.class);
+        ResponseWrapper responseWrapper= null;
+        String jsonStr="";
+        try {
+            responseWrapper = doServiceAndResponse(crowdFundingEntityFacade,"getCrowdFundingAcctInfo",crowdFundingAcctVO);
+            jsonStr=nullParamOfJsonFilter(responseWrapper);
+        } catch (InvocationTargetException e) {
+            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+
+        }
+        return jsonStr;
+    }
 
 }

@@ -199,7 +199,7 @@
     </if>
 
   </update>
-  <delete id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
+  <delete id="deleteByMap" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingRepayPO" >
     delete from crowdfunding_repay
     where 1=1
     <if test="id != null" >

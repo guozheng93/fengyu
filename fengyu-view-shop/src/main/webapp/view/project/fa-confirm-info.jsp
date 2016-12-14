@@ -6,11 +6,35 @@
 		<title>确认信息</title>
 		<jsp:include page="/view/global/base-css.jsp"/>
 		<jsp:include page="/view/global/base-js.jsp"/>
+		<link rel="stylesheet" type="text/css" href="/statics/css/page/project/fa-confirm-info.css">
 		<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/fa-confirm-info.js"></script>
 		
 	</head>
 	<body>
 		<div class="warpper1">
+			<script id="crdFdAcctList" type="text/html">
+				{{each responseBody.recordList as item i}}
+					<li acctId="{{item.id}}"><span>{{item.bankName}}</span><span>{{item.acctNo}}</span><span>{{item.acctName}}</span></li>
+				{{/each}}
+			</script>
+			<script id="bankList" type="text/html">
+				<option selected="selected">银行</option>
+				{{each responseBody.recordList as item i}}
+				<option value="{{item.value}}">{{item.description}}</option>
+				{{/each}}
+			</script>
+			<script id="provinceSelect" type="text/html">
+				<option selected="selected">省</option>
+				{{each responseBody.recordList as item i}}
+				<option value="{{item.value}}">{{item.description}}</option>
+				{{/each}}
+			</script>
+			<script id="citySelect" type="text/html">
+				<option selected="selected">市</option>
+				{{each responseBody.recordList as item i}}
+				<option value="{{item.value}}">{{item.description}}</option>
+				{{/each}}
+			</script>
 			<!---------start head(global)---------->
 			<jsp:include page="/view/global/head.jsp"/>
 			<!---------end   head(global)---------->
@@ -38,31 +62,42 @@
 						<p>邮箱地址：11111111@qq.com</p>
 						<p>联系电话：18000000000</p>
 					</div>
-					<div class="ci-gather">
-						<h5>收款信息</h5>
+					<div id="crdFdAcctContainer" acctId="" class="ci-gather">
+						<h5 style="display: inline-block;">收款信息</h5>
+						<ul class="menu">
+							<li><h5 href="#s1">常用收款人</h5>
+								<ul id="crdFdAcctListContainer" class="submenu">
+								</ul>
+							</li>
+						</ul>
 						<div class="ci-list">
 							<span class="ci-l no-required"></span>
 							<div class="ci-r">
-								<span><input type="radio" name="account" checked="checked">个人账户</span><span><input type="radio" name="account">公司账户</span>
+								<span><input fieldName="acctType" belongTo="crdFdAcct" type="radio"  checked="checked">个人账户</span><span><input fieldName="acctType" belongTo="crdFdAcct" type="radio" name="account">公司账户</span>
 							</div>
 						</div>
 						<div class="ci-list">
 							<span class="ci-l ci-name">收款人姓名:</span>
-							<div class="ci-r"><input type="text" class="payee-name"></div>
+								<div class="ci-r"><input fieldName="acctName" belongTo="crdFdAcct" type="text" class="payee-name"></div>
 						</div>
 						<div class="ci-list">
 							<span class="ci-l ">银行:</span>
-							<div class="ci-r"><select class="blank1">
-								<option>请选择</option>
-								<option>中国银行</option>
-								<option>中国银行</option>
-								<option>中国银行</option>
-							</select></div>
+							<div class="ci-r">
+								<select id="bankListContainer" fieldName="bankId" belongTo="crdFdAcct" class="blank1">
+
+								</select>
+							</div>
 						</div>
 						<div class="ci-list">
 							<span class="ci-l">支行:</span>
 							<div class="ci-r">
-								<input type="text" class="blank_sheng" placeholder="请填写">省<input type="text" class="blank_shi" placeholder="请填写">市<input type="text" class="blank_qu" placeholder="请填写">
+								<input fieldName="acctOpenBank" belongTo="crdFdAcct" type="text" class="blank_sheng" placeholder="请填写">
+								<select id="provinceSelectContainer" fieldName="openBankProvince" belongTo="crdFdAcct" class="blank1">
+
+								</select>
+								<select id="citySelectContainer" fieldName="openBankProvinceCity" belongTo="crdFdAcct" class="blank1">
+
+								</select>
 							</div>
 						</div>
 						<div class="ci-list">
@@ -74,8 +109,11 @@
 						<div class="ci-list">
 							<span class="ci-l">确认银行卡号:</span>
 							<div class="ci-r card-number">
-								<input type="number" maxlength="19" placeholder="请填写">
+								<input fieldName="acctNo" belongTo="crdFdAcct" type="number" maxlength="19" placeholder="请填写">
 							</div>
+						</div>
+						<div class="add-hb-btn">
+							<a href="javascript:;" class="add-true">确定</a>
 						</div>
 					</div>
 					<div class="warm-prompt">
@@ -91,10 +129,10 @@
 		</div>
 		<div class="foot">
 			<p class="foot-title"><span class="ft-bord"></span><span class="ft-txt">蜂娱文化</span><span class="ft-bord ft-bord-r"></span></p>
-			<div class="foot-bg" style="background-image:url(images/foot_bg.png);">
+			<div class="foot-bg" style="background-image:url(/statics/images/foot_bg.png);">
 				<div class="fm-bound"></div>
-				<span class="white-s ws-l"><img src="images/white_sr.png"></span>
-				<span class="white-s ws-r"><img src="images/white_s.png"></span>
+				<span class="white-s ws-l"><img src="/statics/images/white_sr.png"></span>
+				<span class="white-s ws-r"><img src="/statics/images/white_s.png"></span>
 				<div class="foot-mid">
 					<dl class="fm-dl">
 						<dt>帮助与条款</dt>
@@ -107,7 +145,7 @@
 					<dl class="fm-dl">
 						<dt>关注我们</dt>
 						<dd><a href="javascript:;">关注蜂娱文化公众号</a></dd>
-						<dd><img src="images/erweima.jpeg" class="fm-dl-code"></dd>
+						<dd><img src="/statics/images/erweima.jpeg" class="fm-dl-code"></dd>
 						
 					</dl>
 					<dl class="fm-dl">
@@ -134,10 +172,7 @@
 			    </div>
 			</div>
 		</div>
-		<script type="text/javascript" src="js/jquery1.11.3.min.js" ></script>
-		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
-		<script src="js/layer.js"></script>
+
 		<script>
 			jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true,delayTime:700});
 			$(function(){

@@ -68,7 +68,7 @@
 
       <if test="propName != null" >
         #{propName,jdbcType=INTEGER},
-      </if>h
+      </if>
       <if test="itemId != null" >
         #{itemId,jdbcType=VARCHAR},
       </if>

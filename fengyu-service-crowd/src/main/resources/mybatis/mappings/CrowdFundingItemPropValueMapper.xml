@@ -27,13 +27,8 @@
     SELECT
     <include refid="Base_Column_List" />
     FROM crowdfunding_item_propvalue A
-    WHERE 1=1
-    <if test="id != null" >
-      AND id = #{id,jdbcType=INTEGER}
-    </if>
-    <if test="propId != null" >
-      AND PROP_ID = #{propId,jdbcType=INTEGER}
-    </if>
+    WHERE PROP_ID = #{propId,jdbcType=INTEGER}
+
 
   </select>
   <insert id="insert" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdfundingItemPropValuePO" >
