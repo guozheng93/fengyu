@@ -5,7 +5,7 @@ import com.fengyu.common.enums.ErrorEnum;
 import com.fengyu.common.result.ResponseResult;
 import com.fengyu.common.utils.MD5;
 import com.fengyu.common.web.jersey.controller.BaseController;
-import com.fengyu.facade.user.entity.User;
+import com.fengyu.facade.user.entity.vo.UserVO;
 import com.fengyu.facade.user.service.UserFacade;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class UserController extends BaseController {
      * 登录
      * @return
      */
-    @RequestMapping("/login")
+    /*@RequestMapping("/login")
     @ResponseBody
     public ResponseResult login(HttpServletRequest request) {
         ResponseResult result = new ResponseResult();
@@ -41,11 +41,11 @@ public class UserController extends BaseController {
             log.debug("mobile:{},code:{} >>登录：用户名为空", loginName);
             result.setError(ErrorEnum.TOKEN_TIMEOUT, "用户名为空");
         }
-        User user = userFacade.findByLoginName(loginName);
+        UserVO user = userFacade.findByLoginName(loginName);
         MD5 m = new MD5();
         // 无效的帐号
         if (user == null) {
-            if (user.getStatus() == 1) {
+            if (user == 1) {
                 log.debug("mobile:{},code:{} >>登录：帐号错误", loginName);
                 result.setError(ErrorEnum.TOKEN_TIMEOUT, "帐号错误");
             }
@@ -57,5 +57,5 @@ public class UserController extends BaseController {
             }
         }
         return result;
-    }
+    }*/
 }
