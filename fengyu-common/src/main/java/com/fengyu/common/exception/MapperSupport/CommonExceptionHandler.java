@@ -1,6 +1,7 @@
 package com.fengyu.common.exception.MapperSupport;
 
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
 
 /**
  * 封装处理众筹项目模块异常
@@ -16,6 +17,10 @@ public class CommonExceptionHandler extends BaseException{
     }
 
     public CommonExceptionHandler(Throwable ex, CommonExceptionType exceptionType, Object... args) {
+        printLog(ex,exceptionType,this.log,args);
+    }
+
+    public CommonExceptionHandler(HttpStatus httpStatus, Throwable ex, CommonExceptionType exceptionType, Object... args) {
         printLog(ex,exceptionType,this.log,args);
     }
 

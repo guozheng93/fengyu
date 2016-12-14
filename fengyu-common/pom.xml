@@ -266,6 +266,11 @@
             <artifactId>commons-net</artifactId>
             <version>3.3</version>
         </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>RELEASE</version>
+        </dependency>
         <!-- ftp end -->
 
     </dependencies>

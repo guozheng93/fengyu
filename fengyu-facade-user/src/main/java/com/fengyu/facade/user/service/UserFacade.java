@@ -1,6 +1,7 @@
 package com.fengyu.facade.user.service;
 
-import com.fengyu.facade.user.entity.User;
+import com.fengyu.facade.user.entity.po.UserPO;
+import com.fengyu.facade.user.entity.vo.UserVO;
 
 /**
  * @author admin
@@ -9,5 +10,5 @@ import com.fengyu.facade.user.entity.User;
  */
 public interface UserFacade {
 
-    User findByLoginName(String loginName);
+    UserVO findByLoginName(String loginName);
 }

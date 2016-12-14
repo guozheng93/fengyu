@@ -103,15 +103,15 @@
 						<div class="ci-list">
 							<span class="ci-l">银行卡号：</span>
 							<div class="ci-r card-number">
-								<input type="number" maxlength="19" placeholder="请填写">
+								<input fieldName="acctNo" belongTo="crdFdAcct" type="text" maxlength="19" placeholder="请填写">
 							</div>
 						</div>
-						<div class="ci-list">
+						<%--<div class="ci-list">
 							<span class="ci-l">确认银行卡号:</span>
 							<div class="ci-r card-number">
 								<input fieldName="acctNo" belongTo="crdFdAcct" type="number" maxlength="19" placeholder="请填写">
 							</div>
-						</div>
+						</div>--%>
 						<div class="add-hb-btn">
 							<a href="javascript:;" class="add-true">确定</a>
 						</div>

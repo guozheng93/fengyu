@@ -70,6 +70,19 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	public static Date parseDate(String str, String parsePatterns) throws ParseException {
 		return parseDate(str, new String[] { parsePatterns });
 	}
+	public static Date getDate4Later(int laterMinutes)
+	{
+		Calendar calendar=Calendar.getInstance();
+		calendar.add(Calendar.MINUTE,laterMinutes);
+		return calendar.getTime();
+	}
+	/**
+	 * 获取此时此刻是上午还是下午
+	 * @return
+	 */
+	public static long getTimeInterval(Date subtrahend,Date minuend){
+		return subtrahend.getTime()-minuend.getTime();
+	}
 
 	/**
 	 * 根据单位字段比较两个日期
