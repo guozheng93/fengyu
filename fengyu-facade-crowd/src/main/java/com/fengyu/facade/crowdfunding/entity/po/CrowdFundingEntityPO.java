@@ -1,7 +1,6 @@
 package com.fengyu.facade.crowdfunding.entity.po;
 
 
-import com.fengyu.common.entity.BaseEntity;
 public class CrowdFundingEntityPO extends CrowdFundingPO{
     private String entityCoverImage;
     private String entityCatalogImage;

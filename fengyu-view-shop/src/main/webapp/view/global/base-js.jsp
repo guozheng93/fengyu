@@ -10,7 +10,7 @@
     var picPath = "${picPath }";
     //var fileServerUrl="http://47.88.190.192:8787/";
     var fileServerUrl="c//upload//";
-    var serverUrl="http://127.0.0.1:8080/rest/";
+    var serverUrl="http://127.0.0.1:8181/rest/";
 </script>
 <script type="text/javascript" src="/statics/js/jquery1.11.3.min.js" ></script>
 <script type="text/javascript" src="/statics/js/lib/inputchange.js" ></script>

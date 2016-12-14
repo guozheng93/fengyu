@@ -22,7 +22,12 @@ function getItemPropFromNode(repayId,prjtId) {
     }
     return itemPropsArray;
 }
+function clearPropNodes() {
+    $(".hb-attr").find("span").remove();
+    $(".hb-attr-box").remove();
+}
 function dynamicAppendItemPropNode(itemProps) {
+    clearPropNodes();
     for(var i=0;i<itemProps.length;i++)
     {
         var currentItemPropNode=addItemPropNode(itemProps[i]["propName"]);
@@ -74,9 +79,10 @@ function getList4CrowdfundingItemProps(repayId)
                 if(data.responseBody&&data.responseBody.recordList[0])
                 {
                     data=data.responseBody.recordList;
+                    clearPropNodes();
                     for(var i=0;i<data.length;i++)
                     {
-                        var propValues=getList4CrowdfundingItemPropValueByItmPropId(data[i].propId);
+                        var propValues=getList4CrowdfundingItemPropValueByItmPropId(data[i].id);
                         var currentItemPropNode=addItemPropNode(data[i]["propName"]);
                         for(var j=0;j<propValues.length;j++)
                         {
@@ -187,6 +193,8 @@ function initEvent(){
             data: JSON.stringify({id:repayId}),
             //async: false,
             success: function (data){
+                var messge=Tools.getMessageTipsByName("commonTips.deleteSuccess");
+                layer.msg("删除成功");
                 getCrdfdRepayList();
             },
             error: function (returndata) {
@@ -199,51 +207,58 @@ function initEvent(){
     });
     $(".save").click(function ()
     {
-        var crdfdRepayVo=Tools.autoNodeValEncaseJson("crdfdRepay");
-        crdfdRepayVo["prjtId"]=sessionStorage.getItem("prjtId");
-
-        if(sessionStorage.getItem("repayId"))
-        {
-            crdfdRepayVo["id"]=sessionStorage.getItem("repayId");
-            editCrdfdPropItemBatch(sessionStorage.getItem("repayId"),sessionStorage.getItem("prjtId"));
-            $.ajax({
-                url:  serverUrl + "crowdFundingRepay/editCrowdFundingRepay",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                type: "post",
-                data: JSON.stringify(crdfdRepayVo),
-                //async: false,
-                success: function (data){
-
-                },
-                error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
-                }
-            });
-        }else
-        {
-            $.ajax({
-                url:  serverUrl + "crowdFundingRepay/newCrowdFundingRepay",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                type: "post",
-                data: JSON.stringify(crdfdRepayVo),
-                //async: false,
-                success: function (data){
-                    if(data.responseBody&&data.responseBody.recordList[0])
-                    {
-                        sessionStorage.setItem("repayId",data.responseBody.recordList[0].id)
-                        getCrdfdRepayList();
-                        editCrdfdPropItemBatch(data.responseBody.recordList[0].id,sessionStorage.getItem("prjtId"));
-                    }
-                },
-                error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
-                }
-            });
-        }
-
+        modifyCrdFdRepay();
     });
+    $(".add-true").click(function ()
+    {
+        modifyCrdFdRepay();
+    });
+}
+function modifyCrdFdRepay() {
+    var crdfdRepayVo=Tools.autoNodeValEncaseJson("crdfdRepay");
+    crdfdRepayVo["prjtId"]=sessionStorage.getItem("prjtId");
+
+    if(sessionStorage.getItem("repayId"))
+    {
+        crdfdRepayVo["id"]=sessionStorage.getItem("repayId");
+        editCrdfdPropItemBatch(sessionStorage.getItem("repayId"),sessionStorage.getItem("prjtId"));
+        $.ajax({
+            url:  serverUrl + "crowdFundingRepay/editCrowdFundingRepay",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "post",
+            data: JSON.stringify(crdfdRepayVo),
+            //async: false,
+            success: function (data){
+                var message=Tools.getMessageTipsByName("commonTips.modifyedSuccess");
+                layer.msg(message);
+            },
+            error: function (returndata) {
+//            	layer.msg("网络异常，请重试");
+            }
+        });
+    }else
+    {
+        $.ajax({
+            url:  serverUrl + "crowdFundingRepay/newCrowdFundingRepay",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "post",
+            data: JSON.stringify(crdfdRepayVo),
+            //async: false,
+            success: function (data){
+                if(data.responseBody&&data.responseBody.recordList[0])
+                {
+                    sessionStorage.setItem("repayId",data.responseBody.recordList[0].id)
+                    getCrdfdRepayList();
+                    editCrdfdPropItemBatch(data.responseBody.recordList[0].id,sessionStorage.getItem("prjtId"));
+                }
+            },
+            error: function (returndata) {
+//            	layer.msg("网络异常，请重试");
+            }
+        });
+    }
 }
 
 function doCrdfdItemProps() {
@@ -278,7 +293,7 @@ function addItemPropNode(itemPropName) {
     var itemPropValsBox=
         '<div class="hb-attr-box">'+
             '<img src="/statics/images/colse_icon.png" class="hb-closeBtn">'+
-            '<b class="propName">'+itemPropName+'：</b>'+
+            '<b class="propName">'+itemPropName+'</b><i style="font-style: normal;margin-right: 10px;">:</i>'+
             '<input type="text" class="add-attrVal" placeholder="请输入"><a href="javascript:;" class="add-icon">+</a>'+
         '</div>';
     $(itemPropValsBox).insertAfter(".hb-attr");

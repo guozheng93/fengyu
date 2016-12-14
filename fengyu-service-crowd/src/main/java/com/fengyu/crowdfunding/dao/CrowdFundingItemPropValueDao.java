@@ -11,6 +11,6 @@ import java.util.Map;
 @MyBatisDao
 public interface CrowdFundingItemPropValueDao extends BaseDao<CrowdfundingItemPropValuePO>{
 
-    public List<Map<String,Object>> getList4CrowdfundingItemPropValueByItmPropId(Integer itmPropId);
+    public List<Map<String,Object>> getList4CrowdfundingItemPropValueByItmPropId(Integer propId);
     public Integer physicsDelete(CrowdfundingItemPropValuePO crowdfundingItemPropValuePO);
 }

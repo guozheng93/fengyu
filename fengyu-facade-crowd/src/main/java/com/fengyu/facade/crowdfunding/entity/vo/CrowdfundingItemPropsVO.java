@@ -1,6 +1,5 @@
 package com.fengyu.facade.crowdfunding.entity.vo;
 
-import com.fengyu.common.entity.BaseEntity;
 import com.fengyu.common.entity.VOEntity;
 
 import java.util.List;

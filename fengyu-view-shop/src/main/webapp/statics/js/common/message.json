@@ -1,0 +1,7 @@
+{
+  "commonTips":{
+    "modifyedSuccess":"维护成功!",
+    "modifyedFailed":"维护失败!",
+    "deleteSuccess":"删除成功"
+  }
+}

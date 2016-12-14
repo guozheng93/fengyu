@@ -10,15 +10,64 @@
     <result column="BANK_ID" property="bankId" jdbcType="INTEGER" />
     <result column="ACCT_NO" property="acctNo" jdbcType="INTEGER" />
     <result column="OPEN_BANK_CITY" property="openBankCity" jdbcType="INTEGER" />
-    <result column="ACCT_OPEN_BANK" property="acctOpenBank" jdbcType="INTEGER" />
+    <result column="ACCT_OPEN_BANK" property="acctOpenBank" jdbcType="VARCHAR" />
     <result column="OPEN_BANK_PROVINCE" property="openBankProvince" jdbcType="INTEGER" />
   </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID
+    ,B.PRJT_ID
+    ,A.USER_ID
+    ,A.ACCT_TYPE
+    ,A.ACCT_NAME
+    ,A.BANK_ID
+    ,A.ACCT_NO
+    ,A.OPEN_BANK_CITY
+    ,A.ACCT_OPEN_BANK
+    ,A.OPEN_BANK_PROVINCE
+
+  </sql>
+
+  <select id="select" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+      ,C.DESCRIPTION AS BANK_NAME
+    FROM crowdfunding_acct A
+      LEFT JOIN crowdfunding_acct_prjt_map B
+        ON A.ID=B.ACCT_ID
+      LEFT JOIN biz_dictionary C
+      on a.bank_id=C.value
+      and C.type='acct'
+      and C.label='BANKNAME'
+    WHERE 1=1
+    <if test="id != null" >
+      AND a.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND b.prjt_id = #{prjtId,jdbcType=INTEGER}
+    </if>
+</select>
+
+  <select id="getList4AcctByMap" resultType="map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    ,C.DESCRIPTION AS BANK_NAME
+    FROM crowdfunding_acct A
+      LEFT JOIN crowdfunding_acct_prjt_map B
+        ON A.ID=B.ACCT_ID
+      LEFT JOIN biz_dictionary C
+        on a.bank_id=C.value
+        and C.type='acct'
+        and C.label='BANKNAME'
+    WHERE 1=1
+    <if test="userId != null" >
+      AND a.user_id = #{userId,jdbcType=INTEGER}
+    </if>
+
+  </select>
   <insert id="insert" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
     insert into crowdfunding_acct
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="prjtId != null" >
-        PRJT_ID,
-      </if>
+
       <if test="userId != null" >
         USER_ID,
       </if>
@@ -46,9 +95,7 @@
 
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="prjtId != null" >
-        #{prjtId,jdbcType=INTEGER},
-      </if>
+
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
@@ -68,7 +115,7 @@
         #{openBankCity,jdbcType=INTEGER},
       </if>
       <if test="acctOpenBank != null" >
-        #{acctOpenBank,jdbcType=INTEGER},
+        #{acctOpenBank,jdbcType=VARCHAR},
       </if>
       <if test="openBankProvince != null" >
         #{openBankProvince,jdbcType=INTEGER},
@@ -77,13 +124,31 @@
 
     </trim>
   </insert>
+  <insert id="insert2Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    insert into crowdfunding_acct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        PRJT_ID,
+      </if>
+      <if test="id != null" >
+        ID,
+      </if>
 
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        #{prjtId,jdbcType=INTEGER},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
   <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
     update crowdfunding_acct
     <set >
-      <if test="prjtId != null" >
-        PRJT_ID=#{prjtId,jdbcType=INTEGER},
-      </if>
+
       <if test="userId != null" >
         USER_ID=#{userId,jdbcType=INTEGER},
       </if>
@@ -103,7 +168,7 @@
         OPEN_BANK_CITY=#{openBankCity,jdbcType=INTEGER},
       </if>
       <if test="acctOpenBank != null" >
-        ACCT_OPEN_BANK=#{acctOpenBank,jdbcType=INTEGER},
+        ACCT_OPEN_BANK=#{acctOpenBank,jdbcType=VARCHAR},
       </if>
       <if test="openBankProvince != null" >
         OPEN_BANK_PROVINCE=#{openBankProvince,jdbcType=INTEGER},
@@ -116,9 +181,7 @@
     <if test="userId != null" >
       and USER_ID = #{userId,jdbcType=INTEGER}
     </if>
-    <if test="prjtId != null">
-      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
-    </if>
+
 
   </update>
   <delete id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
@@ -130,9 +193,7 @@
     <if test="userId != null" >
       and USER_ID = #{userId,jdbcType=INTEGER}
     </if>
-    <if test="prjtId != null">
-      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
-    </if>
+
   </delete>
 
 </mapper>

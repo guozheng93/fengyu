@@ -157,7 +157,7 @@
 				    	<p>回报内容最好是项目的衍生品，与项目内容有关的回报更能吸引到大家的支持.</p>
 				    </div>
 				    <div class="rs-operate">
-					<a href="initiate-raise.html" class="previous-stup">上一步</a><a href="javascript:;" class="save">保存草稿</a><a href="fa-confirm-info.html" class="next-stup">下一步</a>
+					<a href="initiate-raise.html" class="previous-stup">上一步</a><a href="javascript:;" class="save">保存草稿</a><a href="#" class="next-stup">下一步</a>
 				    </div>
 				</div>
 			</div>

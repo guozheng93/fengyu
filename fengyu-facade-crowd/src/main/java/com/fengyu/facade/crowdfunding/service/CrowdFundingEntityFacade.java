@@ -33,6 +33,9 @@ public interface CrowdFundingEntityFacade extends BaseService{
     public Integer newCrowdFundingAcct(CrowdFundingAcctVO crowdFundingAcctVO);
     public Integer editCrowdFundingAcct(CrowdFundingAcctVO crowdFundingAcctVO);
     public CrowdFundingAcctVO getCrowdFundingAcctInfo(CrowdFundingAcctVO crowdFundingAcctVO);
+    public List<CrowdFundingAcctVO> getList4AcctByMap(Map crowdFundingAcctVO);
+
+
 
 
 

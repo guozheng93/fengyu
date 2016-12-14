@@ -304,11 +304,11 @@ public class CrowdFundingRepayController extends BaseController {
     @Path("deleteCrowdFundingRepay")
     public String deleteCrowdFundingRepay(String args)
     {
-        Map map = JSON.parseObject(args, Map.class);
+        CrowdFundingRepayVO crowdFundingRepayVO = JSON.parseObject(args, CrowdFundingRepayVO.class);
         ResponseWrapper responseWrapper= null;
         String jsonStr="";
         try {
-            responseWrapper = doServiceAndResponse(crowdFundingRepayFacade,"deleteCrowdFundingRepay",Integer.parseInt(map.get("id").toString()));
+            responseWrapper = doServiceAndResponse(crowdFundingRepayFacade,"deleteCrowdFundingRepay",crowdFundingRepayVO);
             jsonStr=nullParamOfJsonFilter(responseWrapper);
         } catch (InvocationTargetException e) {
             throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
