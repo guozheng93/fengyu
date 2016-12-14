@@ -84,16 +84,21 @@
 						<div class="ir-list">
 							<span class="ir-l-s">筹资天数：</span>
 							<div class="raise-amout">
-							<input belongTo="crdfdEntity" id="prjtFundCycle" type="text" placeholder="10~60天" style="border-right:1px solid #a9a9a9">
+							<input belongTo="crdfdEntity" filedName="prjtFundCycle" type="text" placeholder="10~60天" style="border-right:1px solid #a9a9a9">
 							</div>
 						</div>
 						
 						<div class="ir-list le-list">
 							<span class="ir-l-s">列表页图片：</span>
 							<div id="crdfdListImageContainer" class="ir-le-tu">
-								<a id="crdfdListImagePicker" href="javascript:;" class="a-upload"><input type="file"><img src="/statics/images//tu_icon.png">上传列表页图片</a>
+								<a id="crdfdListImagePicker" href="javascript:;" class="a-upload">
+									<input type="file"><img src="/statics/images//tu_icon.png">
+									上传列表页图片
+								</a>
 								<small class="ir-l-tip3">支持ipg、jpeg、png、gif格式，大小：378pxx280px</small>
-							    <div  id="crdfdListImageThumbnail" class="le-tu-show" style="background-image:url(/statics/images//default_tu.png)"><img belongTo="crdfdEntity" id="entityCatalogImage" src=""></div>
+							    <div  id="crdfdListImageThumbnail" class="le-tu-show" style="background-image:url(/statics/images//default_tu.png)">
+									<img belongTo="crdfdEntity" id="entityCatalogImage" src="">
+								</div>
 							</div>
 						</div>
 						<div class="ir-list le-list">

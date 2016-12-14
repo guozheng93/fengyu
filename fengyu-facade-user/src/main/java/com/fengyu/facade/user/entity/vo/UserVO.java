@@ -16,6 +16,7 @@ public class UserVO extends VOEntity implements Principal {
     private Integer id             ;
     private String value          ;
     private String label          ;
+    private String isValid        ;
     private String type           ;
     private String description    ;
     private Double sort           ;
@@ -28,6 +29,14 @@ public class UserVO extends VOEntity implements Principal {
     private Boolean delFlag       ;
     private Token mainToken;
     private Token accessToken;
+
+    public String getIsValid() {
+        return isValid;
+    }
+
+    public void setIsValid(String isValid) {
+        this.isValid = isValid;
+    }
 
     public Token getMainToken() {
         return mainToken;
