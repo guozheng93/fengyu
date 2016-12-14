@@ -12,7 +12,7 @@ import java.util.Map;
  * @创建时间: 2013-7-25,下午11:33:41 .
  * @版本: 1.0 .
  */
-public class PageBean implements Serializable{
+public class PageBean<T> implements Serializable{
 	/**
 	 * 
 	 */
@@ -24,7 +24,7 @@ public class PageBean implements Serializable{
 
 	// 查询数据库
 	private int totalCount; // 总记录数
-	private List<VOEntity> recordList; // 本页的数据列表
+	private List<T> recordList; // 本页的数据列表
 
 	// 计算
 	private int pageCount; // 总页数
@@ -44,7 +44,7 @@ public class PageBean implements Serializable{
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<VOEntity> recordList) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List<T> recordList) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -85,7 +85,7 @@ public class PageBean implements Serializable{
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<VOEntity> recordList, Map<String, Object> countResultMap) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List<T> recordList, Map<String, Object> countResultMap) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -119,11 +119,11 @@ public class PageBean implements Serializable{
 		}
 	}
 
-	public List<VOEntity> getRecordList() {
+	public List<T> getRecordList() {
 		return recordList;
 	}
 
-	public void setRecordList(List<VOEntity> recordList) {
+	public void setRecordList(List<T> recordList) {
 		this.recordList = recordList;
 	}
 

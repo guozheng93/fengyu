@@ -18,4 +18,7 @@
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.fengyu.facade.user.service.UserFacade" ref="userFacade" />
 
+	<!-- 用户地址服务接口 -->
+	<dubbo:service interface="com.fengyu.facade.address.service.AddressFacade" ref="addressFacade" />
+
 </beans>  

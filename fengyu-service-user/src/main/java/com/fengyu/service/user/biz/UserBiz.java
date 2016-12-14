@@ -20,6 +20,6 @@ public class UserBiz {
 
     public Map findByLoginName(String loginName) {
         Map user=userDao.findByLoginName(loginName);
-        return user;
+        return null;
     }
 }

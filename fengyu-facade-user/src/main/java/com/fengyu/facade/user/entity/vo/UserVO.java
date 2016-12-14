@@ -16,7 +16,7 @@ public class UserVO extends VOEntity implements Principal {
     private Integer id             ;
     private String value          ;
     private String label          ;
-    private String isValid        ;
+    private Boolean isValid        ;
     private String type           ;
     private String description    ;
     private Double sort           ;
@@ -30,12 +30,31 @@ public class UserVO extends VOEntity implements Principal {
     private Token mainToken;
     private Token accessToken;
 
-    public String getIsValid() {
+    private String loginName;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLoginName() {
+        return loginName;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public Boolean getValid() {
         return isValid;
     }
 
-    public void setIsValid(String isValid) {
-        this.isValid = isValid;
+    public void setValid(Boolean valid) {
+        isValid = valid;
     }
 
     public Token getMainToken() {

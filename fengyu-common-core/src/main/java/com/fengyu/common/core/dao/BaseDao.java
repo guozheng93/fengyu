@@ -107,15 +107,8 @@ public interface BaseDao<T> {
 
 	Object getBy(Map<String, Object> paramMap, String sqlId);
 
-//	/**
-//	 * 根据序列名称获取下一个值
-//	 *
-//	 * @return
-//	 */
-//	String getSeqNextValue(String seqName);
-
-	SqlSessionTemplate getSessionTemplate();
-
-	SqlSession getSqlSession();
-
+	//分页列表
+	List<T> getList(Map<String, Object> paramMap);
+	//列表总数
+	Long getCountList(Map<String, Object> paramMap);
 }
