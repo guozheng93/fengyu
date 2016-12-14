@@ -1,10 +1,11 @@
 package com.fengyu.service.user.biz;
 
-import com.fengyu.facade.user.entity.User;
+import com.fengyu.facade.user.entity.vo.UserVO;
 import com.fengyu.service.user.dao.UserDao;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * @author admin
@@ -17,8 +18,8 @@ public class UserBiz {
     @Resource
     private UserDao userDao;
 
-    public User findByLoginName(String loginName) {
-        User user=userDao.findByLoginName(loginName);
+    public Map findByLoginName(String loginName) {
+        Map user=userDao.findByLoginName(loginName);
         return user;
     }
 }

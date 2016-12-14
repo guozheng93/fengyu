@@ -1,6 +1,10 @@
-package com.fengyu.facade.other.common.entity.vo;
+package com.fengyu.facade.user.entity.vo;
 
+import com.fengyu.common.entity.Token;
 import com.fengyu.common.entity.VOEntity;
+
+import javax.security.auth.Subject;
+import java.security.Principal;
 
 /**
  * 众筹项目收款人信息表
@@ -8,7 +12,7 @@ import com.fengyu.common.entity.VOEntity;
  * @author Administrator
  * @create 2016 12 04 22:05
  */
-public class BizDictionaryVO extends VOEntity{
+public class UserVO extends VOEntity implements Principal {
     private Integer id             ;
     private String value          ;
     private String label          ;
@@ -22,6 +26,24 @@ public class BizDictionaryVO extends VOEntity{
     private String updateDate    ;
     private String remarks       ;
     private Boolean delFlag       ;
+    private Token mainToken;
+    private Token accessToken;
+
+    public Token getMainToken() {
+        return mainToken;
+    }
+
+    public void setMainToken(Token mainToken) {
+        this.mainToken = mainToken;
+    }
+
+    public Token getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(Token accessToken) {
+        this.accessToken = accessToken;
+    }
 
     @Override
     public Integer getId() {
@@ -127,5 +149,15 @@ public class BizDictionaryVO extends VOEntity{
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public boolean implies(Subject subject) {
+        return false;
     }
 }

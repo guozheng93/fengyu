@@ -16,7 +16,6 @@ public class BaseEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
-	protected Date createTime = new Date();
 
 	public Integer getId() {
 		return id;
@@ -34,12 +33,6 @@ public class BaseEntity implements Serializable {
 		this.version = version;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
 
 }

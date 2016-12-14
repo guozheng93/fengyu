@@ -1,12 +1,11 @@
 package com.fengyu.facade.user.impl;
 
-import com.fengyu.facade.user.entity.User;
+import com.alibaba.fastjson.JSON;
+import com.fengyu.facade.user.entity.vo.UserVO;
 import com.fengyu.facade.user.service.UserFacade;
 import com.fengyu.service.user.biz.UserBiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author admin
@@ -20,7 +19,8 @@ public class UserFacadeImpl implements UserFacade{
     private UserBiz userBiz;
 
     @Override
-    public User findByLoginName(String loginName) {
-        return userBiz.findByLoginName(loginName);
+    public UserVO findByLoginName(String loginName) {
+        UserVO userVO=JSON.parseObject(JSON.toJSONString(userBiz.findByLoginName(loginName)),UserVO.class);
+        return userVO;
     }
 }

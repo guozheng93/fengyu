@@ -11,7 +11,15 @@ import com.fengyu.common.exception.Constant.ExceptionType;
 public enum CommonExceptionType implements ExceptionType {
     METHODNOTFOUND("函数不存在","C0001"),
     SERVICEEXECUTE("SERVICE执行异常","C0002"),
-    UPLOADINVALIDIMG("图片上传失败！","C0003");
+    UPLOADINVALIDIMG("图片上传失败！","C0003"),
+    JEDISOPRATOREXCEPTION("操作redis异常","C0004"),
+
+    XMLRESOLVEEXCEPTION("xml解析异常","C0005"),
+    UNKNOWNEXCEPTION("系统异常,未知异常请联系管理员","C0006"),
+
+    FORBIDDEN("认证失败，请重新登录","C0007"),
+
+    UNAUTHORIZED("登录失效，请重新登录","C0008");
 
     /** 描述 */
     private String desc;

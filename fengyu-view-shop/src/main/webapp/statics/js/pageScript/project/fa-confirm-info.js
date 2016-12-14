@@ -39,22 +39,24 @@ function initEvent() {
     });
 }
 function getAcctInfoByMap(acctParam) {
-    $.ajax({
-        url:  serverUrl + "crowdFundingEntity/getCrowdFundingAcctInfo",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        type: "post",
-        data: JSON.stringify(acctParam),
-        //async: false,
-        success: function (data){
+    if(sessionStorage.getItem("prjtId"))
+    {
+        $.ajax({
+            url:  serverUrl + "crowdFundingEntity/getCrowdFundingAcctInfo",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "post",
+            data: JSON.stringify(acctParam),
+            //async: false,
+            success: function (data){
 
-
-
-        },
-        error: function (returndata) {
+            },
+            error: function (returndata) {
 //            	layer.msg("网络异常，请重试");
-        }
-    });
+            }
+        });
+    }
+
     
 }
 function getList4AcctByUserId() {

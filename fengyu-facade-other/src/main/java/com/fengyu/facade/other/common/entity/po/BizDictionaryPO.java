@@ -21,7 +21,7 @@ public class BizDictionaryPO extends BaseEntity{
     private String updateBy      ;
     private String updateDate    ;
     private String remarks       ;
-    private Integer delFlag       ;
+    private Boolean delFlag       ;
 
     @Override
     public Integer getId() {
@@ -121,11 +121,11 @@ public class BizDictionaryPO extends BaseEntity{
         this.remarks = remarks;
     }
 
-    public Integer getDelFlag() {
+    public Boolean getDelFlag() {
         return delFlag;
     }
 
-    public void setDelFlag(Integer delFlag) {
+    public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
 }

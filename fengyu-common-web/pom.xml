@@ -37,6 +37,11 @@
             <version>1.0.0</version>
         </dependency>
         <dependency>
+            <groupId>com.fengyu</groupId>
+            <artifactId>fengyu-facade-user</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -348,6 +353,10 @@
             <groupId>com.fengyu</groupId>
             <artifactId>fengyu-common-core</artifactId>
             <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
         </dependency>
 
     </dependencies>
