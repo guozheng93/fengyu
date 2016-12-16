@@ -27,7 +27,7 @@ public class UserController extends BaseController {
 
     @POST
     @Path("login")
-    public String newCrowdFundingEntity(String args)
+    public String login(String args)
     {
         UserVO userVO= JSON.parseObject(args, UserVO.class);
         ResponseWrapper responseWrapper= null;
