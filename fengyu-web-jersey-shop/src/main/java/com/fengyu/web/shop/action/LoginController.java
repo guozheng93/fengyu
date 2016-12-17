@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Component
 @Path("/user")
-public class UserController extends BaseController {
+public class LoginController extends BaseController {
 
     @Autowired
     private UserFacade userFacade;

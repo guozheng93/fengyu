@@ -19,6 +19,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!-- javax.mail-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <!-- javax.mail-->
         <dependency>
             <groupId>com.fengyu</groupId>
             <artifactId>fengyu-common</artifactId>
