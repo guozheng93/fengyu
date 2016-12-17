@@ -1,4 +1,4 @@
-package com.fengyu.facade.user.Education.service.impl;
+package com.fengyu.facade.user.education.service.impl;
 
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;

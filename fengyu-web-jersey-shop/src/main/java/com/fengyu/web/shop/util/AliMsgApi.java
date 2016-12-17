@@ -1,5 +1,7 @@
 package com.fengyu.web.shop.util;
 
+import com.alibaba.fastjson.JSON;
+
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -32,12 +34,10 @@ public class AliMsgApi {
 
     /**
      * 发送
-     * @param userId          操作用户（非必填）
      * @param phone           手机号
-     * @param securityCode   验证码
      * @return
      */
-    public static String sendMsg(String userId,String phone,String securityCode){
+    public static String sendMsg(String phone,String templateCode,Map<String,String> paramMap){
         Map<String, String> params = new HashMap<String, String>();
         // 公共参数
         params.put("method", "alibaba.aliqin.fc.sms.num.send");
@@ -51,12 +51,14 @@ public class AliMsgApi {
         // 业务参数
 //        params.put("fields", "num_iid,title,nick,price,num");
 //        params.put("num_iid", "123456789");
-        params.put("Extend",userId);
+      //  params.put("Extend",userId);
         params.put("sms_type","normal");
         params.put("sms_free_sign_name","蜂娱文化");
-        params.put("sms_param","{\"code\":\""+securityCode+"\",\"product\":\"蜂娱文化\"}");
+        //params.put("sms_param","{\"code\":\""+securityCode+"\",\"product\":\"蜂娱文化\"}");
+        String smsStr = JSON.toJSONString(paramMap);
+        params.put("sms_param",smsStr);
         params.put("rec_num",phone);
-        params.put("sms_template_code","SMS_8551007");
+        params.put("sms_template_code",templateCode);
         // 签名参数s
         try {
             params.put("sign", signTopRequest(params, appSecret, SIGN_METHOD_HMAC));
@@ -283,7 +285,10 @@ public class AliMsgApi {
         return false;
     }
     public static void main(String[]args){
-        new AliMsgApi().sendMsg(null,"18766448651","567123");
+        Map<String,String> sendMap = new HashMap<>();
+        sendMap.put("code","123456");
+        sendMap.put("product","蜂娱文化");
+        new AliMsgApi().sendMsg("15269103792","SMS_8551007",sendMap);
         System.out.println("发送成功！");
     }
 }

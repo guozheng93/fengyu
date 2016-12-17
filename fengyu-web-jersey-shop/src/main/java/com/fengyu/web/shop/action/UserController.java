@@ -7,8 +7,8 @@ import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
 import com.fengyu.facade.crowdfunding.entity.vo.*;
 import com.fengyu.facade.crowdfunding.exception.CrowdExceptionHandler;
 import com.fengyu.facade.crowdfunding.service.CrowdFundingEntityFacade;
-import com.fengyu.facade.user.entity.vo.UserVO;
-import com.fengyu.facade.user.service.UserFacade;
+import com.fengyu.facade.user.login.entity.vo.UserVO;
+import com.fengyu.facade.user.login.service.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

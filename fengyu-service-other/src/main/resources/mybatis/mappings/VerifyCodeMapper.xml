@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.service.address.dao.AddressDao" >
+
+  <!-- 用户 -->
+  <sql id="other_verify_code"> `other_verify_code` </sql>
+
+  <resultMap id="beanMap" type="com.fengyu.service.other.verifycode.dao.VerifyCodeDao" >
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="verify_code" property="verifyCode"/>
+    <result column="verify_code_type" property="verifyCodeType"/>
+    <result column="biz_type" property="bizType"/>
+    <result column="send_target" property="sendTarget"/>
+    <result column="dead_time" property="deadTime"/>
+    <result column="gen_time" property="genTime"/>
+    <result column="send_result" property="sendResult"/>
+    <result column="status" property="status"/>
+  </resultMap>
+  <sql id="condition_sql">
+    <if test="sendTarget != null">send_target =#{sendTarget} </if>
+    <if test="verifyCodeType != null">verify_code_type =#{verifyCodeType} </if>
+    <if test="bizType != null">biz_type =#{bizType} </if>
+    <if test="verifyCode != null">verify_code =#{verifyCode} </if>
+  </sql>
+  <select id="getBy" resultMap="beanMap" parameterType="java.lang.Integer">
+    select * from
+    <include refid="other_verify_code" />
+    where id = #{id}
+  </select>
+  <select id="getById" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="other_verify_code" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <select id="getList" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="other_verify_code" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    limit #{pageNum},#{pageSize}
+  </select>
+  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+    select count(*) from
+    <include refid="other_verify_code" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <insert id="insert">
+    insert into
+    <include refid="other_verify_code" />
+    (user_id, verify_code, verify_code_type, biz_type , send_target,
+    dead_time, gen_time, send_result, status)
+    values
+    (#{userId}, #{verifyCode}, #{verifyCodeType}, #{bizType},
+    #{sendTarget}, #{deadTime}, #{genTime}, #{sendResult},
+    #{status})
+  </insert>
+  <update id="update">
+    update <include refid="other_verify_code" />
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null" >
+        `verify_code`= #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCodeType != null" >
+        verify_code_type = #{verifyCodeType,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        biz_type = #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="sendTarget != null" >
+        send_target = #{sendTarget,jdbcType=INTEGER},
+      </if>
+      <if test="deadTime != null" >
+        dead_time = #{deadTime,jdbcType=INTEGER},
+      </if>
+      <if test="genTime != null" >
+        gen_time = #{genTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sendResult != null" >
+        send_result = #{sendResult,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE  from <include refid="other_verify_code" /> where  where id = #{id}
+  </delete>
+
+
+</mapper>
