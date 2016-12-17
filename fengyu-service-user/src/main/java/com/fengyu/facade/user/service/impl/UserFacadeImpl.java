@@ -1,4 +1,4 @@
-package com.fengyu.facade.user.impl;
+package com.fengyu.facade.user.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.fengyu.facade.user.entity.vo.UserVO;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author admin
+ * @author guoz
  * @version V1.0
  * @date 2016/12/1
  */

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.service.education.dao.EducationDao" >
+
+  <!-- 用户 -->
+  <sql id="user_education"> `user_education` </sql>
+
+  <resultMap id="beanMap" type="com.fengyu.facade.education.entity.po.EducationPO" >
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="school" property="school"/>
+    <result column="title" property="title"/>
+    <result column="major" property="major"/>
+    <result column="info" property="info"/>
+    <result column="start_year" property="startYear"/>
+    <result column="start_month" property="startMonth"/>
+    <result column="end_year" property="endYear"/>
+    <result column="end_month" property="endMonth"/>
+    <result column="create_time" property="createTime"/>
+  </resultMap>
+  <sql id="condition_sql">
+     <if test="userId != null">user_id =#{userId} </if>
+  </sql>
+  <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
+    select * from
+    <include refid="user_education" />
+    where id = #{id}
+  </select>
+  <select id="getList" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="user_education" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    limit #{pageNum},#{pageSize}
+  </select>
+  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+    select count(*) from
+    <include refid="user_education" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <insert id="insert">
+    insert into
+    <include refid="user_education" />
+    (user_id, school, title, major , start_year,
+    start_month, end_year, end_month, create_time)
+    values
+    (#{userId}, #{school}, #{title}, #{major},
+    #{startYear}, #{startMonth}, #{endYear}, #{endMonth},
+    #{createTime})
+  </insert>
+  <update id="update">
+    update <include refid="user_education" />
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="school != null" >
+        `school`= #{school},
+      </if>
+      <if test="title != null" >
+        title = #{title},
+      </if>
+      <if test="major != null" >
+        major = #{major},
+      </if>
+      <if test="startYear != null" >
+        start_year = #{startYear},
+      </if>
+      <if test="startMonth != null" >
+        start_month = #{startMonth},
+      </if>
+      <if test="endYear != null" >
+        end_year = #{endYear},
+      </if>
+      <if test="endMonth != null" >
+        end_month = #{endMonth},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE  from <include refid="user_education" /> where  id = #{id}
+  </delete>
+
+
+</mapper>
