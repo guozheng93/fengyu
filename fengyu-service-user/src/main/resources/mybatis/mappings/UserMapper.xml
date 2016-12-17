@@ -5,7 +5,7 @@
   <!-- 用户 -->
   <sql id="user"> `user` </sql>
 
-  <resultMap id="beanMap" type="com.fengyu.facade.user.entity.po.UserPO" >
+  <resultMap id="beanMap" type="com.fengyu.facade.user.login.entity.po.UserPO" >
     <id column="id" property="id"/>
     <result column="phone" property="phone"/>
     <result column="password" property="password"/>

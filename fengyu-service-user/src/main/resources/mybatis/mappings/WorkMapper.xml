@@ -5,7 +5,7 @@
   <!-- 用户 -->
   <sql id="user_work"> `user_work` </sql>
 
-  <resultMap id="beanMap" type="com.fengyu.facade.work.entity.po.WorkPO" >
+  <resultMap id="beanMap" type="com.fengyu.facade.user.work.entity.po.WorkPO" >
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="name" property="name"/>
