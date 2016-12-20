@@ -12,7 +12,7 @@ public class DubboProvider {
 		try {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
 			context.start();
-			System.out.println("[user] modules start");
+			System.out.println("[crowd] modules start");
 		} catch (Exception e) {
 			log.error("== DubboProvider context start error:",e);
 		}

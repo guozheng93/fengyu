@@ -18,7 +18,7 @@ public class CrowdFundingAcctVO extends VOEntity{
     private Integer acctNo;
     private Integer openBankCity;
     private Integer openBankCityName;
-    private Integer acctOpenBank;
+    private String acctOpenBank;
     private Integer acctOpenBankName;
     private Integer openBankProvince;
     private Integer openBankProvinceName;
@@ -95,11 +95,11 @@ public class CrowdFundingAcctVO extends VOEntity{
         this.openBankCityName = openBankCityName;
     }
 
-    public Integer getAcctOpenBank() {
+    public String getAcctOpenBank() {
         return acctOpenBank;
     }
 
-    public void setAcctOpenBank(Integer acctOpenBank) {
+    public void setAcctOpenBank(String acctOpenBank) {
         this.acctOpenBank = acctOpenBank;
     }
 

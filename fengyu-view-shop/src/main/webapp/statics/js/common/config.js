@@ -1,0 +1,20 @@
+var global={
+    defaultImg:"/statics/images/default_tu.png",
+    crowdfundingStatus:{
+        funding:"募集中",
+        submit:"提交",
+        end:"募集结束，到期",
+        repay:"回报中",
+        initial_audit:"初次审核",
+        final_audit:"终审",
+        initial_lending:"第一次放款",
+        final_lending:"尾款",
+        funded:"募集结束，项目结束",
+        edit:"编辑中"
+    },
+    crwFdHeatStatus:{
+        normal:{status:"normal",desc:"完成"},
+        cannel:{status:"cannel",desc:"取消"},
+        delete:{status:"delete",desc:"删除"}
+    }
+}

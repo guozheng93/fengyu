@@ -92,7 +92,7 @@ public class CrowdFundingRepayFacadeImpl extends BaseServiceImpl implements Crow
         CrowdFundingRepayPO crowdFundingRepayPO=new CrowdFundingRepayPO();
         super.getObjectTransformer().defaultExcute(crowdFundingRepayVO,crowdFundingRepayPO);
         Integer id=crowdFundingRepayDao.insert(crowdFundingRepayPO);
-        return id;
+        return crowdFundingRepayPO.getId();
     }
 
     public Integer newCrowdfundingItemProps(CrowdfundingItemPropsVO crowdfundingItemPropsVO) {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingPublicityDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingPublicityPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="PRJT_ID" property="prjtId" jdbcType="INTEGER" />
+    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+    <result column="PUBLICITY_TIME" property="publicityTime" jdbcType="VARCHAR" />
+    <result column="PUBLICITY_IMAGE" property="publicityImage" jdbcType="VARCHAR" />
+
+  </resultMap>
+
+
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.PRJT_ID
+    ,A.AUTHOR
+    ,A.MESSAGE
+    ,A.PUBLICITY_TIME
+
+
+  </sql>
+
+  <select id="getPageList4CrdFdEntityDynamics" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM CROWDFUNDING_PUBLICITY A
+    WHERE 1=1
+    <if test="id != null" >
+      AND a.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND A.prjt_id = #{prjtId,jdbcType=INTEGER}
+    </if>
+</select>
+
+  <select id="getCrdFdEntityDynamicsImgList"  resultType="map" >
+    SELECT
+      A.PUBLICITY_ID
+      ,A.PUBLICITY_IMAGE
+      ,A.ID
+    FROM CROWDFUNDING_PUBLICITY_IMG A
+    WHERE 1=1
+    <if test="publicityId != null" >
+      AND a.PUBLICITY_ID = #{publicityId,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+
+</mapper>

@@ -10,6 +10,7 @@ import com.fengyu.common.utils.string.StrUtil;
 import com.fengyu.common.web.jersey.utils.UdpGetClientMacAddr;
 import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
 
+import com.fengyu.facade.user.entity.vo.UserVO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +18,8 @@ import org.apache.commons.logging.LogFactory;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.SecurityContext;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -35,7 +38,14 @@ public class BaseController {
     private ResponseWrapper response;
 
     public Integer pageNum;
+    @Context
+    protected SecurityContext securityContext;
 
+    public UserVO getUser()
+    {
+        UserVO user=(UserVO)securityContext.getUserPrincipal();
+        return user;
+    }
     /**
      * 编码类型 ISO-8859-1.
      */

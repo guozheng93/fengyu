@@ -12,8 +12,75 @@
     <result column="ACCT_ID" property="acctId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    A.ID, A.ITEM_NAME,A.PITEM_ID,A.IS_PITEM,A.SORT_SEQ
+    A.ID
+    ,A.ENTITY_COVER_IMAGE
+    ,A.ENTITY_CATALOG_IMAGE
+    ,A.ENTITY_LOCATION_PROVINCE
+    ,A.ENTITY_LOCATION_CITY
+    ,A.ENTITY_LOCATION_COUNTY
+    ,A.ENTITY_LOCATION_FULL
+    ,A.ACCT_ID
   </sql>
+
+  <select id="select" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+      ,B.PRJT_NAME
+      ,B.PRJT_ITEM_ID
+      ,B.PRJT_SUMMARY
+      ,B.PRJT_RAISE_TYPE
+      ,B.PRJT_RAISE_AMOUNT
+      ,B.PRJT_RAISE_TOPLIMIT
+      ,B.PRJT_FUND_CYCLE
+      ,B.PRJT_ORGANISER_ID
+      ,C.ACCT_ID
+      ,B.PRJT_STATUS
+      ,B.PRJT_FUNDING_TIME
+      ,B.PRJT_END_TIME
+    FROM CROWDFUNDING_ENTITY A
+      JOIN CROWDFUNDING B
+        ON A.ID=B.ID
+        AND B.PRJT_RAISE_TYPE='money'
+        AND PRJT_STATUS not in ('end')
+      LEFT JOIN CROWDFUNDING_ACCT_PRJT_MAP C
+        ON A.ID=C.PRJT_ID
+    WHERE 1=1
+    <if test="id != null" >
+      AND A.id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
+  <select id="getPageList4CrdFdEntity" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+      ,B.PRJT_NAME
+      ,B.PRJT_ITEM_ID
+      ,B.PRJT_SUMMARY
+      ,B.PRJT_RAISE_TYPE
+      ,B.PRJT_RAISE_AMOUNT
+      ,B.PRJT_RAISE_TOPLIMIT
+      ,B.PRJT_FUND_CYCLE
+      ,B.PRJT_ORGANISER_ID
+      ,C.ACCT_ID
+      ,B.PRJT_STATUS
+      ,B.PRJT_FUNDING_TIME
+      ,B.PRJT_END_TIME
+    FROM CROWDFUNDING_ENTITY A
+      JOIN CROWDFUNDING B
+        ON A.ID=B.ID
+        AND B.PRJT_RAISE_TYPE='money'
+      AND PRJT_STATUS not in ('end')
+      LEFT JOIN CROWDFUNDING_ACCT_PRJT_MAP C
+        ON A.ID=C.PRJT_ID
+      LEFT JOIN
+    WHERE 1=1
+    <if test="id != null" >
+      AND A.id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
 
   <insert id="insert"  parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
     insert into crowdfunding_entity

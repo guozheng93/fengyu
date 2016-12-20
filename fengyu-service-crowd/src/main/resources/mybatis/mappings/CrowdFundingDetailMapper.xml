@@ -11,6 +11,18 @@
     A.ID, A.PRJT_DETAIL
   </sql>
 
+  <select id="select" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM crowdfunding_detail A
+
+    WHERE 1=1
+    <if test="id != null" >
+      AND id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
+
   <insert id="insert" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingDetailPO" >
     insert into crowdfunding_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >

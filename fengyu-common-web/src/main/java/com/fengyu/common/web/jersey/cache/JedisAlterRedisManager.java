@@ -25,8 +25,8 @@ import java.util.Set;
 @Component("jedisAlterRedisManager")
 public class JedisAlterRedisManager {
 
-    @Autowired
-    JedisPool jedisPool;
+
+    JedisPool jedisPool=new JedisPool();
 
 /*
 

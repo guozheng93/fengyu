@@ -2,6 +2,20 @@
   "commonTips":{
     "modifyedSuccess":"维护成功!",
     "modifyedFailed":"维护失败!",
-    "deleteSuccess":"删除成功"
+    "deleteSuccess":"删除成功",
+    "deleteFailed":"删除成功"
+  },
+  "crowd":{
+    "organiserError":"发起人维护失败！",
+    "entityError":"项目基本信息维护失败！",
+    "entityDetailError":"项目详细信息维护失败！",
+    "organiserGetError":"发起人信息获取异常！",
+    "entityGetError":"项目基本信息获取异常！",
+    "entityDetailGetError":"项目详情信息获取异常！",
+    "entityDetailGetError":"项目详情信息获取异常！"
+  },
+  "repay":{
+    "repayInfoError":"回报基本信息维护失败！",
+    "repayItemPropsError":"回报属性维护失败！"
   }
 }

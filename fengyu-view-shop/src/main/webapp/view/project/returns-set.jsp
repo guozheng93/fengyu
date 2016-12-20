@@ -7,9 +7,7 @@
 		<jsp:include page="/view/global/base-css.jsp"/>
 		<jsp:include page="/view/global/base-js.jsp"/>
 		<!--webuploader 文件上传-->
-		<link rel="stylesheet" type="text/css" href="/ueditor/third-party/webuploader/webuploader.css">
-		<script type="text/javascript" src="/ueditor/third-party/webuploader/webuploader.js"></script>
-		<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/returns-set.js"></script>
+
 	</head>
 	<body>
 		<script id="crdfdRepayList" type="text/html">
@@ -31,6 +29,7 @@
 				</tr>
 			{{/each}}
 		</script>
+		<form id="validateForm">
 		<div class="warpper1">
 			<!---------start head(global)---------->
 			<jsp:include page="/view/global/head.jsp"/>
@@ -42,7 +41,13 @@
 			<jsp:include page="/view/global/part/nav.jsp">
 				<jsp:param name="index" value="2"/>
 			</jsp:include>
-
+			<script src="/statics/js/lib/jquery.scrollTo.min.js"></script>
+			<script src="/statics/js/lib/jquery-validate/jquery.validate.min.js"></script>
+			<script  src="/statics/js/lib/jquery-validate/messages_zh.js"></script>
+			<script type="text/javascript" charset="utf-8" src="/statics/js/lib/jquery-validate/additional-methods.js"></script>
+			<link rel="stylesheet" type="text/css" href="/ueditor/third-party/webuploader/webuploader.css">
+			<script type="text/javascript" src="/ueditor/third-party/webuploader/webuploader.js"></script>
+			<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/returns-set.js"></script>
 			<div class="ir-box">
 				<h3>产品众筹</h3>
 				<span class="ir-tip">（*为必填）</span>
@@ -72,12 +77,12 @@
 					<div class="hb-cen">
 						<div class="hb-list">
 							<span class="hb-l">回报类别:</span>
-							<div class="hb-r"><span  class="hb-kind"><input filedName="repayType" value="entity" belongTo="crdfdRepay" type="radio" name="kind" checked="checked">实物回报</span><span  class="hb-kind"><input filedName="repayType" belongTo="crdfdRepay" value="virtual" type="radio" name="kind">虚拟物品回报(电子码等)</span></div>
+							<div class="hb-r"><span  class="hb-kind"><input name="repayType" value="entity" belongTo="crdfdRepay" type="radio" name="kind" checked="checked">实物回报</span><span  class="hb-kind"><input name="repayType" belongTo="crdfdRepay" value="virtual" type="radio" name="kind">虚拟物品回报(电子码等)</span></div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">支付金额:</span>
 							<div class="hb-r pay-num">
-							<input filedName="repayPrice" belongTo="crdfdRepay" type="text" placeholder="整数且不少于100元">
+							<input name="repayPrice" belongTo="crdfdRepay" type="text" placeholder="整数且不少于100元">
 							<span>元</span>
 							</div>
 							<span style="color: red;">"0"为不限金额</span>
@@ -85,7 +90,7 @@
 						<div class="hb-list">
 							<span class="hb-l">回报内容:</span>
 							<div class="hb-r">
-							   <textarea filedName="repayDetail" belongTo="crdfdRepay" placeholder="请简要概述该档位的回报内容(最多不要超过200字)"></textarea>
+							   <textarea name="repayDetail" belongTo="crdfdRepay" placeholder="请简要概述该档位的回报内容(最多不要超过200字)"></textarea>
 							</div>
 						</div>
 						<div class="hb-list">
@@ -93,7 +98,9 @@
 							<div class="hb-r">
 								<a id="repayImageThumbnailPicker" href="javascript:;" class="a-upload"><input type="file"><img src="/statics/images/tu_icon.png">上传列表页图片</a>
 								<small class="ir-l-tip3">支持jpg、jpeg、png、gif格式，大小： 80px*50px </small>
-							    <div id="repayImageThumbnailThumbnail" class="le-tu-show" style="background-image:url(/statics/images/default_tu.png)"><img filedName="repayImageThumbnail" belongTo="crdfdRepay" src=""></div>
+							    <div id="repayImageThumbnailThumbnail" class="le-tu-show" style="background-image:url(/statics/images/default_tu.png)">
+									<img name="repayImageThumbnail" belongTo="crdfdRepay" src="/statics/images/default_tu.png">
+								</div>
 							</div>
 						</div>
 						<div class="hb-list">
@@ -101,54 +108,57 @@
 							<div class="hb-r">
 								<a id="repayImagePicker" href="javascript:;" class="a-upload"><input type="file"><img src="/statics/images/tu_icon.png">上传列表页图片</a>
 								<small class="ir-l-tip3">支持jpg、jpeg、png、gif格式，大小： 800px*500px </small>
-							    <div id="repayImageThumbnail" class="le-tu-show" style="background-image:url(/statics/images/default_tu.png)"><img filedName="repayImage" belongTo="crdfdRepay" src=""></div>
+							    <div id="repayImageThumbnail" class="le-tu-show" style="background-image:url(/statics/images/default_tu.png)">
+									<img name="repayImage" belongTo="crdfdRepay" src="/statics/images/default_tu.png">
+								</div>
 							</div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">添加回报属性:</span>
-							<div class="hb-r hb-attr">
+							<div name="itemProp" class="hb-r hb-attr">
 								<input  type="text" class="add-input"><a href="javascript:;">+添加</a>
 							</div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">支持者备注填写提示:</span>
 							<div class="hb-r beizhu-info">
-								<p class="beizhu1"><input filedName="repayNeedRemark" belongTo="crdfdRepay" value="1" type="radio" checked="checked" name="is-beizhu">是<input filedName="repayRemark" belongTo="crdfdRepay" type="text" placeholder="此处填写内容为支持者提交订单填写备注时，在他们在备注栏看到的提示信息。" class="beizhu-txt"><span style="color:red;margin-left: 4px;">友情提示:请确认该信息为支持者必填.</span></p>
-							    <p class="beizhu2"><input filedName="repayNeedRemark" belongTo="crdfdRepay" value="0" type="radio"  name="is-beizhu">否</p>
+								<p class="beizhu1"><input name="repayNeedRemark" belongTo="crdfdRepay" value="1" type="radio" checked="checked" name="is-beizhu">是<input name="repayRemark" belongTo="crdfdRepay" type="text" placeholder="此处填写内容为支持者提交订单填写备注时，在他们在备注栏看到的提示信息。" class="beizhu-txt"><span style="color:red;margin-left: 4px;">友情提示:请确认该信息为支持者必填.</span></p>
+							    <p class="beizhu2"><input name="repayNeedRemark" belongTo="crdfdRepay" value="0" type="radio"  name="is-beizhu">否</p>
 							</div>
 						</div>
 						<%--<div class="hb-list">
 							<span class="hb-l">是否限定名额:</span>
 							<div class="hb-r xiane-in">
-								<span><input filedName="repayLimitAmount" belongTo="crdfdRepay" value="0" type="radio" name="xiane" checked="checked">否</span><span><input type="radio" filedName="repayType" belongTo="crdfdRepay" value="1" name="xiane">是</span><span style="color:#CCCCCC;">（限定名额不能为"0")</span>
+								<span><input name="repayLimitAmount" belongTo="crdfdRepay" value="0" type="radio" name="xiane" checked="checked">否</span><span><input type="radio" name="repayType" belongTo="crdfdRepay" value="1" name="xiane">是</span><span style="color:#CCCCCC;">（限定名额不能为"0")</span>
 							</div>
 						</div>--%>
 						<div class="hb-list">
 							<span class="hb-l">限定名额:</span>
 							<div class="hb-r set-e">
-								<input filedName="repayLimitAmount" belongTo="crdfdRepay" type="text" placeholder="0"><span style="color: #CCCCCC;">“0”位不限名额</span>
+								<input name="repayLimitAmount" belongTo="crdfdRepay" type="text" placeholder="0"><span style="color: #CCCCCC;">“0”位不限名额</span>
 							</div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">运费:</span>
 							<div class="hb-r yunfei">
-								<input filedName="repayExpressFee" belongTo="crdfdRepay" type="text" placeholder="0"><span class="yuan-btn">元</span><span style="color: #CCCCCC">“0”为包邮</span>
+								<input name="repayExpressFee" belongTo="crdfdRepay" type="text" placeholder="0"><span class="yuan-btn">元</span><span style="color: #CCCCCC">“0”为包邮</span>
 							</div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">发票:</span>
 							<div class="hb-r fapiao-select">
-								<span><input filedName="repayInvoiceFlag" belongTo="crdfdRepay" value="0" type="radio" name="fapiao" checked="checked">不可开发票</span><span><input filedName="repayInvoiceFlag" belongTo="crdfdRepay" value="1" type="radio" name="fapiao">可开发票  （包括个人发票和自定义抬头发票）<input filedName="repayInvoiceRemark" belongTo="crdfdRepay" type="text" placeholder="发票抬头"></span>
+								<span><input name="repayInvoiceFlag" belongTo="crdfdRepay" value="0" type="radio" name="fapiao" checked="checked">不可开发票</span><span><input name="repayInvoiceFlag" belongTo="crdfdRepay" value="1" type="radio" name="fapiao">可开发票  （包括个人发票和自定义抬头发票）<input name="repayInvoiceRemark" belongTo="crdfdRepay" type="text" placeholder="发票抬头"></span>
 							</div>
 						</div>
 						<div class="hb-list">
 							<span class="hb-l">回报时间:</span>
 							<div class="hb-r">
-								<p>项目结束后<input filedName="repayTime" belongTo="crdfdRepay" type="number" class="tianshu" placeholder="0">天，将会向支持者发送回报</p>
+								<p>项目结束后<input name="repayTime" belongTo="crdfdRepay" type="number" class="tianshu" placeholder="0">天，将会向支持者发送回报</p>
 							</div>
 						</div>
 						<div class="add-hb-btn">
-							<a href="javascript:;" class="add-true">确定</a><a href="javascript:;" class="add-false">取消</a>
+							<a href="javascript:;" class="add-true">确定</a>
+							<a href="javascript:;" class="add-false">取消</a>
 						</div>
 					</div>
 				    <div class="warm-prompt">
@@ -163,6 +173,7 @@
 			</div>
 			<div class="push1"></div>
 		</div>
+		</form>
 		<div class="foot">
 			<p class="foot-title"><span class="ft-bord"></span><span class="ft-txt">蜂娱文化</span><span class="ft-bord ft-bord-r"></span></p>
 			<div class="foot-bg" style="background-image:url(/statics/images/foot_bg.png);">
@@ -256,7 +267,7 @@
 		</script>
 		<script>
 			$(function(){
-				 /*删除操作*/
+				 /*/!*删除操作*!/
 				$.each($(".rs-tbody tr"), function(i,e) {
 					$(e).find(".hb-del").click(function(){
 						layer.open({
@@ -269,9 +280,9 @@
 							}
 						})	
 					})
-				});
+				});*/
 			
-			 /*保存*/
+			 /*/!*保存*!/
 			$(".save").click(function(){
 				layer.open({
 					shadeClose:true,
@@ -282,7 +293,7 @@
 				    btn:['我知道了','不再提示']
 				})
 			})
-			  /*取消*/
+			  /!*取消*!/
  			   $(".add-false").click(function(){
  			   	layer.open({
  			   		title:'温馨提示',
@@ -290,7 +301,7 @@
  			   		content:'取消后，将清空此档位所填写的信息，确认取消么？',
  			   		btn:['确认取消','暂不取消']
  			   	})
- 			   })
+ 			   })*/
 			})
 		</script>
 	</body>

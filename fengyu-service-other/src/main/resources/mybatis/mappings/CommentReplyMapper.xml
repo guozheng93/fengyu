@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.other.comment.dao.CommentReplyDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.other.comment.entity.po.CommentReplyPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="COMMENT_ID" property="commentId" jdbcType="INTEGER" />
+    <result column="REPLY_ID" property="replyId" jdbcType="INTEGER" />
+    <result column="REPLY_TYPE" property="replyType" jdbcType="VARCHAR" />
+    <result column="REPLY_CONTENT" property="replyContent" jdbcType="VARCHAR" />
+    <result column="FROM_UID" property="fromUid" jdbcType="INTEGER" />
+    <result column="TO_UID" property="toUid" jdbcType="INTEGER" />
+    <result column="REPLY_TIME" property="commentTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.COMMENT_ID
+    ,A.REPLY_ID
+    ,A.REPLY_TYPE
+    ,A.REPLY_CONTENT
+    ,A.FROM_UID
+    ,A.TO_UID
+    ,A.REPLY_TIME
+
+  </sql>
+
+  <select id="getCommentReplyList" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM COMMENT_REPLY A
+    WHERE 1=1
+    <if test="commentId != null" >
+      AND a.COMMENT_ID = #{commentId,jdbcType=INTEGER}
+    </if>
+    order by a.REPLY_TIME desc
+  </select>
+  <insert id="commentReply4Prjt" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.other.comment.entity.po.CommentReplyPO" >
+    insert into COMMENT_REPLY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        COMMENT_ID,
+      </if>
+      <if test="replyId != null" >
+        REPLY_ID,
+      </if>
+      <if test="replyType != null" >
+        REPLY_TYPE,
+      </if>
+      <if test="replyContent != null" >
+        REPLY_CONTENT,
+      </if>
+      <if test="fromUid != null" >
+        FROM_UID,
+      </if>
+      <if test="toUid != null" >
+        TO_UID,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="replyId != null" >
+        #{replyId,jdbcType=INTEGER},
+      </if>
+      <if test="replyType != null" >
+        #{replyType,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        #{fromUid,jdbcType=INTEGER},
+      </if>
+      <if test="toUid != null" >
+        #{toUid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

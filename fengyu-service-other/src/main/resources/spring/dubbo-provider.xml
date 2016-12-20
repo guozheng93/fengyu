@@ -17,5 +17,6 @@
 
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.fengyu.facade.other.common.service.BizDictionaryFacade" ref="bizDictionaryFacade" />
+	<dubbo:service interface="com.fengyu.facade.other.comment.service.CommentFacade" ref="commentFacade" />
 
 </beans>  

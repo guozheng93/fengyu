@@ -18,6 +18,38 @@
 	<jsp:include page="/view/global/part/nav.jsp">
 		<jsp:param name="index" value="2"/>
 	</jsp:include>
+
+	<%--我要支持点击后的 支持列表--%>
+	<script id="projectList" type="text/html">
+		{{each responseBody.recordList as item i}}
+			<div class="pr-list">
+				<div class="pr-tu-fu">
+					<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
+					<img src="/statics/images/zhongcouchengg.png">
+				</div>
+				<div class="pr-info">
+					<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
+					<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
+					<p class="pr-p3"><span>活动</span></p>
+					<p class="pr-p4"><span style="width:80%;" id="per"></span><label class="percent-show" for="per">80%</label></p>
+					<ul class="pr-p5 list-unstyled">
+						<li>
+							<p class="pr-lp">目标金额</p>
+							<p><b>¥10000</b></p>
+						</li>
+						<li>
+							<p class="pr-lp">已筹金额</p>
+							<p><b>¥10000</b></p>
+						</li>
+						<li class="pr-li3">
+							<p class="pr-lp">支持人数</p>
+							<p><b>258</b></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		{{/each}}
+	</script>
 	<!---------start nav(part)------------->
 	<!----------------------------------------------------->
 	<div class="pr-box">
@@ -49,162 +81,9 @@
 			</div>
 			<!----------------------------------------------------->
 			<p class="pr-breadnav"><span>全部结果></span>"手机支架"</p>
-			<div class="pr-lists">
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:80%;" id="per"></span><label class="percent-show" for="per">80%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:30%;" id="per"></span><label class="percent-show" for="per">30%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:30%;" id="per"></span><label class="percent-show" for="per">30%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:100%;" id="per"></span><label class="percent-show" for="per">100%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:30%;" id="per"></span><label class="percent-show" for="per">30%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="pr-list">
-					<div class="pr-tu-fu">
-						<a href="project-detail.html" target="_blank" style="background-image:url(/statics/images/pro_tu.png)" class="pr-tu"></a>
-						<img src="/statics/images/zhongcouchengg.png">
-					</div>
-					<div class="pr-info">
-						<p class="pr-p1"><b>小刀子品牌一多锂电UU车小刀子品牌一多锂电UU车</b></p>
-						<p class="pr-p2"><img src="/statics/images/naozhong.png">剩余时间：<time>30</time>天</p>
-						<p class="pr-p3"><span>活动</span></p>
-						<p class="pr-p4"><span style="width:30%;" id="per"></span><label class="percent-show" for="per">30%</label></p>
-						<ul class="pr-p5 list-unstyled">
-							<li>
-								<p class="pr-lp">目标金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li>
-								<p class="pr-lp">已筹金额</p>
-								<p><b>¥10000</b></p>
-							</li>
-							<li class="pr-li3">
-								<p class="pr-lp">支持人数</p>
-								<p><b>258</b></p>
-							</li>
-						</ul>
-					</div>
+			<div class="pr-lists" >
+				<div id="projectListBox">
+
 				</div>
 				<!----分页--->
 				<div id="pr-page"></div>

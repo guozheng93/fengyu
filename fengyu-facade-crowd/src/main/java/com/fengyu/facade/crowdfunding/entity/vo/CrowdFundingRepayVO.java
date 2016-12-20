@@ -2,6 +2,8 @@ package com.fengyu.facade.crowdfunding.entity.vo;
 
 import com.fengyu.common.entity.VOEntity;
 
+import java.util.List;
+
 /**
  * 项目回报基本信息表
  *
@@ -23,6 +25,33 @@ public class CrowdFundingRepayVO extends VOEntity{
     private String repayTime;
     private String repayImage;
     private String repayImageThumbnail;
+    private Double sumAmt4Repay;
+    private Integer sumOrders4Repay;
+    private List<CrowdfundingItemPropsVO> crdFdItemProps;
+
+    public List<CrowdfundingItemPropsVO> getCrdFdItemProps() {
+        return crdFdItemProps;
+    }
+
+    public void setCrdFdItemProps(List<CrowdfundingItemPropsVO> crdFdItemProps) {
+        this.crdFdItemProps = crdFdItemProps;
+    }
+
+    public Integer getSumOrders4Repay() {
+        return sumOrders4Repay;
+    }
+
+    public void setSumOrders4Repay(Integer sumOrders4Repay) {
+        this.sumOrders4Repay = sumOrders4Repay;
+    }
+
+    public Double getSumAmt4Repay() {
+        return sumAmt4Repay;
+    }
+
+    public void setSumAmt4Repay(Double sumAmt4Repay) {
+        this.sumAmt4Repay = sumAmt4Repay;
+    }
 
     public String getRepayTypeName() {
         return repayTypeName;

@@ -83,8 +83,8 @@
       <if test="prjtRaiseToplimit != null" >
         #{prjtRaiseToplimit,jdbcType=DOUBLE},
       </if>
-      <if test="prjtRaiseToplimit != null" >
-        #{prjtRaiseToplimit,jdbcType=INTEGER},
+      <if test="prjtFundCycle != null" >
+        #{prjtFundCycle,jdbcType=INTEGER},
       </if>
       <if test="prjtCommitTime != null" >
         #{prjtCommitTime,jdbcType=TIMESTAMP},
@@ -144,7 +144,7 @@
   </update>
 
   <update id="submitCrowdFunding" parameterType="java.lang.Integer">
-    update crowdfunding set PRJT_STATUS='sumbit'
+    update crowdfunding set PRJT_STATUS='submit'
     where id=#{id,jdbcType=INTEGER} and PRJT_STATUS="edit"
   </update>
 

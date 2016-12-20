@@ -33,10 +33,30 @@ public class CrowdFundingVO extends VOEntity {
     private Integer prjtFundCycle;
     //项目提交日期
     private String prjtCommitTime;
+    //项目提交日期
+    private String prjtFundingTime;
+    //项目提交日期
+    private String prjtEndTime;
     //项目状态
     private String prjtStatus;
     //项目状态
     private String prjtStatusName;
+
+    public String getPrjtFundingTime() {
+        return prjtFundingTime;
+    }
+
+    public void setPrjtFundingTime(String prjtFundingTime) {
+        this.prjtFundingTime = prjtFundingTime;
+    }
+
+    public String getPrjtEndTime() {
+        return prjtEndTime;
+    }
+
+    public void setPrjtEndTime(String prjtEndTime) {
+        this.prjtEndTime = prjtEndTime;
+    }
 
     public Integer getPrjtUserId() {
         return prjtUserId;

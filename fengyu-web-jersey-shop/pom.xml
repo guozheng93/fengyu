@@ -44,6 +44,11 @@
             <artifactId>fengyu-facade-other</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.fengyu</groupId>
+            <artifactId>fengyu-facade-order</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!--<dependency>
             <groupId>com.fengyu</groupId>
             <artifactId>fengyu-facade-user</artifactId>

@@ -1,4 +1,4 @@
-package com.fengyu.crowdfunding.enums;
+package com.fengyu.facade.crowdfunding.enums;
 
 import com.fengyu.common.enums.BaseEnum;
 
@@ -62,6 +62,48 @@ public class CrowdFundingEnum {
 
 
         CrowdFundingRaiseType(String code, String desc) {
+            this.code=code;
+            this.desc=desc;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
+    }
+
+    public static enum CrowdFundingHeatType implements BaseEnum{
+
+        CROWD_FUNDING_HEAT_TYPE_ISPRAISE("PRS001","已经赞过"),
+        CROWD_FUNDING_HEAT_TYPE_ISCANNELPRAISE("PRS002","从未赞过"),
+        CROWD_FUNDING_HEAT_TYPE_ISFOCUS("FUS001","已经关注"),
+        CROWD_FUNDING_HEAT_TYPE_ISCANNELFOCUS("FUS001","从未关注过"),
+        CROWD_FUNDING_HEAT_TYPE_FOCUS_TYPE_CANNEL("cannel","取消"),
+        CROWD_FUNDING_HEAT_TYPE_FOCUS_TYPE_DELETE("delete","删除"),
+        CROWD_FUNDING_HEAT_TYPE_FOCUS_TYPE_NORMAL("normal","正常"),
+        CROWD_FUNDING_HEAT_TYPE_PRAISE_TYPE_CANNEL("cannel","取消"),
+        CROWD_FUNDING_HEAT_TYPE_PRAISE_TYPE_DELETE("delete","删除"),
+        CROWD_FUNDING_HEAT_TYPE_PRAISE_TYPE_NORMAL("normal","正常"),
+        ;
+        /** 描述 */
+        public String desc="";
+        /** 枚举值 */
+        public String code = "";
+
+
+
+        CrowdFundingHeatType(String code, String desc) {
             this.code=code;
             this.desc=desc;
         }

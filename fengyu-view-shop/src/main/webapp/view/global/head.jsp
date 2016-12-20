@@ -2,6 +2,10 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
+<head>
+    <jsp:include page="/view/global/base-css.jsp"/>
+    <jsp:include page="/view/global/base-js.jsp"/>
+</head>
 
 <body>
 <div class="head">

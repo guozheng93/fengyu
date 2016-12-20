@@ -2,6 +2,7 @@ package com.fengyu.web.crowdfunding.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.fengyu.common.exception.MapperSupport.CommonExceptionType;
+import com.fengyu.common.page.PageBean;
 import com.fengyu.common.web.jersey.controller.BaseController;
 import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
 import com.fengyu.facade.crowdfunding.entity.vo.CrowdFundingRepayVO;
@@ -9,12 +10,16 @@ import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropValueVO;
 import com.fengyu.facade.crowdfunding.entity.vo.CrowdfundingItemPropsVO;
 import com.fengyu.facade.crowdfunding.exception.CrowdExceptionHandler;
 import com.fengyu.facade.crowdfunding.service.CrowdFundingRepayFacade;
+import com.fengyu.facade.order.entity.vo.OrderVO;
+import com.fengyu.facade.order.enums.OrderEnum;
+import com.fengyu.facade.order.service.OrderFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +30,8 @@ public class CrowdFundingRepayController extends BaseController {
 
     @Autowired
     private CrowdFundingRepayFacade crowdFundingRepayFacade;
-
+    @Autowired
+    private OrderFacade orderFacade;
    /* @Autowired
     private UserFacade userFacade;
 */
@@ -76,6 +82,57 @@ public class CrowdFundingRepayController extends BaseController {
         }
         return jsonStr;
     }
+    /**
+     * @author junz
+     * @date 2016/12/4 20:51
+     * @description 获取回报基本信息
+     * @param
+     * @return
+     **/
+    @POST
+    @Path("getList4CrdFdRepayWithOrder")
+    public String getList4CrdFdRepayWithOrder(String args)
+    {
+        Map crowdFundingRepayVO= JSON.parseObject(args, Map.class);
+        ResponseWrapper responseWrapper= new ResponseWrapper();
+        String jsonStr="";
+        try {
+            List<CrowdFundingRepayVO> repayList
+                    =crowdFundingRepayFacade.getList4CrowdFundingRepay(crowdFundingRepayVO);
+
+            //坐入 特征量 特征值 汇总值等数据
+            for (int i = 0; i < repayList.size(); i++) {
+                Map itemPropsParamMap=new HashMap();
+                itemPropsParamMap.put("repayId",repayList.get(i).getId());
+                List<CrowdfundingItemPropsVO> itemPropsList
+                        =crowdFundingRepayFacade.getList4CrowdfundingItemProps(itemPropsParamMap);
+                for (int j = 0; j < itemPropsList.size(); j++) {
+                    List<CrowdfundingItemPropValueVO> propValsList
+                            =crowdFundingRepayFacade.getList4CrowdfundingItemPropValueByItmPropId(itemPropsList.get(j).getId());
+                    itemPropsList.get(j).setPropValues(propValsList);
+                }
+                repayList.get(i).setCrdFdItemProps(itemPropsList);
+
+                //汇总回报单元 订单总数
+                OrderVO orderVo=new OrderVO();
+                orderVo.setPrjtId(repayList.get(i).getPrjtId());
+                orderVo.setMerchandiseId(repayList.get(i).getId());
+                orderVo.setOrderStatus(OrderEnum.OrderStatus.ORDER_STATUS_PAIDED.getCode());
+                List list=orderFacade.getPageList4Order(orderVo);
+                repayList.get(i).setSumOrders4Repay(list.size());
+            }
+
+
+            PageBean page=new PageBean(repayList);
+            responseWrapper.setResponseBody(page);
+            jsonStr=nullParamOfJsonFilter(responseWrapper);
+        } catch (Exception e) {
+            throw  new CrowdExceptionHandler(e, CommonExceptionType.METHODNOTFOUND,args);
+
+        }
+        return jsonStr;
+    }
+
 
     /**
      * @author junz

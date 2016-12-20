@@ -11,4 +11,6 @@ import java.util.Map;
 @MyBatisDao
 public interface CrowdFundingAcctDao extends BaseDao<CrowdFundingAcctPO> {
     public List<Map<String,Object>> getList4AcctByMap(Map map);
+    public Integer insert2Map(CrowdFundingAcctPO crowdFundingAcctPO);
+    public Integer delete4Map(CrowdFundingAcctPO crowdFundingAcctPO);
 }
