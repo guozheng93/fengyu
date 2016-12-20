@@ -13,10 +13,13 @@
 	<dubbo:registry protocol="zookeeper" address="zookeeper://139.196.225.215:2181" />
 
 	<!-- 用dubbo协议在20880端口暴露服务 -->
-	<dubbo:protocol name="dubbo" port="20881" />
+	<dubbo:protocol name="dubbo" port="20885" />
 
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.fengyu.facade.other.common.service.BizDictionaryFacade" ref="bizDictionaryFacade" />
 	<dubbo:service interface="com.fengyu.facade.other.comment.service.CommentFacade" ref="commentFacade" />
+
+	<!-- 通知服务接口 -->
+	<dubbo:service interface="com.fengyu.facade.other.verifycode.service.VerifyCodeFacade" ref="verifyCodeFacade" />
 
 </beans>  

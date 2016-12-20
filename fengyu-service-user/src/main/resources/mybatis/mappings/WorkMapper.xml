@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.service.work.dao.WorkDao" >
+
+  <!-- 用户 -->
+  <sql id="user_work"> `user_work` </sql>
+
+  <resultMap id="beanMap" type="com.fengyu.facade.user.work.entity.po.WorkPO" >
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="name" property="name"/>
+    <result column="work" property="work"/>
+    <result column="start_year" property="startYear"/>
+    <result column="start_month" property="startMonth"/>
+    <result column="end_year" property="endYear"/>
+    <result column="end_month" property="endMonth"/>
+  </resultMap>
+  <sql id="condition_sql">
+    <if test="userId != null">user_id =#{userId} </if>
+  </sql>
+  <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
+    select * from
+    <include refid="user_work" />
+    where id = #{id}
+  </select>
+  <select id="getList" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="user_work" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    limit #{pageNum},#{pageSize}
+  </select>
+  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+    select count(*) from
+    <include refid="user_work" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <insert id="insert">
+    insert into
+    <include refid="user_work" />
+    (user_id, `name`, `work`, start_year,
+    start_month, end_year, end_month)
+    values
+    (#{userId}, #{name}, #{work},
+    #{startYear}, #{startMonth}, #{endYear}, #{endMonth})
+  </insert>
+  <update id="update">
+    update <include refid="user_work" />
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        `name`= #{name},
+      </if>
+      <if test="work != null" >
+        `work` = #{work},
+      </if>
+      <if test="startYear != null" >
+        start_year = #{startYear},
+      </if>
+      <if test="startMonth != null" >
+        start_month = #{startMonth},
+      </if>
+      <if test="endYear != null" >
+        end_year = #{endYear},
+      </if>
+      <if test="endMonth != null" >
+        end_month = #{endMonth},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE  from <include refid="user_work" /> where  id = #{id}
+  </delete>
+
+
+</mapper>

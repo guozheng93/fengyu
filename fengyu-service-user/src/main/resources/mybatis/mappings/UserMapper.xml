@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fengyu.service.user.dao.impl.UserDaoImpl" >
+<mapper namespace="com.fengyu.service.user.dao.UserDao" >
 
   <!-- 用户 -->
   <sql id="user"> `user` </sql>
 
-  <resultMap id="beanMap" type="com.fengyu.facade.user.entity.User" >
-    <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="loginName" property="loginName" jdbcType="VARCHAR" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
+  <resultMap id="beanMap" type="com.fengyu.facade.user.login.entity.po.UserPO" >
+    <id column="id" property="id"/>
+    <result column="phone" property="phone"/>
+    <result column="password" property="password"/>
+    <result column="email" property="email"/>
+    <result column="isValid" property="is_valid"/>
+    <result column="qqId" property="qq_id"/>
+    <result column="wxId" property="wx_id"/>
+    <result column="wbId" property="wb_id"/>
+    <result column="isAuth" property="is_auth"/>
+    <result column="createTime" property="create_time"/>
+    <result column="updateTime" property="update_time"/>
+    <result column="lastTime" property="last_time"/>
   </resultMap>
 
   <select id="findByLoginName" resultMap="beanMap" parameterType="java.lang.String" >
     select
      *
     from <include refid="user"/>
-    where loginName = #{loginName,jdbcType=VARCHAR}
+    where phone = #{loginName,jdbcType=VARCHAR} or email = #{loginName,jdbcType=VARCHAR}
   </select>
 
 </mapper>

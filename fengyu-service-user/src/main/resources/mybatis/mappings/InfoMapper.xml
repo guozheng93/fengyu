@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.service.info.dao.InfoDao" >
+
+  <!-- 用户 -->
+  <sql id="user_info"> `user_info` </sql>
+
+  <resultMap id="beanMap" type="com.fengyu.facade.user.info.entity.po.InfoPO" >
+    <id column="user_id" property="userId"/>
+    <result column="name" property="name"/>
+    <result column="age" property="age"/>
+    <result column="birthday" property="birthday"/>
+    <result column="constellation" property="constellation"/>
+    <result column="info" property="info"/>
+    <result column="feeling_info" property="feelingInfo"/>
+    <result column="province" property="province"/>
+    <result column="city" property="city"/>
+    <result column="county" property="county"/>
+    <result column="address" property="address"/>
+    <result column="old_province" property="oldProvince"/>
+    <result column="old_city" property="oldCity"/>
+    <result column="old_county" property="oldCounty"/>
+  </resultMap>
+  <sql id="condition_sql">
+
+  </sql>
+  <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
+    select * from
+    <include refid="user_info" />
+    where user_id = #{id}
+  </select>
+  <select id="getList" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="user_info" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    limit #{pageNum},#{pageSize}
+  </select>
+  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+    select count(*) from
+    <include refid="user_info" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <insert id="insert">
+    insert into
+    <include refid="user_info" />
+    (user_id, name, age, birthday , constellation,
+    info, feeling_info, province, city,county,address,,old_province,old_city,old_county)
+    values
+    (#{userId}, #{name}, #{age}, #{birthday},
+    #{constellation}, #{info}, #{feelingInfo}, #{province},
+    #{city}, #{county}, #{address}, #{old_province}, #{old_city}, #{old_county})
+  </insert>
+  <update id="update">
+    update <include refid="user_info" />
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId},
+      </if>
+      <if test="name != null" >
+        `name`= #{name},
+      </if>
+      <if test="age != null" >
+        age = #{age},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday},
+      </if>
+      <if test="constellation != null" >
+        constellation = #{constellation},
+      </if>
+      <if test="info != null" >
+        info = #{info},
+      </if>
+      <if test="info != null" >
+        feelingInfo = #{feelingInfo},
+      </if>
+      <if test="city != null" >
+        city = #{city},
+      </if>
+      <if test="province != null" >
+        province = #{province},
+      </if>
+      <if test="county != null" >
+        county = #{county},
+      </if>
+      <if test="address != null" >
+        address = #{address},
+      </if>
+      <if test="oldProvince != null" >
+        old_province = #{oldProvince},
+      </if>
+      <if test="oldCity != null" >
+        old_city = #{oldCity},
+      </if>
+      <if test="oldCounty != null" >
+        old_county = #{oldCounty},
+      </if>
+    </set>
+    where user_id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE  from <include refid="user_info" /> where  user_id = #{id}
+  </delete>
+
+
+</mapper>
