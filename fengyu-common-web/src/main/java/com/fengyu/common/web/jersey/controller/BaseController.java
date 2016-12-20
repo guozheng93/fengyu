@@ -10,7 +10,7 @@ import com.fengyu.common.utils.string.StrUtil;
 import com.fengyu.common.web.jersey.utils.UdpGetClientMacAddr;
 import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
 
-import com.fengyu.facade.user.entity.vo.UserVO;
+import com.fengyu.facade.user.login.entity.vo.UserVO;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
