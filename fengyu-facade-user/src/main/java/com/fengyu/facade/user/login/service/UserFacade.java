@@ -1,6 +1,8 @@
 package com.fengyu.facade.user.login.service;
 
+import com.fengyu.facade.user.login.entity.po.UserPO;
 import com.fengyu.facade.user.login.entity.vo.UserVO;
+import org.springframework.http.ResponseEntity;
 
 /**用户对外接口实现类
  * @author admin
@@ -13,5 +15,5 @@ public interface UserFacade {
      * @param loginName  登录名
      * @return
      */
-    UserVO findByLoginName(String loginName);
+    UserPO findByLoginName(String loginName);
 }

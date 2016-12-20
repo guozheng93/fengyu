@@ -22,11 +22,11 @@
 						<form class="lr-fm">
 							<div class="input-group f-div">
 								  <div class="input-group-addon"><img src="/statics/images/user-hd.png"></div>
-								  <input type="text" class="form-control input-lg user-name" placeholder="手机/绑定邮箱" value="">
+								  <input type="text" id="loginName" class="form-control input-lg user-name" placeholder="手机/绑定邮箱" value="">
 							</div>
 							<div class="input-group f-div">
 								  <div class="input-group-addon"><img src="/statics/images/suo.png"></div>
-								  <input type="password" class="form-control input-lg paswd" placeholder="密码">
+								  <input type="password" id="pwd" class="form-control input-lg paswd" placeholder="密码">
 								  <!----为了兼容ie8----->
 								  <input type="text" class="form-control input-lg paswd2" placeholder="密码" value="">
 								  <!--------->
@@ -36,7 +36,8 @@
 							<span class="auto-log"><input type="checkbox" id="tick"><label for="tick">自动登录</label></span>
 							<span class="foget-a"><a href="forgetPassword-one.html">忘记密码？</a></span>
 						</p>
-						<a href="/view/home/index.jsp" class="btn btn-warning lr-a">登录</a>
+						<a href="javascript:;" id="loginBtn" class="btn btn-warning lr-a">登录</a>
+						<%--<a href="/view/home/index.jsp" class="btn btn-warning lr-a">登录</a>--%>
 						<div class="third-log">
 							<p>使用其他账号登录：</p>
 							<a href="javascript:;"><img src="/statics/images/qqkuaijie.png"></a>
@@ -51,26 +52,21 @@
 		<div class="footer-lo">
 			<p>Copyright  2016 山东星万蜂娱网络科技有限公司  鲁ICP备16015631号-1 www.360fengyu.com</p>
 		</div>
-		<script type="text/javascript" src="/statics/js/jquery1.11.3.min.js" ></script>
-		<script type="text/javascript" src="/statics/js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="/statics/js/layer.js" ></script>
-		<!--[if lt IE 10]>
-		<script type="text/javascript" src="/statics/js/ie8.js" ></script>
-        <![endif]-->
-        <script>
-        	$(function(){
-        		/*简单登录*/        		
-        		$(".lr-a").click(function(){
-        			var phone_number=$(".user-name").val();
-        		    var login_paswd=$(".paswd").val();
-        			if(phone_number!=""&&login_paswd!=""){
-	        			window.location.href="/view/home/index.jsp";
-	        		}else{
-	        			layer.msg("用户名和登录密码不能为空");
-	        			return false;
-	        		}
-        		})
-        	})
-        </script>
+		<script type="text/javascript" src="/statics/js/plugin/seajs/sea.js"></script>
+		<script type="text/javascript">
+			seajs.config({
+				base: "/statics/js/",
+				alias: {
+					"jquery"  :  "plugin/jquery/jquery-1.10.2.min",
+					"md5"     :  "plugin/jquery/jquery.md5"
+				},
+				map: [
+					[ /^(.*\/js\/.*\.(?:css|js))(?:.*)$/i, '$1?201605241248']
+				]
+			});
+			seajs.use("/statics/js/pageScript/login.js",function(login){
+				login.init();
+			});
+		</script>
 	</body>
 </html>

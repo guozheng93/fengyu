@@ -1,5 +1,6 @@
 package com.fengyu.service.user.login.biz;
 
+import com.fengyu.facade.user.login.entity.po.UserPO;
 import com.fengyu.facade.user.login.entity.vo.UserVO;
 import com.fengyu.service.user.login.dao.UserDao;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class UserBiz {
     @Resource
     private UserDao userDao;
 
-    public Map findByLoginName(String loginName) {
-        Map user=userDao.findByLoginName(loginName);
-        return null;
+    public UserPO findByLoginName(String loginName) {
+        UserPO userPO=userDao.findByLoginName(loginName);
+        return userPO;
     }
 }

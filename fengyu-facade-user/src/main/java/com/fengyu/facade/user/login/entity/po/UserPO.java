@@ -13,7 +13,7 @@ public class UserPO extends BaseEntity {
     private String phone        ;
     private String password     ;
     private String email        ;
-    private String isValid     ;
+    private Boolean isValid     ;
     private String qqId        ;
     private String wxId        ;
     private String wbId        ;
@@ -64,11 +64,11 @@ public class UserPO extends BaseEntity {
         this.email = email;
     }
 
-    public String getIsValid() {
+    public Boolean getIsValid() {
         return isValid;
     }
 
-    public void setIsValid(String isValid) {
+    public void setIsValid(Boolean isValid) {
         this.isValid = isValid;
     }
 

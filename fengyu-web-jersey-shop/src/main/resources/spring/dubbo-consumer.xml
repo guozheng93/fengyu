@@ -19,6 +19,10 @@
 
 	<dubbo:reference interface="com.fengyu.facade.other.common.service.BizDictionaryFacade" id="bizDictionaryFacade" check="false" />
 	<!--&lt;!&ndash; 用户服务接口 &ndash;&gt;-->
-	<!--<dubbo:reference interface="com.fengyu.facade.user.service.UserFacade" id="userFacade" check="false" />-->
+	<dubbo:reference interface="com.fengyu.facade.user.login.service.UserFacade" id="userFacade" check="false" />
+	<dubbo:reference interface="com.fengyu.facade.user.address.service.AddressFacade" id="addressFacade" check="false" />
+	<dubbo:reference interface="com.fengyu.facade.user.education.service.EducationFacade" id="educationFacade" check="false" />
+	<dubbo:reference interface="com.fengyu.facade.user.info.service.InfoFacade" id="infoFacade" check="false" />
+	<dubbo:reference interface="com.fengyu.facade.user.work.service.WorkFacade" id="workFacade" check="false" />
 
 </beans>
