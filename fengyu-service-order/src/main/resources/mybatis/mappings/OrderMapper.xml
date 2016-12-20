@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.order.dao.OrderDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.order.entity.po.OrderPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ORDER_AMT" property="orderAmt" jdbcType="DOUBLE" />
+    <result column="ORDER_PARTY_A" property="orderPartyA" jdbcType="INTEGER" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="MERCHANDISE_TYPE" property="merchandiseType" jdbcType="VARCHAR" />
+    <result column="PRJT_ID" property="prjtId" jdbcType="INTEGER" />
+    <result column="MERCHANDISE_ID" property="merchandiseId" jdbcType="INTEGER" />
+    <result column="ORDER_QUANTITY" property="orderQuantity" jdbcType="DOUBLE" />
+    <result column="ORDER_REMARK" property="orderRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+     A.ORDER_AMT
+    ,A.ORDER_PARTY_A
+    ,A.ORDER_TIME
+    ,A.ORDER_STATUS
+    ,B.MERCHANDISE_ID
+    ,B.ORDER_QUANTITY
+    ,B.ORDER_REMARK
+    ,B.PRJT_ID
+  </sql>
+
+  <select id="getOrderOverview" resultType="map" >
+    SELECT
+      SUM(A.ORDER_AMT) AS ORDER_AMT
+      ,A.ORDER_PARTY_A
+      <if test="merchandiseId != null" >
+        , B.MERCHANDISE_ID = #{merchandiseId,jdbcType=INTEGER}
+      </if>
+      ,B.PRJT_ID
+      ,count(1) as sumSupportors
+    FROM `ORDER` A
+      JOIN ORDER_SHIPMENT B
+        ON A.ID=B.ORDER_ID
+    WHERE 1=1
+    <if test="merchandiseId != null" >
+      AND B.MERCHANDISE_ID = #{merchandiseId,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND B.PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+    GROUP BY B.PRJT_ID
+    <if test="orderStatus != null" >
+      , A.ORDER_STATUS
+    </if>
+  </select>
+
+  <select id="getPageList4Order" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM `ORDER` A
+      JOIN ORDER_SHIPMENT B
+        ON A.ID=B.ORDER_ID
+    WHERE 1=1
+    <if test="merchandiseId != null" >
+      AND B.MERCHANDISE_ID = #{merchandiseId,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND B.PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+  </select>
+<!--
+  <select id="getList4AcctByMap" resultType="map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    ,C.DESCRIPTION AS BANK_NAME
+    FROM crowdfunding_acct A
+      LEFT JOIN crowdfunding_acct_prjt_map B
+        ON A.ID=B.ACCT_ID
+      LEFT JOIN biz_dictionary C
+        on a.bank_id=C.value
+        and C.type='acct'
+        and C.label='BANKNAME'
+    WHERE 1=1
+    <if test="userId != null" >
+      AND a.user_id = #{userId,jdbcType=INTEGER}
+    </if>
+
+  </select>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    insert into crowdfunding_acct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE,
+      </if>
+      <if test="acctName != null" >
+        ACCT_NAME,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="acctNo != null" >
+      ACCT_NO,
+      </if>
+      <if test="openBankCity != null" >
+        OPEN_BANK_CITY,
+      </if>
+      <if test="acctOpenBank != null" >
+        ACCT_OPEN_BANK,
+      </if>
+      <if test="openBankProvince != null" >
+        OPEN_BANK_PROVINCE,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="acctName != null" >
+        #{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="acctNo != null" >
+        #{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="openBankCity != null" >
+        #{openBankCity,jdbcType=INTEGER},
+      </if>
+      <if test="acctOpenBank != null" >
+        #{acctOpenBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankProvince != null" >
+        #{openBankProvince,jdbcType=INTEGER},
+      </if>
+
+
+    </trim>
+  </insert>
+  <insert id="insert2Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    insert into crowdfunding_acct_prjt_map
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        PRJT_ID,
+      </if>
+      <if test="id != null" >
+        ACCT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="prjtId != null" >
+        #{prjtId,jdbcType=INTEGER},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    update crowdfunding_acct
+    <set >
+
+      <if test="userId != null" >
+        USER_ID=#{userId,jdbcType=INTEGER},
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE=#{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="acctName != null" >
+        ACCT_NAME=#{acctName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null" >
+        BANK_ID=#{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="acctNo != null" >
+        ACCT_NO=#{acctNo,jdbcType=INTEGER},
+      </if>
+      <if test="openBankCity != null" >
+        OPEN_BANK_CITY=#{openBankCity,jdbcType=INTEGER},
+      </if>
+      <if test="acctOpenBank != null" >
+        ACCT_OPEN_BANK=#{acctOpenBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankProvince != null" >
+        OPEN_BANK_PROVINCE=#{openBankProvince,jdbcType=INTEGER},
+      </if>
+    </set>
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      and USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+
+
+  </update>
+  <delete id="delete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    delete from crowdfunding_acct
+    where 1=1
+    <if test="id != null" >
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      and USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+
+  </delete>
+
+  <delete id="delete4Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    delete from crowdfunding_acct_prjt_map
+    where 1=1
+    <if test="id != null" >
+      and ACCT_ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+
+  </delete>-->
+
+</mapper>

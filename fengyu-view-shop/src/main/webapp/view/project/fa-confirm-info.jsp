@@ -6,8 +6,7 @@
 		<title>确认信息</title>
 		<jsp:include page="/view/global/base-css.jsp"/>
 		<jsp:include page="/view/global/base-js.jsp"/>
-		<link rel="stylesheet" type="text/css" href="/statics/css/page/project/fa-confirm-info.css">
-		<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/fa-confirm-info.js"></script>
+
 		
 	</head>
 	<body>
@@ -18,19 +17,19 @@
 				{{/each}}
 			</script>
 			<script id="bankList" type="text/html">
-				<option selected="selected">银行</option>
+				<option value="" selected="selected">请选择银行...</option>
 				{{each responseBody.recordList as item i}}
 				<option value="{{item.value}}">{{item.description}}</option>
 				{{/each}}
 			</script>
 			<script id="provinceSelect" type="text/html">
-				<option selected="selected">省</option>
+				<option value="" selected="selected">请选择省...</option>
 				{{each responseBody.recordList as item i}}
 				<option value="{{item.value}}">{{item.description}}</option>
 				{{/each}}
 			</script>
 			<script id="citySelect" type="text/html">
-				<option selected="selected">市</option>
+				<option value="" selected="selected">请选择市...</option>
 				{{each responseBody.recordList as item i}}
 				<option value="{{item.value}}">{{item.description}}</option>
 				{{/each}}
@@ -45,7 +44,14 @@
 			<jsp:include page="/view/global/part/nav.jsp">
 				<jsp:param name="index" value="2"/>
 			</jsp:include>
-			<div class="ir-box">
+			<script src="/statics/js/lib/jquery.scrollTo.min.js"></script>
+			<script src="/statics/js/lib/jquery-validate/jquery.validate.min.js"></script>
+			<script  src="/statics/js/lib/jquery-validate/messages_zh.js"></script>
+			<script type="text/javascript" charset="utf-8" src="/statics/js/lib/jquery-validate/additional-methods.js"></script>
+			<link rel="stylesheet" type="text/css" href="/statics/css/page/project/fa-confirm-info.css">
+			<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/fa-confirm-info.js"></script>
+			<form id="validateForm">
+				<div class="ir-box">
 				<h3>产品众筹</h3>
 				<span class="ir-tip">（*为必填）</span>
 				<div class="ir-title">
@@ -73,17 +79,17 @@
 						<div class="ci-list">
 							<span class="ci-l no-required"></span>
 							<div class="ci-r">
-								<span><input fieldName="acctType" belongTo="crdFdAcct" type="radio"  checked="checked">个人账户</span><span><input fieldName="acctType" belongTo="crdFdAcct" type="radio" name="account">公司账户</span>
+								<span><input name="acctType" belongTo="crdFdAcct" type="radio" value="personal"  checked="checked">个人账户</span><span><input name="acctType" belongTo="crdFdAcct" type="radio" value="company" name="account">公司账户</span>
 							</div>
 						</div>
 						<div class="ci-list">
 							<span class="ci-l ci-name">收款人姓名:</span>
-								<div class="ci-r"><input fieldName="acctName" belongTo="crdFdAcct" type="text" class="payee-name"></div>
+								<div class="ci-r"><input name="acctName" belongTo="crdFdAcct" type="text" class="payee-name"></div>
 						</div>
 						<div class="ci-list">
 							<span class="ci-l ">银行:</span>
 							<div class="ci-r">
-								<select id="bankListContainer" fieldName="bankId" belongTo="crdFdAcct" class="blank1">
+								<select id="bankListContainer" name="bankId" belongTo="crdFdAcct" class="blank1">
 
 								</select>
 							</div>
@@ -91,11 +97,11 @@
 						<div class="ci-list">
 							<span class="ci-l">支行:</span>
 							<div class="ci-r">
-								<input fieldName="acctOpenBank" belongTo="crdFdAcct" type="text" class="blank_sheng" placeholder="请填写">
-								<select id="provinceSelectContainer" fieldName="openBankProvince" belongTo="crdFdAcct" class="blank1">
+								<input name="acctOpenBank" belongTo="crdFdAcct" type="text" class="blank_sheng" placeholder="请填写">
+								<select id="provinceSelectContainer" name="openBankProvince" belongTo="crdFdAcct" class="blank1">
 
 								</select>
-								<select id="citySelectContainer" fieldName="openBankProvinceCity" belongTo="crdFdAcct" class="blank1">
+								<select id="citySelectContainer" name="openBankCity" belongTo="crdFdAcct" class="blank1">
 
 								</select>
 							</div>
@@ -103,17 +109,18 @@
 						<div class="ci-list">
 							<span class="ci-l">银行卡号：</span>
 							<div class="ci-r card-number">
-								<input fieldName="acctNo" belongTo="crdFdAcct" type="text" maxlength="19" placeholder="请填写">
+								<input name="acctNo" belongTo="crdFdAcct" type="text" maxlength="19" placeholder="请填写">
 							</div>
 						</div>
 						<%--<div class="ci-list">
 							<span class="ci-l">确认银行卡号:</span>
 							<div class="ci-r card-number">
-								<input fieldName="acctNo" belongTo="crdFdAcct" type="number" maxlength="19" placeholder="请填写">
+								<input name="acctNo" belongTo="crdFdAcct" type="number" maxlength="19" placeholder="请填写">
 							</div>
 						</div>--%>
 						<div class="add-hb-btn">
 							<a href="javascript:;" class="add-true">确定</a>
+							<a href="javascript:;" class="new-acct">新增</a>
 						</div>
 					</div>
 					<div class="warm-prompt">
@@ -121,10 +128,11 @@
 				    	<p>请确认本页信息，并填写完整的银行信息，确保项目成功后您能快速拿到款项。</p>
 					</div>
 					<div class="rs-operate">
-					    <a href="returns-set.html" class="previous-stup">上一步</a><a href="javascript:;" class="save">保存草稿</a><a href="complete.html" class="next-stup">下一步</a>
+					    <a href="returns-set.html" class="previous-stup">上一步</a><a href="javascript:;" class="save">保存草稿</a><a href="#" class="next-stup">下一步</a>
 				    </div>
 				</div>
 			</div>
+			</form>
 			<div class="push1"></div>
 		</div>
 		<div class="foot">
@@ -198,17 +206,7 @@
 			  },function(){
 			  	$(".next,.prev").fadeOut();
 			  })
-				/*保存*/
-				$(".save").click(function(){
-					layer.open({
-						shadeClose:true,
-	        			closeBtn:1,
-	        			area:'600px',
-	        			title:'',
-						content:'<p class="save-tip">您的信息已更新保存成功</p>'+'<p class="save-tip">点击“下一步”将默认保存填写信息</p>'+'<p class="save-tip">您可到<a href="javascript:;">“个人中心”</a>——<a href="javascript:;">“我发起的项目”</a>，查看与编辑保存的信息</p>',
-					    btn:['我知道了','不再提示']
-					})
-				})
+
 				/*个人账户和公司账户*/
 				$(".ci-r span").click(function(){
 					if($(this).index()==0){

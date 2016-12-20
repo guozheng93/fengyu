@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.other.comment.dao.CommentDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.other.comment.entity.po.CommentPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="TOPIC_ID" property="topicId" jdbcType="INTEGER" />
+    <result column="TOPIC_TYPE" property="topicType" jdbcType="VARCHAR" />
+    <result column="COMMENT_CONTENT" property="commentContent" jdbcType="VARCHAR" />
+    <result column="FROM_UID" property="fromUid" jdbcType="INTEGER" />
+    <result column="COMMENT_TIME" property="commentTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.TOPIC_ID
+    ,A.TOPIC_TYPE
+    ,A.COMMENT_CONTENT
+    ,A.FROM_UID
+    ,A.COMMENT_TIME
+
+  </sql>
+
+
+
+  <select id="getPageList4Comment" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM COMMENT A
+    WHERE 1=1
+    <if test="topicId != null" >
+      AND a.TOPIC_ID = #{topicId,jdbcType=INTEGER}
+    </if>
+    order by a.COMMENT_TIME desc
+  </select>
+
+  <insert id="comment4Prjt" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.other.comment.entity.po.CommentPO" >
+    insert into COMMENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        TOPIC_ID,
+      </if>
+      <if test="topicType != null" >
+        TOPIC_TYPE,
+      </if>
+      <if test="commentContent != null" >
+        COMMENT_CONTENT,
+      </if>
+      <if test="fromUid != null" >
+        FROM_UID,
+      </if>
+
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="topicType != null" >
+        #{topicType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="fromUid != null" >
+        #{fromUid,jdbcType=INTEGER},
+      </if>
+
+    </trim>
+  </insert>
+
+
+</mapper>

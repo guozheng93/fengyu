@@ -3,6 +3,7 @@ package com.fengyu.common.page;
 import com.fengyu.common.entity.VOEntity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * @创建时间: 2013-7-25,下午11:33:41 .
  * @版本: 1.0 .
  */
-public class PageBean<T> implements Serializable{
+public class PageBean implements Serializable{
 	/**
 	 * 
 	 */
@@ -24,7 +25,7 @@ public class PageBean<T> implements Serializable{
 
 	// 查询数据库
 	private int totalCount; // 总记录数
-	private List<T> recordList; // 本页的数据列表
+	private List recordList; // 本页的数据列表
 
 	// 计算
 	private int pageCount; // 总页数
@@ -35,6 +36,17 @@ public class PageBean<T> implements Serializable{
 	
 	
 	public PageBean(){}
+
+	public PageBean(List recordList){
+		this.recordList = recordList;
+	}
+
+	public PageBean(Map obj){
+
+		List list=new ArrayList();
+		list.add(obj);
+		this.recordList=list;
+	}
 	
 	/**
 	 * 只接受前4个必要的属性，会自动的计算出其他3个属生的值
@@ -44,7 +56,7 @@ public class PageBean<T> implements Serializable{
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<T> recordList) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List recordList) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -85,7 +97,7 @@ public class PageBean<T> implements Serializable{
 	 * @param totalCount
 	 * @param recordList
 	 */
-	public PageBean(int currentPage, int numPerPage, int totalCount, List<T> recordList, Map<String, Object> countResultMap) {
+	public PageBean(int currentPage, int numPerPage, int totalCount, List recordList, Map<String, Object> countResultMap) {
 		this.currentPage = currentPage;
 		this.numPerPage = numPerPage;
 		this.totalCount = totalCount;
@@ -119,11 +131,11 @@ public class PageBean<T> implements Serializable{
 		}
 	}
 
-	public List<T> getRecordList() {
+	public List getRecordList() {
 		return recordList;
 	}
 
-	public void setRecordList(List<T> recordList) {
+	public void setRecordList(List recordList) {
 		this.recordList = recordList;
 	}
 

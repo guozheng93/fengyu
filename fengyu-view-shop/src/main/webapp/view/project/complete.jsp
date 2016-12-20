@@ -4,9 +4,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>完成</title>
-		<jsp:include page="/view/global/base-css.jsp"/>
-		<jsp:include page="/view/global/base-js.jsp"/>
-		<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/crdfdEntityComplete.js"></script>
 	</head>
 	<body>
 		<div class="warpper1">
@@ -20,6 +17,7 @@
 			<jsp:include page="/view/global/part/nav.jsp">
 				<jsp:param name="index" value="2"/>
 			</jsp:include>
+			<script type="text/javascript" charset="utf-8" src="/statics/js/pageScript/project/complete.js"></script>
 			<div class="ir-box">
 				<h3>产品众筹</h3>
 				<span class="ir-tip">（*为必填）</span>
@@ -32,15 +30,15 @@
 				<div class="comp-box">
 					<h4><b>提交</b></h4>
 					<div class="comp-mid">
-						<img src="images/chenggong.png">
+						<img src="/statics/images/chenggong.png">
 						<div class="comp-txt">
 							<p>发起众筹信息填写完成</p>
                             <p>点击“预览项目”进行项目预览，点击“提交审核”进行审核</p>
 						</div>
 						<div class="comp-operate">
-							<a href="fa-confirm-info.html" class="previous-stup">上一步</a>
+							<a href="#" class="previous-stup">上一步</a>
 							<a href="javascript:;"  class="submit-audit">提交审核</a>
-							<a href="project-detail.html" target="_blank" class="preview-pro">预览项目</a>
+							<a href="#" target="_blank" class="preview-pro">预览项目</a>
 						</div>
 					</div>
 				</div>
@@ -49,10 +47,10 @@
 		</div>
 		<div class="foot">
 			<p class="foot-title"><span class="ft-bord"></span><span class="ft-txt">蜂娱文化</span><span class="ft-bord ft-bord-r"></span></p>
-			<div class="foot-bg" style="background-image:url(images/foot_bg.png);">
+			<div class="foot-bg" style="background-image:url(/statics/images/foot_bg.png);">
 				<div class="fm-bound"></div>
-				<span class="white-s ws-l"><img src="images/white_sr.png"></span>
-				<span class="white-s ws-r"><img src="images/white_s.png"></span>
+				<span class="white-s ws-l"><img src="/statics/images/white_sr.png"></span>
+				<span class="white-s ws-r"><img src="/statics/images/white_s.png"></span>
 				<div class="foot-mid">
 					<dl class="fm-dl">
 						<dt>帮助与条款</dt>
@@ -65,7 +63,7 @@
 					<dl class="fm-dl">
 						<dt>关注我们</dt>
 						<dd><a href="javascript:;">关注蜂娱文化公众号</a></dd>
-						<dd><img src="images/erweima.jpeg" class="fm-dl-code"></dd>
+						<dd><img src="/statics/images/erweima.jpeg" class="fm-dl-code"></dd>
 						
 					</dl>
 					<dl class="fm-dl">
@@ -92,10 +90,7 @@
 			    </div>
 			</div>
 		</div>
-		<script type="text/javascript" src="js/jquery1.11.3.min.js" ></script>
-		<script type="text/javascript" src="js/bootstrap.min.js" ></script>
-		<script type="text/javascript" src="js/jquery.SuperSlide.2.1.1.js" ></script>
-		<script src="js/layer.js"></script>
+
 		<script>
 			$(function(){
 				jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:true,delayTime:700});
@@ -121,7 +116,7 @@
 			  },function(){
 			  	$(".next,.prev").fadeOut();
 			  })
-				  /*提交审核*/
+				  /*/!*提交审核*!/
 				 $(".submit-audit").click(function(){
 				 	layer.open({
 				 		title:'温馨提示',
@@ -132,7 +127,7 @@
 				 				window.location.href="person-center.html?type=2";
 				 		}
 				 	})
-				 })
+				 })*/
 				 //关注订阅号
 					$(".attent-a").click(function(){
 						if($(".gz-box").css("display")=="none"){

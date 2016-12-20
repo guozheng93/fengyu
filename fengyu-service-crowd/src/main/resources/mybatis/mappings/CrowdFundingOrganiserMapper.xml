@@ -8,8 +8,27 @@
     <result column="ORGNR_BLOG" property="orgnrBlog" jdbcType="VARCHAR" />
     <result column="ORGNR_BLESS_WORD" property="orgnrBlessWord" jdbcType="VARCHAR" />
     <result column="ORGNR_TELEPHONE" property="orgnrTelephone" jdbcType="VARCHAR" />
-
   </resultMap>
+
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.USER_ID
+    ,A.ORGNR_RESUME
+    ,A.ORGNR_BLOG
+    ,A.ORGNR_BLESS_WORD
+    ,A.ORGNR_TELEPHONE
+  </sql>
+
+  <select id="select" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM crowdfunding_organiser A
+    WHERE 1=1
+    <if test="id != null" >
+      AND id = #{id,jdbcType=INTEGER}
+    </if>
+
+  </select>
   <insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingOrganiserPO" >
     insert into crowdfunding_organiser
     <trim prefix="(" suffix=")" suffixOverrides="," >

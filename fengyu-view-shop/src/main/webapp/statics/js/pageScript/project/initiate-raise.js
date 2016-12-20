@@ -1,24 +1,33 @@
 //done ,ready,fail
 var createEntityPrjtOperateNode={
-
 };
+
 $(function(){
-
-    var ue = UE.getEditor("editor");
-    //初始化node监听事件
-    initEvent();
-    //获取项目类型种类
-    getCrdFdItemList();
-
-    //初始化图片控件
-    Tools.webImageUploader("crdfdListImagePicker","crdfdListImageThumbnail");
-    Tools.webImageUploader("crdfdCoverImagePicker","crdfdCoverImageThumbnail");
-
-    if($("#prjtId").val())
+    var prjtId=Tools.getQueryString("prjtId");
+    if(prjtId)
     {
-        getCrowdFundingEntityInfo();
-        getCrowdFundingDetail();
-        getCrowdFundingOrganiserInfo();
+        sessionStorage.setItem("prjtId",prjtId);
+        var ue = UE.getEditor("editor");
+
+        if(Tools.getQueryString("prjtId"))
+        {
+            sessionStorage.setItem("prjtId",Tools.getQueryString("prjtId"));
+        }
+        //初始化node监听事件
+        initEvent();
+        //获取项目类型种类
+        getCrdFdItemList();
+
+        //初始化图片控件
+        Tools.webImageUploader("crdfdListImagePicker","crdfdListImageThumbnail");
+        Tools.webImageUploader("crdfdCoverImagePicker","crdfdCoverImageThumbnail");
+
+        if(sessionStorage.getItem("prjtId"))
+        {
+            getCrowdFundingEntityInfo();
+            getCrowdFundingDetail();
+            getCrowdFundingOrganiserInfo();
+        }
     }
 
 
@@ -45,27 +54,161 @@ function getCrdFdItemList() {
 }
 
 function initEvent() {
-    createEntityPrjtOperateNode=sessionStorage.getItem("createEntityPrjtOperateNode")?
-        JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"))
-        :{
-            crdfdEntity:"ready",
-            crdfdDetail:"ready",
-            crdfdOrganiser:"ready"
-        };
+    //初始化验证对象
+    var crowdfundingInfoForm=$("#crowdfundingInfoForm").validate({
+        rules: {
+            crdfdEntityItem: {
+                userdefined:"checkCrdFdItemValue()"
+            },
+            prjtName:{
+                required:true,
+                maxlength:20
+            },
+            prjtSummary:{
+                maxlength:200
+            },
+            prjtRaiseAmount: {
+                required: true
+                ,min: 100
+                /*,equalTo: "#password"*/
+            },
+            prjtRaiseToplimit:{
+                userdefined:"checkPrjtRaiseToplimitValue()"
+            },
+            prjtFundCycle:{
+                required:true,
+                min:10,
+                max:60
+            },
+            entityCatalogImage:{
+                userdefined:"checkImgVal()"
+            },
+            entityCoverImage:{
+                userdefined:"checkImgVal()"
+            },
+            crdFdDetail:{
+                userdefined:"checkUeVal()"
+            },
+            orgnrResume:{
+                required:true,
+                maxlength:160
+            },
+            orgnrTelephone:{
+                required:true,
+                number:true,
+            }
 
+        },
+        messages: {
+            crdfdEntityItem:{userdefined:Tools.getValidMsgByName("crowd.entity.crdfditem-notset")},
+            prjtName:{
+                required:Tools.getValidMsgByName("crowd.entity.prjtName-notset"),
+                maxlength:Tools.getValidMsgByName("crowd.entity.prjtName-maxlength")
+            },
+            prjtSummary:{
+                /*required:Tools.getValidMsgByName("crowd.entity.prjtSummary-notset"),*/
+                maxlength:Tools.getValidMsgByName("crowd.entity.prjtSummary-maxlength")
+            },
+            prjtRaiseAmount: {
+                required: Tools.getValidMsgByName("crowd.entity.prjtRaiseAmount-notset")
+                ,min: Tools.getValidMsgByName("crowd.entity.prjtRaiseAmount-min")
+                /* ,equalTo: "两次密码输入不一致"*/
+            },
+            prjtRaiseToplimit:{
+                userdefined:Tools.getValidMsgByName("crowd.entity.prjtRaiseToplimit-notset")
+            },
+            prjtFundCycle:{
+                required:Tools.getValidMsgByName("crowd.entity.prjtFundCycle-notset"),
+                min:Tools.getValidMsgByName("crowd.entity.prjtFundCycle-min"),
+                max:Tools.getValidMsgByName("crowd.entity.prjtFundCycle-max")
+            },
+            entityCatalogImage:{
+                userdefined:Tools.getValidMsgByName("crowd.entity.entityCatalogImage-notset")
+            },
+            entityCoverImage:{
+                userdefined:Tools.getValidMsgByName("crowd.entity.entityCoverImage-notset")
+            },
+            crdFdDetail:{
+                userdefined:Tools.getValidMsgByName("crowd.entity.crdFdDetail-notset")
+            },
+            orgnrResume:{
+                required:Tools.getValidMsgByName("crowd.entity.orgnrResume-notset"),
+                maxlength:Tools.getValidMsgByName("crowd.entity.orgnrResume-maxlength")
+            },
+            orgnrTelephone:{
+                required:Tools.getValidMsgByName("crowd.entity.orgnrTelephone-notset"),
+                number:Tools.getValidMsgByName("crowd.entity.orgnrTelephone-number")
+            }
+
+        }/*,
+         submitHandler:function(form){
+         saveCrowdFunding();
+         }*/
+    });
+    //初始化验证异常缓存信息，用于处理缓存异常
+    sessionStorage.setItem("validateErrors","");
+
+    //初始化操作进程，用以判断是否完成维护操作
+    createEntityPrjtOperateNode={
+        crdfdEntity:"ready",
+        crdfdDetail:"ready",
+        crdfdOrganiser:"ready"
+    };
+    sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
+    //初始化项目类型点击事件
     itemClickEvent();
+
+    //保存草稿点击
     $(".save").click(function () {
-        $(this).attr("status","onclick");
-        saveCrowdFunding();
-    });
-    $(".next-stup").click(function () {
-        $(this).attr("status","onclick");
-        if(checkComplete())
-            window.location.href="/view/project/returns-set.jsp";
-        else
+
+        //启动验证
+        var flag=crowdfundingInfoForm.form();
+        //判断是否验证成功，成功则进行业务动作
+        if(flag)
+        {
+            //设置保存草稿按钮被点击
+            $(this).attr("status","onclick");
             saveCrowdFunding();
+        }
     });
 
+    //下一步按钮
+    $(".next-stup").click(function () {
+        //启动验证
+        var flag=crowdfundingInfoForm.form();
+        //判断是否验证成功，成功则进行业务动作
+        if(flag)
+        {
+            saveCrowdFunding();
+        }
+    });
+
+}
+function checkUeVal(value,element)
+{
+    var ueValue=UE.getEditor('editor').getContent();
+    return ueValue.length>0;
+}
+function checkImgVal(value,element)
+{
+    var imgNodeName=$(element).attr("name");
+    element=$("img[name='"+imgNodeName+"']");
+    var imgSrc= $(element).attr("src");
+    return imgSrc.indexOf("/statics/images/default_tu.png")==-1;
+}
+function checkCrdFdItemValue() {
+    var checkItemList=$("#crdfdEntityItemContainer").children(".active-span");
+    if(checkItemList.length<1)
+        return false;
+    else
+        return true;
+}
+function checkPrjtRaiseToplimitValue(value) {
+    if(value!="0")
+    {
+        return value>=100;
+    }else if(value==0)
+        return true;
 }
 
 function itemClickEvent() {
@@ -77,14 +220,14 @@ function itemClickEvent() {
 
 function getCrowdFundingEntityInfo()
 {
-    if($("#prjtId").val())
+    if(sessionStorage.getItem("prjtId"))
     {
         $.ajax({
             url:  serverUrl + "crowdFundingEntity/getCrowdFundingEntityInfo",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: "post",
-            data: JSON.stringify({id:$("#prjtId").val()}),
+            data: JSON.stringify({id:sessionStorage.getItem("prjtId")}),
             //async: false,
             success: function (data){
                 console.log(data.responseBody);
@@ -104,22 +247,24 @@ function getCrowdFundingEntityInfo()
     }
 
 }
-function getCrowdFundingDetail() {
-    if($("#prjtId").val())
+function    getCrowdFundingDetail() {
+    if(sessionStorage.getItem("prjtId"))
     {
         $.ajax({
             url:  serverUrl + "crowdFundingEntity/getCrowdFundingDetail",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: "post",
-            data: JSON.stringify({id:$("#prjtId").val()}),
+            data: JSON.stringify({id:sessionStorage.getItem("prjtId")}),
             //async: false,
             success: function (data){
                 console.log(data.responseBody);
                 if(data.responseBody&&data.responseBody.recordList[0])
                 {
-                    UE.getEditor('editor').setContent(data.responseBody.recordList[0]);
-
+                    var prjtDetail=data.responseBody.recordList[0].prjtDetail;
+                    UE.getEditor('editor').ready(function() {
+                        UE.getEditor('editor').setContent(prjtDetail);
+                    });
                 }
 
             },
@@ -130,14 +275,14 @@ function getCrowdFundingDetail() {
     }
 }
 function getCrowdFundingOrganiserInfo() {
-    if($("#prjtOrganiserId").val())
+    if(sessionStorage.getItem("prjtOrganiserId"))
     {
         $.ajax({
             url:  serverUrl + "crowdFundingEntity/getCrowdFundingOrganiserInfo",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             type: "post",
-            data: JSON.stringify({id:$("#prjtOrganiserId").val()}),
+            data: JSON.stringify({id:sessionStorage.getItem("prjtOrganiserId")}),
             //async: false,
             success: function (data){
                 console.log(data.responseBody);
@@ -156,24 +301,22 @@ function getCrowdFundingOrganiserInfo() {
 
 function saveCrowdFunding() {
     /*var serverInterfaceUrl=prjtId?"crowdfundingEntity/edi",""*/
-    //插入
-    if(!$("#prjtId").val())
+    //判断prjtId 是否存在，若不存在则是新增动作，插入
+    if(!sessionStorage.getItem("prjtId"))
     {
-
         //首先插入发起人信息表
         newCrowdFundingOrganiser();
-
     }else {
         editCrowdFundingInfo();
     }
 }
 
 function editCrowdFundingInfo() {
-    if($("#prjtId").val())
+    if(sessionStorage.getItem("prjtId"))
     {
         var crdfdEntity=Tools.autoNodeValEncaseJson("crdfdEntity");
         crdfdEntity["prjtItemId"]=$("#crdfdEntityItemContainer").find(".active-span").attr("itemid");
-        crdfdEntity["id"]=$("#prjtId").val();
+        crdfdEntity["id"]=sessionStorage.getItem("prjtId");
         //更新项目基本信息
         $.ajax({
             url:  serverUrl + "crowdFundingEntity/editCrowdFundingEntity",
@@ -183,6 +326,8 @@ function editCrowdFundingInfo() {
             data: JSON.stringify(crdfdEntity),
             //async: false,
             success: function (data){
+
+                var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
                 createEntityPrjtOperateNode.crdfdEntity="done";
                 sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
                 checkComplete();
@@ -194,7 +339,11 @@ function editCrowdFundingInfo() {
 
             },
             error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
+                layer.msg(Tools.getMessageTipsByName("crowd.entityError"));
+                var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
+                createEntityPrjtOperateNode.crdfdEntity="error";
+                sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
+                checkComplete();
             }
         });
 
@@ -210,15 +359,19 @@ function editCrowdFundingDetail() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         type: "post",
-        data: JSON.stringify({id:$("#prjtId").val(),prjtDetail:UE.getEditor('editor').getContent()}),
+        data: JSON.stringify({id:sessionStorage.getItem("prjtId"),prjtDetail:UE.getEditor('editor').getContent()}),
         //async: false,
         success: function (data){
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
             createEntityPrjtOperateNode.crdfdDetail="done";
             sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
             checkComplete();
         },
         error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
+            layer.msg(Tools.getMessageTipsByName("crowd.entityDetailError"));
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
+            createEntityPrjtOperateNode.crdfdDetail="error";
+            sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
         }
     });
     
@@ -234,16 +387,21 @@ function newCrowdFundingOrganiser() {
         data: JSON.stringify(crowdFundingOrganiser),
         //async: false,
         success: function (data){
+            //设置发起人节点操作结束
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
             createEntityPrjtOperateNode.crdfdOrganiser="done";
             sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
-            checkComplete();
-            console.log(data.responseBody);
+
+            //checkComplete();
+            //console.log(data.responseBody);
             if(data.responseBody&&data.responseBody.recordList[0])
             {
                 organiserId=data.responseBody.recordList[0].id;
-                $("#prjtOrganiserId").val(organiserId);
+                sessionStorage.setItem("prjtOrganiserId",organiserId);
                 var crdfdEntity=Tools.autoNodeValEncaseJson("crdfdEntity");
                 crdfdEntity["prjtItemId"]=$("#crdfdEntityItemContainer").find(".active-span").attr("itemid");
+                crdfdEntity["prjtOrganiserId"]=organiserId;
+
                 $.ajax({
                     url:  serverUrl + "crowdFundingEntity/newCrowdFundingEntity",
                     contentType: "application/json; charset=utf-8",
@@ -252,6 +410,7 @@ function newCrowdFundingOrganiser() {
                     data: JSON.stringify(crdfdEntity),
                     //async: false,
                     success: function (data){
+                        var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
                         createEntityPrjtOperateNode.crdfdEntity="done";
                         sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
                         checkComplete();
@@ -259,7 +418,6 @@ function newCrowdFundingOrganiser() {
                         if(data.responseBody&&data.responseBody.recordList[0])
                         {
                             var id=data.responseBody.recordList[0].id;
-                            $("#prjtId").val(id);
                             sessionStorage.setItem("prjtId",id);
                         }
                         editCrowdFundingDetail();
@@ -267,20 +425,27 @@ function newCrowdFundingOrganiser() {
 
                     },
                     error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
+                        layer.msg(Tools.getMessageTipsByName("crowd.entityError"));
+                        var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
+                        createEntityPrjtOperateNode.crdfdEntity="error";
+                        sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
                     }
                 });
             }
 
         },
         error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
+            layer.msg(Tools.getMessageTipsByName("crowd.organiserError"));
+            //设置发起人节点操作结束
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
+            createEntityPrjtOperateNode.crdfdOrganiser="error";
+            sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
         }
     });
 }
 function editCrowdFundingOrganiser() {
     var crowdFundingOrganiser=Tools.autoNodeValEncaseJson("crdfdOrganiser");
-    crowdFundingOrganiser["id"]=$("#prjtOrganiserId").val();
+    crowdFundingOrganiser["id"]=sessionStorage.getItem("prjtOrganiserId");
     //更新项目发起人信息
     $.ajax({
         url:  serverUrl + "crowdFundingEntity/editCrowdFundingOrganiser",
@@ -290,18 +455,16 @@ function editCrowdFundingOrganiser() {
         data: JSON.stringify(crowdFundingOrganiser),
         //async: false,
         success: function (data){
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
             createEntityPrjtOperateNode.crdfdOrganiser="done";
             sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
             checkComplete();
-           /*console.log(data.responseBody);
-            if(data.responseBody&&data.responseBody.recordList[0])
-            {
-                Tools.autoInjectValue(data.responseBody.recordList[0]);
-            }*/
-
         },
         error: function (returndata) {
-//            	layer.msg("网络异常，请重试");
+            layer.msg(Tools.getMessageTipsByName("crowd.organiserError"));
+            var createEntityPrjtOperateNode=JSON.parse(sessionStorage.getItem("createEntityPrjtOperateNode"));
+            createEntityPrjtOperateNode.crdfdOrganiser="error";
+            sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
         }
     });
 }
@@ -321,15 +484,28 @@ function  checkComplete() {
     var flag=true;
     for (var step in createEntityPrjtOperateNode)
     {
-        if(createEntityPrjtOperateNode[step]!=done)
+        if(createEntityPrjtOperateNode[step]!="done")
         {
             flag=false;
             break;
         }
     }
-    if( $(".save").attr("status")=="onclick")
+    if(flag)
     {
-        openSuccessWindow();
+        var createEntityPrjtOperateNode={
+            crdfdEntity:"ready",
+            crdfdDetail:"ready",
+            crdfdOrganiser:"ready"
+        };
+        sessionStorage.setItem("createEntityPrjtOperateNode",JSON.stringify(createEntityPrjtOperateNode));
+        if($(".save").attr("status")=="onclick")
+        {
+            openSuccessWindow();
+            $(".save").attr("status","");
+        }else
+        {
+            window.location.href="/view/project/returns-set.jsp?prjtId="+sessionStorage.getItem("prjtId");
+        }
     }
     return flag;
 }

@@ -19,5 +19,7 @@
 	<dubbo:service interface="com.fengyu.facade.crowdfunding.service.CrowdFundingEntityFacade" ref="crowdFundingEntityFacade" />
 	<!-- 用户服务接口 -->
 	<dubbo:service interface="com.fengyu.facade.crowdfunding.service.CrowdFundingRepayFacade" ref="crowdFundingRepayFacade" />
+	<!-- 用户服务接口 -->
+	<dubbo:service interface="com.fengyu.facade.crowdfunding.service.CrowdFundingAuditFacade" ref="crowdFundingAuditFacade" />
 
 </beans>  

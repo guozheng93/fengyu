@@ -1,6 +1,6 @@
 var Tools={
     getQueryString:function (paramName) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg = new RegExp("(^|&)" + paramName + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
         if(r != null){
             return unescape(r[2]);
@@ -112,7 +112,7 @@ var Tools={
         for(var value in data)
         {
 
-            var tagNode=$("[filedName='"+value+"']");
+            var tagNode=$("[name='"+value+"']");
             if($(tagNode).length>1)
             {
                 tagNode=$(tagNode).eq(0);
@@ -120,6 +120,12 @@ var Tools={
             if(tagNode.length>0)
             {
                 var tagName=$(tagNode)[0].tagName.toString().toLowerCase();
+                if(value&&data[value].length>11&&parseInt(data[value]))
+                {
+                    var date=new Date(parseInt(data[value]));
+                    data[value]=date.dateFormat("YYYY年 M月 D日");
+                }
+
                 switch(tagName)
                 {
                     case "input":
@@ -129,22 +135,28 @@ var Tools={
                                 $(tagNode).val(data[value]);
                                 break;
                             case "radio":
-                                $("input[filedName='"+value+"'][value='"+data[value]+"']").attr("checked","checked");;
+                                $("input[name='"+value+"'][value='"+data[value]+"']").attr("checked","checked");;
                                 break;
                             case "number":
                                 $(tagNode).val(data[value]);
                                 break;
+
                             /*case "checkbox":
                              nodeVal=$(tagNode).val();
                              break;*/
                         }
                         break;
-
+                    case "select":
+                        $(tagNode).val(data[value]);
+                        break;
                     case "img":
                         $(tagNode).attr("src",fileServerUrl+data[value]);
                         break;
                     case "textarea":
                         $(tagNode).val(data[value]);
+                        break;
+                    default:
+                        $(tagNode).html(data[value]);
                         break;
                 }
             }
@@ -165,8 +177,8 @@ var Tools={
                     var nodes=$("[belongTo='"+filter[i]+"']");
                     for(var j=0;j<nodes.length;j++)
                     {
-                        if(this.isNotAllowedNull($(nodes[j]).attr("filedName"),"元素必须包含filedName"))
-                            json[$(nodes[j]).attr("filedName")]=this.getNodeVal4Encase(nodes[j]);
+                        if(this.isNotAllowedNull($(nodes[j]).attr("name"),"元素必须包含name"))
+                            json[$(nodes[j]).attr("name")]=this.getNodeVal4Encase(nodes[j]);
                     }
                 }
             }
@@ -175,8 +187,8 @@ var Tools={
                 var nodes=$("[belongTo='"+filter+"']");
                 for(var j=0;j<nodes.length;j++)
                 {
-                    if(this.isNotAllowedNull($(nodes[j]).attr("filedName"),"元素必须包含filedName"))
-                        json[$(nodes[j]).attr("filedName")]=this.getNodeVal4Encase(nodes[j]);
+                    if(this.isNotAllowedNull($(nodes[j]).attr("name"),"元素必须包含name"))
+                        json[$(nodes[j]).attr("name")]=this.getNodeVal4Encase(nodes[j]);
                 }
             }
         }else
@@ -184,8 +196,8 @@ var Tools={
             var nodes=$("[belongTo]");
             for(var j=0;j<nodes.length;j++)
             {
-                if(this.isNotAllowedNull($(nodes[j]).attr("filedName"),"元素必须包含filedName"))
-                    json[$(nodes[j]).attr("filedName")]=this.getNodeVal4Encase(nodes[j]);
+                if(this.isNotAllowedNull($(nodes[j]).attr("name"),"元素必须包含name"))
+                    json[$(nodes[j]).attr("name")]=this.getNodeVal4Encase(nodes[j]);
             }
         }
         return json;
@@ -206,7 +218,7 @@ var Tools={
                         nodeVal=$(tagNode).val();
                         break;
                     case "radio":
-                        nodeVal=$("input[filedName='"+$(tagNode).attr("filedName")+"']:checked").val();
+                        nodeVal=$("input[name='"+$(tagNode).attr("name")+"']:checked").val();
                         break;
                     case "number":
                         nodeVal=$(tagNode).val();
@@ -215,6 +227,9 @@ var Tools={
                         nodeVal=$(tagNode).val();
                         break;*/
                 }
+                break;
+            case "select":
+                nodeVal=$(tagNode).val();
                 break;
             case "img":
                 nodeVal=$(tagNode).attr("src");
@@ -249,4 +264,37 @@ var Tools={
         });
         return messageTips;
     }
+    ,
+    getValidMsgByName:function (jsonNodeName) {
+        var jsonNodes=jsonNodeName.split(".");
+        var messageTips;
+        $.ajaxSettings.async = false;
+        $.getJSON("/statics/js/common/validate-message.json",messageTips,function(data){
+            var jsonNode=data;
+            for(var i=0;i<jsonNodes.length;i++)
+            {
+                jsonNode=jsonNode[jsonNodes[i]];
+            }
+            messageTips=jsonNode;
+        });
+        return messageTips;
+    },
+    setVal2Session:function (key,value) {
+        var isjson = typeof(value) == "object" && Object.prototype.toString.call(value).toLowerCase() == "[object object]" && !value.length;
+        if(isjson)
+        {
+            sessionStorage.setItem(key,JSON.stringify(value));
+        }else
+        {
+            sessionStorage.setItem(key,value);
+        }
+    },
+    getVal2Session:function (key) {
+        return key;
+    },
+    resetImgVal:function () {
+        $("img[belongto]").attr("src",global.defaultImg);
+        $("img[belongto]").nextAll().remove();
+    },
+
 }

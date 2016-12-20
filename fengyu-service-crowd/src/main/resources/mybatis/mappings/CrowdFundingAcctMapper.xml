@@ -64,7 +64,7 @@
     </if>
 
   </select>
-  <insert id="insert" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
     insert into crowdfunding_acct
     <trim prefix="(" suffix=")" suffixOverrides="," >
 
@@ -125,16 +125,14 @@
     </trim>
   </insert>
   <insert id="insert2Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
-    insert into crowdfunding_acct
+    insert into crowdfunding_acct_prjt_map
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="prjtId != null" >
         PRJT_ID,
       </if>
       <if test="id != null" >
-        ID,
+        ACCT_ID,
       </if>
-
-
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="prjtId != null" >
@@ -192,6 +190,18 @@
     </if>
     <if test="userId != null" >
       and USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+
+  </delete>
+
+  <delete id="delete4Map" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingAcctPO" >
+    delete from crowdfunding_acct_prjt_map
+    where 1=1
+    <if test="id != null" >
+      and ACCT_ID = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      and PRJT_ID = #{prjtId,jdbcType=INTEGER}
     </if>
 
   </delete>

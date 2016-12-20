@@ -4,6 +4,7 @@ import com.fengyu.common.page.PageBean;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ResponseWrapper {
     private static final String WARNING = "[WARNING]: ";
@@ -18,6 +19,13 @@ public class ResponseWrapper {
     {
         this.responseStatus=200;
         this.returnCode="00000";
+    }
+    public ResponseWrapper(Map map)
+    {
+        this.responseStatus=200;
+        this.returnCode="00000";
+        PageBean pageBean=new PageBean(map);
+        this.responseBody=pageBean;
     }
     public ResponseWrapper(Integer responseStatus,String returnCode)
     {

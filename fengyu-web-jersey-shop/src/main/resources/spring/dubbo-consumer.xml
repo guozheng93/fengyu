@@ -18,6 +18,10 @@
 	<dubbo:reference interface="com.fengyu.facade.crowdfunding.service.CrowdFundingRepayFacade" id="crowdFundingRepayFacade" check="false" />
 
 	<dubbo:reference interface="com.fengyu.facade.other.common.service.BizDictionaryFacade" id="bizDictionaryFacade" check="false" />
+
+	<dubbo:reference interface="com.fengyu.facade.order.service.OrderFacade" id="orderFacade" check="false" />
+	<dubbo:reference interface="com.fengyu.facade.other.comment.service.CommentFacade" id="commentFacade" check="false" />
+
 	<!--&lt;!&ndash; 用户服务接口 &ndash;&gt;-->
 	<dubbo:reference interface="com.fengyu.facade.user.login.service.UserFacade" id="userFacade" check="false" />
 	<dubbo:reference interface="com.fengyu.facade.user.address.service.AddressFacade" id="addressFacade" check="false" />

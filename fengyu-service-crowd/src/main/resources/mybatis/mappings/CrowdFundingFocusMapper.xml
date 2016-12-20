@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.crowdfunding.dao.CrowdFundingFocusDao" >
+  <resultMap id="BaseResultMap" type="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingFocusPO" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="PRJT_ID" property="prjtId" jdbcType="INTEGER" />
+    <result column="USER_ID" property="userId" jdbcType="INTEGER" />
+    <result column="FOCUS_TIME" property="focusTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    A.ID
+    ,A.PRJT_ID
+    ,A.USER_ID
+    ,A.FOCUS_TIME
+    ,A.STATUS
+  </sql>
+
+  <select id="getFocusList" resultType="map" >
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM CROWDFUNDING_FOCUS A
+    WHERE 1=1
+    <if test="id != null" >
+      AND A.id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="prjtId != null" >
+      AND A.PRJT_ID = #{prjtId,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      AND A.USER_ID = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="status != null" >
+      AND A.STATUS = #{status,jdbcType=VARCHAR}
+    </if>
+    ORDER BY A.FOCUS_TIME DESC
+  </select>
+
+  <select id="selectTotal" resultType="integer" >
+    SELECT
+      COALESCE(SUM(1),0) AS focusTotal
+    FROM (
+      SELECT
+        DISTINCT PRJT_ID
+      FROM crowdfunding_FOCUS A
+      WHERE A.PRJT_ID = #{prjtId,jdbcType=INTEGER}
+        AND A.USER_ID = #{userId,jdbcType=INTEGER}
+        AND A.STATUS = 'normal'
+    ) AS A
+
+  </select>
+  <insert id="insert"  parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+    insert into crowdfunding_FOCUS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        PRJT_ID,
+        USER_ID,
+        STATUS
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        #{prjtId,jdbcType=INTEGER},
+        #{userId,jdbcType=INTEGER},
+        #{status,jdbcType=INTEGER}
+    </trim>
+  </insert>
+  <!--
+    <update id="update" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+      update crowdfunding_entity
+      <set>
+      <if test="entityCoverImage != null" >
+        ENTITY_COVER_IMAGE=#{entityCoverImage,jdbcType=VARCHAR},
+      </if>
+      <if test="entityCatalogImage != null" >
+        ENTITY_CATALOG_IMAGE=#{entityCatalogImage,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationProvince != null" >
+        ENTITY_LOCATION_PROVINCE=#{entityLocationProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationPity != null" >
+        ENTITY_LOCATION_CITY=#{entityLocationPity,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationCounty != null" >
+        ENTITY_LOCATION_COUNTY=#{entityLocationCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="entityLocationFull != null" >
+        ENTITY_LOCATION_FULL=#{entityLocationFull,jdbcType=VARCHAR},
+      </if>
+        <if test="acctId != null" >
+          ACCT_ID=#{acctId,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="pysicalDelete" parameterType="com.fengyu.facade.crowdfunding.entity.po.CrowdFundingEntityPO" >
+      delete from crowdfunding_entity
+      where id = #{id,jdbcType=INTEGER}
+    </delete>-->
+
+</mapper>

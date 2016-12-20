@@ -2,6 +2,8 @@ package com.fengyu.common.web.jersey.listenner;
 
 
 import com.fengyu.common.web.jersey.exception.ExceptionMapperSupport;
+import com.fengyu.common.web.jersey.filter.AuthorizationRequestFilter;
+import com.fengyu.common.web.jersey.filter.FeatureAnnotatedFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 import org.glassfish.jersey.server.validation.ValidationConfig;
@@ -34,10 +36,10 @@ public class WebApplication extends ResourceConfig{
 //        register(AirLogFilter.class);
         // MVC.
         register(JspMvcFeature.class);
-        /*//注册注解工厂
-        register(FeatureAnnotatedFactory.class);*/
+        //注册注解工厂
+        register(FeatureAnnotatedFactory.class);
         //注册身份验证
-        //register(AuthorizationRequestFilter.class);
+        register(AuthorizationRequestFilter.class);
 
     }
     public static class ValidationConfigurationContextResolver implements ContextResolver<ValidationConfig> {

@@ -32,14 +32,18 @@ public class BeanUtils {
 	public static Map transDataMap2BeanMap4FiledName(Map map)
 	{
 		Map<String,Object> newMap=new HashMap();
-		// 方法三：用keySet()
-		Iterator it = map.keySet().iterator();
-		while (it.hasNext()){
-			String key;
-			key=(String)it.next();
-			String newKey= StringUtil.replaceUnderlineAndfirstToUpper(key);
-			newMap.put(newKey,map.get(key));
+		if(map!=null)
+		{
+			// 方法三：用keySet()
+			Iterator it = map.keySet().iterator();
+			while (it.hasNext()){
+				String key;
+				key=(String)it.next();
+				String newKey= StringUtil.replaceUnderlineAndfirstToUpper(key);
+				newMap.put(newKey,map.get(key));
+			}
 		}
+
 		return newMap;
 	}
 	/**
