@@ -7,10 +7,13 @@ import com.fengyu.common.exception.MapperSupport.CommonExceptionType;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
 import com.fengyu.common.utils.string.StrUtil;
+import com.fengyu.common.web.jersey.token.JwtUtil;
 import com.fengyu.common.web.jersey.utils.UdpGetClientMacAddr;
 import com.fengyu.common.web.jersey.wrapper.ResponseWrapper;
 
+import com.fengyu.facade.user.login.entity.po.UserPO;
 import com.fengyu.facade.user.login.entity.vo.UserVO;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -40,6 +43,21 @@ public class BaseController {
     public Integer pageNum;
     @Context
     protected SecurityContext securityContext;
+
+    @Context
+    HttpServletRequest webRequest;
+
+    public Integer getUserId()
+    {
+        try{
+            String token = webRequest.getHeader("token");
+            Claims claims = new JwtUtil().parseJWT(token);
+            UserPO userPO= com.alibaba.fastjson.JSON.parseObject(claims.getSubject(), UserPO.class);
+            return  userPO.getId();
+        }catch (Exception e){
+            return null;
+        }
+    }
 
     public UserVO getUser()
     {

@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,7 @@ public class AddressBiz {
     }
 
     public long insert(AddressPO addressPO) {
+        addressPO.setCreateTime(new Date());
         return addressDao.insert(addressPO);
     }
 

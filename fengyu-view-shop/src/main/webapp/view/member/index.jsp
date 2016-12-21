@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>个人中心</title>
-		<link rel="stylesheet" href="/statics/css/skin/layer.css" />
+		<link rel="stylesheet" href="/statics/js/skin/layer.css" />
 		<link rel="stylesheet" href="/statics/css/person.css" />
 	</head>
 	<body>
@@ -54,30 +54,31 @@
 		<div class="modify-adres-box">
 			<span class="modify-close">×</span>
 			<p class="ship-info-title"><b>修改收货地址</b></p>
-		    	<p class="ship-p1"><span>收货人：</span><input type="text"></p>
+			    <input type="hidden" id = "id" value =  "1">
+		    	<p class="ship-p1"><span>收货人：</span><input id ="editName" type="text"></p>
 		    	<p class="ship-p2"><span>所在地地址:</span>
-		    		<select>
+		    		<select id ="editProvince">
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    		</select>
 		    		省
-		    		<select>
+		    		<select id ="editCity">
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    		</select>
 		    		市
-		    		<select>
+		    		<select id ="editCountry">
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    			<option>请选择</option>
 		    		</select>
 		    		区
 		    	</p>
-		    	<p class="ship-p3"><span></span><input type="text" placeholder="填写详细地址"></p>
-		    	<p class="ship-p4"><span>手机号码：</span><input type="number" maxlength="11"></p>
-		    	<p class="ship-p5"><span>邮箱：</span><input type="text"></p>
+		    	<p class="ship-p3"><span></span><input type="text" id ="editAddress" placeholder="填写详细地址"></p>
+		    	<p class="ship-p4"><span>手机号码：</span><input id ="editPhone" type="number" maxlength="11"></p>
+		    	<p class="ship-p5"><span>邮箱：</span><input id ="editEmail" type="text"></p>
 		    	<p class="ship-p6"><span></span><a href="javascript:;">保存</a></p>
 		</div>
 		<!------添加新闻动态---------->

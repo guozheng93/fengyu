@@ -1,4 +1,4 @@
-package com.fengyu.web.shop.util.token;
+package com.fengyu.common.web.jersey.token;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.http.HttpStatus;

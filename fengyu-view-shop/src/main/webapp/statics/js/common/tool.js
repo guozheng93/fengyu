@@ -59,7 +59,7 @@ define(function(require,exports,module){
     tool.load = function(config){
     	if(tool.isEmpty(config)){
     		config = {};
-    		config.time = 60000;
+    		config.time = 30000;
     	}
     	var index = layer.load(1, {time: config.time,offset: '300px',shade : 0.3});
     	return index;

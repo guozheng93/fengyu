@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<title>蜂娱文化登录</title>
 		<link rel="stylesheet" href="/statics/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="/statics/css/skin/layer.css"/>
+		<link rel="stylesheet" href="/statics/js/skin/layer.css"/>
 		<link rel="stylesheet" href="/statics/css/base.css" />
 	</head>
 	<body>

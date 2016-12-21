@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fengyu.service.address.dao.AddressDao" >
+<mapper namespace="com.fengyu.service.user.address.dao.AddressDao" >
 
   <!-- 用户 -->
   <sql id="user_address"> `user_address` </sql>
@@ -9,6 +9,7 @@
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="name" property="name"/>
+    <result column="phone" property="phone"/>
     <result column="email" property="email"/>
     <result column="province_id" property="provinceId"/>
     <result column="city_id" property="cityId"/>
@@ -33,7 +34,7 @@
     </where>
     limit #{pageNum},#{pageSize}
   </select>
-  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+  <select id="getCountList" resultType="long" parameterType="java.util.Map" >
     select count(*) from
     <include refid="user_address" />
     <where>
@@ -43,10 +44,10 @@
   <insert id="insert">
     insert into
     <include refid="user_address" />
-    (user_id, name, email, province_id , city_id,
+    (user_id, `name`,`phone`, email, province_id , city_id,
     country_id, address, is_default, create_time)
     values
-    (#{userId}, #{name}, #{email}, #{provinceId},
+    (#{userId}, #{name},#{phone}, #{email}, #{provinceId},
     #{cityId}, #{countryId}, #{address}, #{isDefault},
     #{createTime})
   </insert>
@@ -84,7 +85,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <delete id="delete" parameterType="java.lang.Integer">
-    DELETE  from <include refid="user_address" /> where  where id = #{id}
+    DELETE  from <include refid="user_address" />  where id = #{id}
   </delete>
 
 

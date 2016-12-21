@@ -13,38 +13,14 @@ import javax.ws.rs.Path;
 
 
 @Component
-@Path("/user")
+@Path("/member/user")
 public class IndexController extends BaseController {
 
-    @Autowired
-    private UserFacade userFacade;
 
     @POST
     @Path("list")
     public String login(String args)
     {
-//        UserVO userVO= JSON.parseObject(args, UserVO.class);
-//        ResponseWrapper responseWrapper= null;
-//        String jsonStr="";
-//        //登录支持  手机号和邮箱
-//        UserVO user =  userFacade.findByLoginName(userVO.getLoginName());
-//
-//        //用户名错误
-//        if(user == null){
-//
-//        }
-//        //效验密码
-//        if(user.getPassword().equals(userVO.getPassword())){
-//
-//        }
-//        //未禁用，执行登录操作
-//        if(!user.getValid()){
-//
-//            //记录用户状态
-//
-//        }else{ //已禁用
-//
-//        }
         return null;
     }
 }

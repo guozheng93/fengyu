@@ -8,7 +8,7 @@ define(function(require, exports, module){
 
     //初始化
     login.init = function(){
-        $("#account,#pwd").val("");
+        $("#loginName,#pwd").val("");
         login.event();
         login.loadTopWindow();
     };
@@ -38,13 +38,13 @@ define(function(require, exports, module){
         var loginName = $.trim($("#loginName").val()),
             pwd = $.trim($("#pwd").val()),
             params = {"loginName":loginName, 'password':pwd};
-        if(tool.isEmpty(loginName) || tool.isEmpty(pwd)){
+        if(false){
             tool.msg("账号密码不允许为空",2);
             tool.closeLayer(loginLy);
             return;
         }else{
             var config = {
-                url : "/user/login",
+                url : "/member/user/list",
                 params : params,
                 onSuccess : login.doLoginSuccess
             };
