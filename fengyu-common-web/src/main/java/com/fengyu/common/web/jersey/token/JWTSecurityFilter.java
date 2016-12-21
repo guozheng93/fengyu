@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.Priority;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Priorities;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import java.io.IOException;
 
@@ -50,11 +50,10 @@ public class JWTSecurityFilter implements ContainerRequestFilter{
             try{
                 Claims claims = new  JwtUtil().parseJWT(token);
                 if(token == null ||  claims == null || claims.getSubject() == null){
-                    throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+                    throw new TokenException();
                 }
             }catch (Exception e){
-                System.out.println(e.getMessage());
-                throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+                throw new TokenException();
             }
         }else{
             return;

@@ -4,6 +4,7 @@ package com.fengyu.common.web.jersey.listenner;
 import com.fengyu.common.web.jersey.exception.ExceptionMapperSupport;
 import com.fengyu.common.web.jersey.filter.AuthorizationRequestFilter;
 import com.fengyu.common.web.jersey.filter.FeatureAnnotatedFactory;
+import com.fengyu.common.web.jersey.token.JWTSecurityFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 import org.glassfish.jersey.server.validation.ValidationConfig;
@@ -40,6 +41,8 @@ public class WebApplication extends ResourceConfig{
         register(FeatureAnnotatedFactory.class);
         //注册身份验证
         register(AuthorizationRequestFilter.class);
+
+        register(JWTSecurityFilter.class);
 
     }
     public static class ValidationConfigurationContextResolver implements ContextResolver<ValidationConfig> {

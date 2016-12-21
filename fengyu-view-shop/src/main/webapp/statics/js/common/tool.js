@@ -83,9 +83,23 @@ define(function(require,exports,module){
     tool.alert = function(msg, callback){
     	layer.alert(msg, {title:"提示信息",closeBtn:0}, callback);
     };
-    
+
     //发送api请求  application/x-www-form-urlencoded
     tool.apiReq = function(config){
+		// 当遇到 401 状态码时，清空 cookie 中的 token，并跳转到登录页面
+		$.ajaxSetup({
+			statusCode: {
+				401: function () {
+					tool.msg("操作超时，请重新登录",2);
+					localStorage.removeItem("refreshToken");
+					localStorage.removeItem("token");
+					setTimeout(function () {
+						location.href = '/view/login.jsp';
+					}, 2000);
+
+				}
+			}
+		});
     	$.ajax({
     		headers    : {
     			"token" : localStorage.getItem("token"),

@@ -64,8 +64,8 @@
 					[ /^(.*\/js\/.*\.(?:css|js))(?:.*)$/i, '$1?201605241248']
 				]
 			});
-			seajs.use("/statics/js/pageScript/member/setting/address/index.js",function(login){
-//				login.init();
+			seajs.use("/statics/js/pageScript/member/setting/address/index.js",function(address){
+				address.init();
 			});
 		</script>
 		<%--我要支持点击后的 支持列表--%>

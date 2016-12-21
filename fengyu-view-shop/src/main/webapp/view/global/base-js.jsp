@@ -66,7 +66,7 @@
     var saver;
     function initScreenSaver(){
         //blort;
-        saver = new ScreenSaver({timeout:5000});
+        saver = new ScreenSaver({timeout:1000*60*30});
     }
     window.onload = initScreenSaver();
 
