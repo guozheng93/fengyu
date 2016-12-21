@@ -14,7 +14,7 @@ import com.fengyu.facade.other.comment.entity.po.CommentReplyPO;
 import com.fengyu.facade.other.comment.entity.vo.CommentReplyVO;
 import com.fengyu.facade.other.comment.entity.vo.CommentVO;
 import com.fengyu.facade.other.comment.service.CommentFacade;
-import com.fengyu.facade.user.entity.vo.UserVO;
+import com.fengyu.facade.user.login.entity.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

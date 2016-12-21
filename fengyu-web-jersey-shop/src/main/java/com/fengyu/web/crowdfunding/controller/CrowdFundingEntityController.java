@@ -17,7 +17,7 @@ import com.fengyu.facade.order.entity.vo.OrderVO;
 import com.fengyu.facade.order.enums.OrderEnum;
 import com.fengyu.facade.order.service.OrderFacade;
 import com.fengyu.facade.other.comment.entity.vo.CommentReplyVO;
-import com.fengyu.facade.user.entity.vo.UserVO;
+import com.fengyu.facade.user.login.entity.vo.UserVO;
 import com.sun.tools.internal.xjc.reader.gbind.ElementSets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
