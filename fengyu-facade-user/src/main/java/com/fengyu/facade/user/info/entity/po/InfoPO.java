@@ -1,11 +1,13 @@
 package com.fengyu.facade.user.info.entity.po;
 
+import java.io.Serializable;
+
 /**
  * @author guoz
  * @version V1.0
  * @date 2016/12/16
  */
-public class InfoPO {
+public class InfoPO implements Serializable {
 
     private Integer userId;
     private String name;

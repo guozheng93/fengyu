@@ -1,11 +1,13 @@
 package com.fengyu.facade.user.work.entity.po;
 
+import java.io.Serializable;
+
 /**
  * @author guoz
  * @version V1.0
  * @date 2016/12/17
  */
-public class WorkPO {
+public class WorkPO implements Serializable {
 
     private Integer id;
     private Integer userId;

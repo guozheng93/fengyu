@@ -1,5 +1,6 @@
 package com.fengyu.facade.user.address.entity.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,17 +9,35 @@ import java.util.Date;
  * @version V1.0
  * @date 2016/12/14
  */
-public class AddressPO {
+public class AddressPO implements Serializable {
 
     private Integer id;
-    private String userId;
+    private int userId;
     private String name;
+    private String phone;
+    private String email;
     private int provinceId;
     private int countryId;
     private int cityId;
     private String address;
     private boolean isDefault;
-    private Date crateTime;
+    private Date createTime;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Integer getId() {
         return id;
@@ -28,11 +47,11 @@ public class AddressPO {
         this.id = id;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -84,11 +103,11 @@ public class AddressPO {
         isDefault = aDefault;
     }
 
-    public Date getCrateTime() {
-        return crateTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCrateTime(Date crateTime) {
-        this.crateTime = crateTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

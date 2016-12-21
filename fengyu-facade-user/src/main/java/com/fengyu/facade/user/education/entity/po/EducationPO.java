@@ -1,5 +1,6 @@
 package com.fengyu.facade.user.education.entity.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * @version V1.0
  * @date 2016/12/16
  */
-public class EducationPO {
+public class EducationPO implements Serializable {
 
     private Integer id;
     private Integer userId;
