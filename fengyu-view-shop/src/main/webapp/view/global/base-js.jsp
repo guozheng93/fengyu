@@ -10,7 +10,7 @@
     var picPath = "${picPath }";
     //var fileServerUrl="http://47.88.190.192:8787/";
     var fileServerUrl="http://ocr6w6mo0.bkt.clouddn.com/";
-    var serverUrl="http://127.0.0.1:8181/rest/";
+    var serverUrl="http://127.0.0.1:8080/api/rest/";
 
 </script>
 <script type="text/javascript" src="/statics/js/common/config.js" ></script>
@@ -27,7 +27,7 @@
     function ScreenSaver(settings){
         this.settings = settings;
 
-        thisthis.nTimeout = this.settings.timeout;
+        this.nTimeout = this.settings.timeout;
 
         document.body.screenSaver = this;
         // link in to body events
@@ -42,7 +42,8 @@
     }
     ScreenSaver.prototype.timeout = function(){
         if ( !this.saver ){
-            window.location = 'http://www.baidu.com';
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("token");
         }
     }
     ScreenSaver.prototype.signal = function(){
@@ -67,9 +68,7 @@
         //blort;
         saver = new ScreenSaver({timeout:5000});
     }
-    function window.onload(){
-        initScreenSaver();
-    }
+    window.onload = initScreenSaver();
 
 </script>
 

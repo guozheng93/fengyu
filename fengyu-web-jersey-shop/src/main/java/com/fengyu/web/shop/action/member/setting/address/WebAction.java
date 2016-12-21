@@ -1,12 +1,9 @@
 package com.fengyu.web.shop.action.member.setting.address;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fengyu.common.core.dao.BaseDao;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
 import com.fengyu.common.web.jersey.controller.BaseController;
-import com.fengyu.common.web.jersey.token.JwtUtil;
 import com.fengyu.facade.user.address.entity.po.AddressPO;
 import com.fengyu.facade.user.address.service.AddressFacade;
 import com.fengyu.web.shop.util.token.ResponseUtil;
@@ -15,7 +12,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

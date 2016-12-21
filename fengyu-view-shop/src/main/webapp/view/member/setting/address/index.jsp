@@ -65,7 +65,7 @@
 				]
 			});
 			seajs.use("/statics/js/pageScript/member/setting/address/index.js",function(login){
-				login.init();
+//				login.init();
 			});
 		</script>
 		<%--我要支持点击后的 支持列表--%>
