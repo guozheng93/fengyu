@@ -19,7 +19,7 @@
     <result column="create_time" property="createTime"/>
   </resultMap>
   <sql id="condition_sql">
-
+    <if test = "userId !=null">user_id = #{userId} </if>
   </sql>
   <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
     select * from

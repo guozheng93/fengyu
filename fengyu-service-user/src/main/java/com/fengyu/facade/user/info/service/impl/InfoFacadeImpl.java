@@ -5,6 +5,7 @@ import com.fengyu.common.page.PageParam;
 import com.fengyu.facade.user.info.entity.po.InfoPO;
 import com.fengyu.facade.user.info.service.InfoFacade;
 import com.fengyu.service.user.info.biz.InfoBiz;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Service("infoFacade")
 public class InfoFacadeImpl implements InfoFacade{
 
+    @Autowired
     private InfoBiz infoBiz;
 
     @Override

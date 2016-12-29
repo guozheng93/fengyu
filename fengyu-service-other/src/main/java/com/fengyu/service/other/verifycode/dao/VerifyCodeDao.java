@@ -2,7 +2,7 @@ package com.fengyu.service.other.verifycode.dao;
 
 import com.fengyu.common.core.annotation.MyBatisDao;
 import com.fengyu.common.core.dao.BaseDao;
-import com.fengyu.facade.other.verifycode.entity.VerifyCodePO;
+import com.fengyu.facade.other.verifycode.entity.po.VerifyCodePO;
 
 /**
  * @author admin

@@ -14,6 +14,7 @@ import java.security.Principal;
  */
 public class UserVO extends VOEntity implements Principal {
     private Integer id             ;
+    private String username;
     private String value          ;
     private String label          ;
     private Boolean isValid        ;
@@ -32,6 +33,14 @@ public class UserVO extends VOEntity implements Principal {
 
     private String loginName;
     private String password;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPassword() {
         return password;

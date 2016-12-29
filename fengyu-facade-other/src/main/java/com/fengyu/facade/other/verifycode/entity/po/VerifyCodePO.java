@@ -1,5 +1,6 @@
-package com.fengyu.facade.other.verifycode.entity;
+package com.fengyu.facade.other.verifycode.entity.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * @version V1.0
  * @date 2016/12/17
  */
-public class VerifyCodePO {
+public class VerifyCodePO implements Serializable{
 
     private Integer id;
     private Integer userId;

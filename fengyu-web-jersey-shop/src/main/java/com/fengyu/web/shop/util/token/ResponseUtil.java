@@ -33,7 +33,6 @@ public class ResponseUtil {
 		CommonResponse res = new CommonResponse();
 		res.setCode(Constant.RESCODE_SUCCESS);
 		res.setData(data);
-		System.out.println(general(res));
 		return general(res);
 	}
 	

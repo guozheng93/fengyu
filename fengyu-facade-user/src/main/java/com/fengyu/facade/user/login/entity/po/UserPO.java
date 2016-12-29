@@ -3,6 +3,8 @@ package com.fengyu.facade.user.login.entity.po;
 import com.fengyu.common.entity.BaseEntity;
 import com.fengyu.common.entity.Token;
 
+import java.util.Date;
+
 /**
  * 众筹项目收款人信息表
  *
@@ -10,6 +12,7 @@ import com.fengyu.common.entity.Token;
  * @create 2016 12 04 22:05
  */
 public class UserPO extends BaseEntity {
+    private String username;
     private String phone        ;
     private String password     ;
     private String email        ;
@@ -18,11 +21,19 @@ public class UserPO extends BaseEntity {
     private String wxId        ;
     private String wbId        ;
     private Boolean isAuth      ;
-    private String createTime  ;
-    private String updateTime;
-    private String lastTime ;
+    private Date createTime  ;
+    private Date updateTime;
+    private Date lastTime ;
     private Token mainToken;
     private Token accessToken;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Token getAccessToken() {
         return accessToken;
@@ -104,27 +115,35 @@ public class UserPO extends BaseEntity {
         isAuth = auth;
     }
 
-    public String getCreateTime() {
+    public Boolean getValid() {
+        return isValid;
+    }
+
+    public void setValid(Boolean valid) {
+        isValid = valid;
+    }
+
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 
-    public String getLastTime() {
+    public Date getLastTime() {
         return lastTime;
     }
 
-    public void setLastTime(String lastTime) {
+    public void setLastTime(Date lastTime) {
         this.lastTime = lastTime;
     }
 }

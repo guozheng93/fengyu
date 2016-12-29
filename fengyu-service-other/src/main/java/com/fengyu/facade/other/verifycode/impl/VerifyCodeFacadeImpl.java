@@ -2,9 +2,10 @@ package com.fengyu.facade.other.verifycode.impl;
 
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
-import com.fengyu.facade.other.verifycode.entity.VerifyCodePO;
+import com.fengyu.facade.other.verifycode.entity.po.VerifyCodePO;
 import com.fengyu.facade.other.verifycode.service.VerifyCodeFacade;
 import com.fengyu.service.other.verifycode.biz.VerifyCodeBiz;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -17,6 +18,7 @@ import java.util.Map;
 @Service("verifyCodeFacade")
 public class VerifyCodeFacadeImpl implements VerifyCodeFacade{
 
+    @Autowired
     private VerifyCodeBiz verifycodeBiz;
 
     @Override

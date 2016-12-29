@@ -23,4 +23,12 @@ public class UserBiz {
         UserPO userPO=userDao.findByLoginName(loginName);
         return userPO;
     }
+
+    public long update(UserPO userPO) {
+        return userDao.update(userPO);
+    }
+
+    public long insert(UserPO userPO) {
+        return userDao.insert(userPO);
+    }
 }

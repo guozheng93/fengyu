@@ -3,9 +3,10 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<jsp:include page="/view/member/global/base-css.jsp"/>
-	
+
 		<div class="pd-head">
-			<a href="javascript:;" class="active-pda">个人资料</a><a href="javascript:;">头像照片</a>
+			<a href="javascript:;" class="active-pda">个人资料</a>
+			<a href="javascript:;">头像照片</a>
 		</div>
 		<div class="pd-main">
 			<h5><b>基本资料</b></h5>
@@ -18,80 +19,132 @@
 					</div>
 				</div>
 				<div class="pd-plist">
-				<p class="pd-p1"><span>昵称：</span><input type="text"></p>
-				<p class="pd-p2"><span>年龄：</span><input type="number"><b>岁</b></p>
-				<p class="pd-p3"><span>生日：</span>
-					<select>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-					</select>
-					年
-					<select>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-					</select>
-					月
-					<select>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-						<option>请选择</option>
-					</select>
-					日
-				</p>
-				<p class="pd-p4"><span>星座：</span>
-					<select>
-						<option>巨蟹座</option>
-						<option>巨蟹座</option>
-						<option>巨蟹座</option>
-					</select>
-				</p>
-				<p class="pd-p5"><span>个性签名：</span><input type="text" placeholder="一句话描述~"></p>
-				<p class="pd-p6"><span>感情状态：</span><input type="text"></p>
-				<p class="pd-p7"><span>家乡：</span>
-					<select>
-						<option>省/直辖市</option>
-						<option>省/直辖市</option>
-						<option>省/直辖市</option>
-					</select>
-					<select>
-						<option>市</option>
-						<option>市</option>
-						<option>市</option>
-					</select>
-					<select>
-						<option>区/县</option>
-						<option>区/县</option>
-						<option>区/县</option>
-					</select>
-				</p>
-				<p class="pd-p8"><span>现居地：</span>
-					<select>
-						<option>省/直辖市</option>
-						<option>省/直辖市</option>
-						<option>省/直辖市</option>
-					</select>
-					<select>
-						<option>市</option>
-						<option>市</option>
-						<option>市</option>
-					</select>
-					<select>
-						<option>区/县</option>
-						<option>区/县</option>
-						<option>区/县</option>
-					</select>
-					<select>
-						<option>乡镇／街道</option>
-						<option>乡镇／街道</option>
-						<option>乡镇／街道</option>
-					</select>
-				</p>
-				<p class="pd-p9"><span></span><input type="text" placeholder="详细地址"></p>
+					<p class="pd-p1"><span>昵称：</span><input id="name" type="text"></p>
+					<p class="pd-p2"><span>年龄：</span><input id="age" type="number"><b>岁</b></p>
+					<p class="pd-p3">
+						<span>生日：</span>
+						<select id ="birYear">
+							<option value="0">请选择</option>
+							<option value="1976">1976</option>
+							<option value="1977">1977</option>
+							<option value="1978">1978</option>
+							<option value="1979">1979</option>
+							<option value="1980">1980</option>
+							<option value="1981">1981</option>
+							<option value="1982">1982</option>
+							<option value="1983">1983</option>
+							<option value="1984">1984</option>
+							<option value="1985">1985</option>
+							<option value="1986">1986</option>
+							<option value="1987">1987</option>
+							<option value="1988">1988</option>
+							<option value="1989">1989</option>
+							<option value="1990">1990</option>
+							<option value="1991">1991</option>
+							<option value="1992">1992</option>
+							<option value="1993">1993</option>
+							<option value="1994">1994</option>
+							<option value="1995">1995</option>
+							<option value="1996">1996</option>
+							<option value="1997">1997</option>
+							<option value="1998">1998</option>
+							<option value="1999">1999</option>
+							<option value="2000">2000</option>
+							<option value="2001">2001</option>
+							<option value="2002">2002</option>
+							<option value="2003">2003</option>
+							<option value="2004">2004</option>
+							<option value="2005">2005</option>
+							<option value="2006">2006</option>
+							<option value="2007">2007</option>
+							<option value="2008">2008</option>
+							<option value="2009">2009</option>
+							<option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option value="2012">2012</option>
+							<option value="2013">2013</option>
+							<option value="2014">2014</option>
+							<option value="2015">2015</option>
+							<option value="2016">2016</option>
+						</select>
+						年
+						<select id="birMon">
+							<option value="0">请选择</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						月
+						<select id="birDay">
+							<option>请选择</option>
+						</select>
+						日
+					</p>
+					<p class="pd-p4">
+						<span>星座：</span>
+						<select id ="constellation">
+							<option>白羊座</option>
+							<option>金牛座</option>
+							<option>双子座</option>
+							<option>狮子座</option>
+							<option>巨蟹座</option>
+							<option>处女座</option>
+							<option>天秤座</option>
+							<option>天蝎座</option>
+							<option>射手座</option>
+							<option>摩羯座</option>
+							<option>水瓶座</option>
+							<option>双鱼座</option>
+						</select>
+					</p>
+					<p class="pd-p5">
+						<span>个性签名：</span>
+						<input type="text" id ="info" placeholder="一句话描述~">
+					</p>
+					<p class="pd-p6">
+						<span>感情状态：</span>
+						<input id ="feelingInfo" type="text">
+					</p>
+					<p class="pd-p7"><span>家乡：</span>
+						<select id ="oldProvince">
+							<option>请选择</option>
+						</select>
+						<select id ="oldCity">
+							<option>请选择</option>
+						</select>
+						<select id ="oldCounty">
+							<option>请选择</option>
+						</select>
+					</p>
+					<p class="pd-p8"><span>现居地：</span>
+						<select id ="province">
+							<option>请选择</option>
+						</select>
+						<select id ="city">
+							<option>请选择</option>
+						</select>
+						<select id ="county">
+							<option>请选择</option>
+						</select>
+						<%--<select>--%>
+							<%--<option>乡镇／街道</option>--%>
+							<%--<option>乡镇／街道</option>--%>
+							<%--<option>乡镇／街道</option>--%>
+						<%--</select>--%>
+					</p>
+					<p class="pd-p9">
+						<span></span>
+						<input id ="address" type="text" placeholder="详细地址">
+					</p>
 			    </div>
 			    <!------------------------------>
 			    <div class="education-info">
@@ -163,7 +216,7 @@
 			    	<a href="javascript:;" class="add-del">删除</a>
 			    	</div>
 			    	<div class="edui-add">
-			    		<img src="images/tianjia.png">点击添加学历
+			    		<img src="/statics/images/tianjia.png">点击添加学历
 			    	</div>
 			    </div>
 			    <div class="work-info">
@@ -282,36 +335,68 @@
 			</div>
 			<a href="javascript:;" class="pd-save">保存</a>
 		</div>
-		<jsp:include page="/view/member/global/base-js.jsp"/>
-		<script>
-			$(function(){
-		        /**/
-		        $(".pd-main").hide().eq(0).show();
-		        $(".pd-head a").click(function(){
-		        
-		       	$(this).addClass("active-pda").siblings().removeClass("active-pda");
-		       	var pd_indexa=$(this).index();
-		       	$(".pd-main").eq(pd_indexa).show().siblings(".pd-main").hide();
-		       	
-		        })
-				$(".edui-add").click(function(){
-					$(".add-con").show();
-					parent.iFrameHeight();
-					$(".add-del").click(function(){
-					$(".add-con,.add-con2").hide();
-					})
-				})
-				$(".work-add").click(function(){
-					$(".add-con2").show();
-					parent.iFrameHeight();
-					$(".add-del").click(function(){
-						$(".add-con").hide();
-					})
-				})
-				/*资料保存成功提示*/
-				$(".pd-save").click(function(){
-					layer.msg("恭喜，您的资料保存成功");
-				})
-			})
-		</script>
+<script type="text/javascript" src="/statics/js/plugin/seajs/sea.js"></script>
+<script type="text/javascript">
+	seajs.config({
+		base: "/statics/js/",
+		alias: {
+			"jquery"  :  "plugin/jquery/jquery-1.10.2.min",
+			"md5"     :  "plugin/jquery/jquery.md5",
+			"template" :  "lib/template.js"
+		},
+		map: [
+			[ /^(.*\/js\/.*\.(?:css|js))(?:.*)$/i, '$1?201605241248']
+		]
+	});
+	seajs.use("/statics/js/pageScript/member/setting/info/index.js",function(index){
+		index.init();
+	});
+</script>
+<%--<script type="text/javascript">--%>
+	<%--seajs.config({--%>
+		<%--base: "/statics/js/",--%>
+		<%--alias: {--%>
+			<%--"jquery"  :  "plugin/jquery/jquery-1.10.2.min",--%>
+			<%--"md5"     :  "plugin/jquery/jquery.md5",--%>
+			<%--"template" :  "lib/template.js"--%>
+		<%--},--%>
+		<%--map: [--%>
+			<%--[ /^(.*\/js\/.*\.(?:css|js))(?:.*)$/i, '$1?201605241248']--%>
+		<%--]--%>
+	<%--});--%>
+	<%--seajs.use("/statics/js/pageScript/member/setting/info/info.js",function(index){--%>
+		<%--index.init();--%>
+	<%--});--%>
+<%--</script>--%>
+		<%--<script>--%>
+			<%--$(function(){--%>
+		        <%--/**/--%>
+		        <%--$(".pd-main").hide().eq(0).show();--%>
+		        <%--$(".pd-head a").click(function(){--%>
+		        <%----%>
+		       	<%--$(this).addClass("active-pda").siblings().removeClass("active-pda");--%>
+		       	<%--var pd_indexa=$(this).index();--%>
+		       	<%--$(".pd-main").eq(pd_indexa).show().siblings(".pd-main").hide();--%>
+		       	<%----%>
+		        <%--})--%>
+				<%--$(".edui-add").click(function(){--%>
+					<%--$(".add-con").show();--%>
+					<%--parent.iFrameHeight();--%>
+					<%--$(".add-del").click(function(){--%>
+					<%--$(".add-con,.add-con2").hide();--%>
+					<%--})--%>
+				<%--})--%>
+				<%--$(".work-add").click(function(){--%>
+					<%--$(".add-con2").show();--%>
+					<%--parent.iFrameHeight();--%>
+					<%--$(".add-del").click(function(){--%>
+						<%--$(".add-con").hide();--%>
+					<%--})--%>
+				<%--})--%>
+				<%--/*资料保存成功提示*/--%>
+				<%--$(".pd-save").click(function(){--%>
+					<%--layer.msg("恭喜，您的资料保存成功");--%>
+				<%--})--%>
+			<%--})--%>
+		<%--</script>--%>
 

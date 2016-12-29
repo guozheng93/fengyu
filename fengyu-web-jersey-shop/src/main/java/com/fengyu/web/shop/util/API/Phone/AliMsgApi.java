@@ -288,7 +288,17 @@ public class AliMsgApi {
         Map<String,String> sendMap = new HashMap<>();
         sendMap.put("code","123456");
         sendMap.put("product","蜂娱文化");
-        new AliMsgApi().sendMsg("15269103792","SMS_8551007",sendMap);
-        System.out.println("发送成功！");
+        String result = new AliMsgApi().sendMsg("15269103792","SMS_8551007",sendMap);
+        Map<String,Object> map = JSON.parseObject(result);
+        System.out.println(result);
+        if(map.get("alibaba_aliqin_fc_sms_num_send_response") != null){
+            //Map<String,Object> succsessResult = JSON.parseObject(map.get("result").toString());
+            System.out.println("发送成功！");
+        }else{
+            Map<String,Object> response = JSON.parseObject(map.get("error_response").toString());
+            String errorCode = response.get("code").toString();
+            String errorMsg = response.get("sub_msg").toString();
+            System.out.println("发送失败code："+errorCode+",msg:"+errorMsg);
+        }
     }
 }

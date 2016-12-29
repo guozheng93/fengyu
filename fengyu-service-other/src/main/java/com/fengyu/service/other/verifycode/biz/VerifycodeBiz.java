@@ -2,7 +2,7 @@ package com.fengyu.service.other.verifycode.biz;
 
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
-import com.fengyu.facade.other.verifycode.entity.VerifyCodePO;
+import com.fengyu.facade.other.verifycode.entity.po.VerifyCodePO;
 import com.fengyu.service.other.verifycode.dao.VerifyCodeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +53,10 @@ public class VerifyCodeBiz {
         paramMap.put("verifyCodeType",verifyCodeType);
         paramMap.put("bizType",bizType);
         paramMap.put("verifyCode",verifyCode);
+        return verifyCodeDao.getBy(paramMap);
+    }
+
+    public VerifyCodePO getBy(Map<String, Object> paramMap) {
         return verifyCodeDao.getBy(paramMap);
     }
 }

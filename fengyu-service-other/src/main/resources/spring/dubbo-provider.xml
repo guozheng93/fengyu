@@ -21,5 +21,6 @@
 
 	<!-- 通知服务接口 -->
 	<dubbo:service interface="com.fengyu.facade.other.verifycode.service.VerifyCodeFacade" ref="verifyCodeFacade" />
+	<dubbo:service interface="com.fengyu.facade.other.area.service.AreaFacade" ref="areaFacade" />
 
 </beans>  

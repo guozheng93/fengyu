@@ -56,6 +56,8 @@ define(function(require, exports, module){
         tool.closeLayer(loginLy);
         var result = eval('(' + res.body + ')');
         if(result.code == 1000 || result.code == 1001){
+            sessionStorage.username = result.data.username;
+            sessionStorage.auth = result.data.auth;
             localStorage.setItem("token", result.data.token);
             localStorage.setItem("refreshToken", result.data.refreshToken);
             //跳转到主界面

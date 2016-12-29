@@ -2,7 +2,7 @@ package com.fengyu.facade.other.verifycode.service;
 
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
-import com.fengyu.facade.other.verifycode.entity.VerifyCodePO;
+import com.fengyu.facade.other.verifycode.entity.po.VerifyCodePO;
 
 import java.util.Map;
 
@@ -53,6 +53,4 @@ public interface VerifyCodeFacade {
      * @return result 删除结果
      */
     public long delete(Integer id);
-
-
 }

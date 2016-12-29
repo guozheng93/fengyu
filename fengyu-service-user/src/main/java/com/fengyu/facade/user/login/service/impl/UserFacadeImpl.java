@@ -26,4 +26,13 @@ public class UserFacadeImpl implements UserFacade{
         return userPO;
     }
 
+    @Override
+    public long update(UserPO userPO) {
+        return userBiz.update(userPO);
+    }
+
+    @Override
+    public long insert(UserPO userPO) {
+        return userBiz.insert(userPO);
+    }
 }

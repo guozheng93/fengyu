@@ -7,6 +7,7 @@
 
   <resultMap id="beanMap" type="com.fengyu.facade.user.login.entity.po.UserPO" >
     <id column="id" property="id"/>
+    <result column="username" property="username"/>
     <result column="phone" property="phone"/>
     <result column="password" property="password"/>
     <result column="email" property="email"/>
@@ -26,5 +27,53 @@
     from <include refid="user"/>
     where phone = #{loginName,jdbcType=VARCHAR} or email = #{loginName,jdbcType=VARCHAR}
   </select>
+
+  <insert id="insert">
+    insert into
+    <include refid="user" />
+    (username,phone, password, email, is_valid , qq_id,
+    wx_id, wb_id, is_auth, create_time,update_time,last_time)
+    values
+    (#{username},#{phone}, #{password}, #{email}, #{isValid},
+    #{qqId}, #{wxId}, #{wbId}, #{isAuth},
+    #{createTime}, #{updateTime}, #{lastTime})
+  </insert>
+
+  <update id="update">
+    update <include refid="user" />
+    <set >
+      <if test="phone != null" >
+        phone = #{phone},
+      </if>
+      <if test="password != null" >
+        `password`= #{password},
+      </if>
+      <if test="isValid != null" >
+        is_valid = #{isValid},
+      </if>
+      <if test="qqId != null" >
+        qq_id = #{qqId},
+      </if>
+      <if test="wxId != null" >
+        wx_id = #{wxId},
+      </if>
+      <if test="wbId != null" >
+        wb_id = #{wbId},
+      </if>
+      <if test="isAuth != null" >
+        is_auth = #{isAuth},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime},
+      </if>
+      <if test="lastTime != null" >
+        last_time = #{lastTime},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
 </mapper>

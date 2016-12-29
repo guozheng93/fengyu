@@ -19,7 +19,7 @@
     <result column="create_time" property="createTime"/>
   </resultMap>
   <sql id="condition_sql">
-     <if test="userId != null">user_id =#{userId} </if>
+     <if test="userId != null">and user_id =#{userId} </if>
   </sql>
   <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
     select * from
@@ -34,7 +34,7 @@
     </where>
     limit #{pageNum},#{pageSize}
   </select>
-  <select id="getCountList" resultMap="beanMap" parameterType="java.util.Map" >
+  <select id="getCountList" resultType="long" parameterType="java.util.Map" >
     select count(*) from
     <include refid="user_education" />
     <where>

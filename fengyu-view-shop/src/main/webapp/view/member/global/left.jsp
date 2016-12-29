@@ -8,7 +8,7 @@
     <dl>
         <img src="/statics/images/dl_before.png">
         <dt>个人设置</dt>
-        <dd><a href="/view/member/setting/user/index.jsp" target="ifa">个人资料</a></dd>
+        <dd><a href="/view/member/setting/info/index.jsp" target="ifa">个人资料</a></dd>
         <dd><a href="/view/member/setting/security/index.jsp" target="ifa">安全信息</a></dd>
         <dd><a href="/view/member/setting/address/index.jsp" target="ifa">收货地址</a></dd>
         <dd><a href="/view/member/setting/authlogin/index.jsp" target="ifa">账号绑定</a></dd>

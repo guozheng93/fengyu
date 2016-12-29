@@ -1,11 +1,11 @@
-package com.fengyu.web.shop.action.member.setting.address;
+package com.fengyu.web.shop.action.member.setting.education;
 
 import com.alibaba.fastjson.JSON;
 import com.fengyu.common.page.PageBean;
 import com.fengyu.common.page.PageParam;
 import com.fengyu.common.web.jersey.controller.BaseController;
-import com.fengyu.facade.user.address.entity.po.AddressPO;
-import com.fengyu.facade.user.address.service.AddressFacade;
+import com.fengyu.facade.user.education.entity.po.EducationPO;
+import com.fengyu.facade.user.education.service.EducationFacade;
 import com.fengyu.web.shop.util.token.ResponseUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -24,21 +24,21 @@ import java.util.Map;
  * @date 2016/12/17
  */
 @Component
-@Path("/member/setting/address")
-public class WebAction extends BaseController{
+@Path("/member/setting/education")
+public class EducationAction extends BaseController{
 
-    private static final Logger logger = LogManager.getLogger(WebAction.class);
+    private static final Logger logger = LogManager.getLogger(EducationAction.class);
 
     @Autowired
-    private AddressFacade addressFacade;
+    private EducationFacade educationFacade;
 
     @POST
     @Path("get")
     public String get(String args)
     {
         try {
-            AddressPO addressPO = JSON.parseObject(args, AddressPO.class);
-            AddressPO po = addressFacade.getById(addressPO.getId());
+            EducationPO educationPO = JSON.parseObject(args, EducationPO.class);
+            EducationPO po = educationFacade.getById(educationPO.getId());
             return  ResponseUtil.success(po);
         } catch (Exception e) {
             logger.error(e);
@@ -55,7 +55,8 @@ public class WebAction extends BaseController{
             Integer currentPage = Integer.parseInt(map.get("currentPage").toString());
             Integer numPerPage = Integer.parseInt(map.get("numPerPage").toString());
             PageParam pageParam = new PageParam(currentPage,numPerPage);
-            PageBean pageBean = addressFacade.listPage(pageParam,map);
+            map.put("userId",getUserId());
+            PageBean pageBean = educationFacade.listPage(pageParam,map);
             return ResponseUtil.success(pageBean);
         } catch (Exception e) {
             logger.error(e);
@@ -69,13 +70,13 @@ public class WebAction extends BaseController{
     public String insert(String args)
     {
         try {
-            AddressPO addressPO = JSON.parseObject(args, AddressPO.class);
-            addressPO.setId(getUserId().intValue());
-            Long result = addressFacade.insert(addressPO);
+            EducationPO educationPO = JSON.parseObject(args, EducationPO.class);
+            educationPO.setId(getUserId().intValue());
+            Long result = educationFacade.insert(educationPO);
             if(result >0){
                 return ResponseUtil.success();
             }else{
-                return ResponseUtil.exception("收货地址增加失败");
+                return ResponseUtil.exception("学历信息增加失败");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -90,12 +91,12 @@ public class WebAction extends BaseController{
     public String edit(String args)
     {
         try {
-            AddressPO addressPO = JSON.parseObject(args, AddressPO.class);
-            Long result = addressFacade.update(addressPO);
+            EducationPO educationPO = JSON.parseObject(args, EducationPO.class);
+            Long result = educationFacade.update(educationPO);
             if(result >0){
                 return ResponseUtil.success();
             }else{
-                return ResponseUtil.exception("收货地址更新失败");
+                return ResponseUtil.exception("学历信息更新失败");
             }
         } catch (Exception e) {
             logger.error(e);
@@ -109,12 +110,12 @@ public class WebAction extends BaseController{
     public String delete(String args)
     {
         try {
-            AddressPO addressPO = JSON.parseObject(args, AddressPO.class);
-            Long result = addressFacade.delete(addressPO.getId());
+            EducationPO educationPO = JSON.parseObject(args, EducationPO.class);
+            Long result = educationFacade.delete(educationPO.getId());
             if(result >0){
                 return ResponseUtil.success();
             }else{
-                return ResponseUtil.exception("收货地址删除失败");
+                return ResponseUtil.exception("学历信息删除失败");
             }
         } catch (Exception e) {
             logger.error(e);

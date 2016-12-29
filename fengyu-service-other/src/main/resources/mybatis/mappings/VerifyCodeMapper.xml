@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fengyu.service.address.dao.AddressDao" >
+<mapper namespace="com.fengyu.service.other.verifycode.dao.VerifyCodeDao" >
 
   <!-- 用户 -->
   <sql id="other_verify_code"> `other_verify_code` </sql>
 
-  <resultMap id="beanMap" type="com.fengyu.service.other.verifycode.dao.VerifyCodeDao" >
+  <resultMap id="beanMap" type="com.fengyu.facade.other.verifycode.entity.po.VerifyCodePO" >
     <id column="id" property="id"/>
     <result column="user_id" property="userId"/>
     <result column="verify_code" property="verifyCode"/>
@@ -18,17 +18,17 @@
     <result column="status" property="status"/>
   </resultMap>
   <sql id="condition_sql">
-    <if test="sendTarget != null">send_target =#{sendTarget} </if>
-    <if test="verifyCodeType != null">verify_code_type =#{verifyCodeType} </if>
-    <if test="bizType != null">biz_type =#{bizType} </if>
-    <if test="verifyCode != null">verify_code =#{verifyCode} </if>
+    <if test="sendTarget != null">and send_target =#{sendTarget} </if>
+    <if test="verifyCodeType != null">and verify_code_type =#{verifyCodeType} </if>
+    <if test="bizType != null">and biz_type =#{bizType} </if>
+    <if test="verifyCode != null">and verify_code =#{verifyCode} </if>
   </sql>
-  <select id="getBy" resultMap="beanMap" parameterType="java.lang.Integer">
+  <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
     select * from
     <include refid="other_verify_code" />
     where id = #{id}
   </select>
-  <select id="getById" resultMap="beanMap" parameterType="java.util.Map">
+  <select id="getBy" resultMap="beanMap" parameterType="java.util.Map">
     select * from
     <include refid="other_verify_code" />
     <where>
@@ -50,7 +50,7 @@
       <include refid="condition_sql" />
     </where>
   </select>
-  <insert id="insert">
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true">
     insert into
     <include refid="other_verify_code" />
     (user_id, verify_code, verify_code_type, biz_type , send_target,

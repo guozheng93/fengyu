@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -71,10 +72,8 @@ public class LoginController extends BaseController {
                     JSONObject jo = new JSONObject();
                     jo.put("token", token);
                     jo.put("refreshToken", refreshToken);
-                    Claims claims = new JwtUtil().parseJWT(token);
-                    System.out.println(claims);
-                    String json = claims.getSubject();
-                    System.out.println(json);
+                    jo.put("auth",user.getAuth());
+                    jo.put("username",user.getUsername());
                     return ResponseUtil.success(jo);
                 }else{ //已禁用
                     return ResponseUtil.exception("账号已禁用");
@@ -88,7 +87,7 @@ public class LoginController extends BaseController {
         }
     }
 
-    @POST
+    @GET
     @Path("tokenError")
     @Produces(MediaType.APPLICATION_JSON)
     public String tokenError(String args)

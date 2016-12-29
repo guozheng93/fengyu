@@ -6,15 +6,34 @@
     <jsp:include page="/view/global/base-css.jsp"/>
     <jsp:include page="/view/global/base-js.jsp"/>
 </head>
-
+<script>
+    $(function(){
+        var username = sessionStorage.getItem("username");
+        if(username == null){
+            $(".list-unstyled li:eq(0)").show();
+            $(".list-unstyled li:eq(1)").show();
+            $(".list-unstyled li:eq(2)").hide();
+            $(".list-unstyled li:eq(3)").hide();
+            $(".list-unstyled li:eq(4)").hide();
+        }else{
+            $(".nicheng").html(username);
+            $(".list-unstyled li:eq(0)").hide();
+            $(".list-unstyled li:eq(1)").hide();
+            $(".list-unstyled li:eq(2)").show();
+            $(".list-unstyled li:eq(3)").show();
+            $(".list-unstyled li:eq(4)").show();
+        }
+    });
+</script>
 <body>
 <div class="head">
     <div class="head-mid">
         <span class="hd-phone">客服热线：400-025-3721</span>
         <ul class="list-unstyled nav hd-r">
-            <li><a href="register.html" class="hd-regist">注册</a></li>
-            <li><a href="login.html" class="hd-login">登录</a></li>
-            <li><a href="/view/member/index.jsp" target="_blank" class="nicheng">我的昵称</a></li>
+
+            <li><a href="register.html" class="regist">注册</a></li>
+            <li><a href="login.html" class="login">登录</a></li>
+            <li><a href="/view/member/index.jsp" target="_blank" class="nicheng"></a></li>
             <li><a href="index.html" >退出</a></li>
             <li><a href="javascript:;" class="mesage-link" target="_blank">我的消息<span class="badge">1</span></a></li>
             <li class="attent-a"><a href="javascript:;" >关注公众号</a>

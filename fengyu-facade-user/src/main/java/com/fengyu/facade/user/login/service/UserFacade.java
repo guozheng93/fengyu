@@ -16,4 +16,8 @@ public interface UserFacade {
      * @return
      */
     UserPO findByLoginName(String loginName);
+
+    long update(UserPO userPO);
+
+    long insert(UserPO userPO);
 }

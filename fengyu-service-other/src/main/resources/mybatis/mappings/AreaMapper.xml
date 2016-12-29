@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fengyu.service.other.area.dao.AreaDao" >
+
+  <!-- 用户 -->
+  <sql id="other_area"> `other_area` </sql>
+
+  <resultMap id="beanMap" type="com.fengyu.facade.other.area.entity.po.AreaPO" >
+    <id column="id" property="id"/>
+    <result column="name" property="name"/>
+    <result column="parentid" property="parentid"/>
+    <result column="level" property="level"/>
+    <result column="orderby" property="orderby"/>
+  </resultMap>
+  <sql id="condition_sql">
+    <if test="id != null">and id = #{id}</if>
+    <if test="parentid != null">and parentid = #{parentid}</if>
+    <if test="level != null">and level = #{level}</if>
+  </sql>
+  <select id="getById" resultMap="beanMap" parameterType="java.lang.Integer">
+    select * from
+    <include refid="other_area" />
+    where id = #{id}
+  </select>
+  <select id="getBy" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="other_area" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <select id="getList" resultMap="beanMap" parameterType="java.util.Map">
+    select * from
+    <include refid="other_area" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+    limit #{pageNum},#{pageSize}
+  </select>
+  <select id="getCountList" resultType="long" parameterType="java.util.Map" >
+    select count(*) from
+    <include refid="other_area" />
+    <where>
+      <include refid="condition_sql" />
+    </where>
+  </select>
+  <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+    insert into
+    <include refid="other_area" />
+    (name, parentid, level, orderby)
+    values
+    (#{name}, #{parentid}, #{level}, #{orderby})
+  </insert>
+  <update id="update">
+    update <include refid="other_area" />
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        `parentid`= #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="orderby != null" >
+        orderby = #{orderby,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="delete" parameterType="java.lang.Integer">
+    DELETE  from <include refid="other_area" /> where  where id = #{id}
+  </delete>
+
+
+</mapper>

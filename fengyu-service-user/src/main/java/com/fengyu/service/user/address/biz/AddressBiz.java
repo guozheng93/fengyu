@@ -33,7 +33,7 @@ public class AddressBiz {
         paramMap.put("pageSize",pageParam.getNumPerPage());
         List<AddressPO> list = addressDao.getList(paramMap);
         Long count = addressDao.getCountList(paramMap);
-        return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), count.intValue(), list);
+        return new PageBean(pageParam.getPageNum(), pageParam.getNumPerPage(), 0, null);
 
     }
 
